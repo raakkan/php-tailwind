@@ -1,0 +1,21 @@
+{
+    "name": "raakkan/php-tailwind",
+    "description": "tailwind css in php",
+    "type": "library",
+    "license": "mit",
+    "autoload": {
+        "psr-4": {
+            "Raakkan\\PhpTailwind\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Raakkan",
+            "email": "solakkathir@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0"
+    }
+}
