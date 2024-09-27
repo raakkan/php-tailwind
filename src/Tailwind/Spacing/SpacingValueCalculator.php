@@ -1,6 +1,6 @@
 <?php
 
-namespace Raakkan\PhpTailwind\Spacing;
+namespace Raakkan\PhpTailwind\Tailwind\Spacing;
 
 class SpacingValueCalculator
 {

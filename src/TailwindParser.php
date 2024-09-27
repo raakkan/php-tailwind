@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind;
 
-use Raakkan\PhpTailwind\Spacing\MarginClass;
-use Raakkan\PhpTailwind\Spacing\PaddingClass;
-use Raakkan\PhpTailwind\Spacing\SpaceClass;
+use Raakkan\PhpTailwind\Tailwind\Spacing\MarginClass;
+use Raakkan\PhpTailwind\Tailwind\Spacing\PaddingClass;
+use Raakkan\PhpTailwind\Tailwind\Spacing\SpaceClass;
 
 class TailwindParser
 {
@@ -14,17 +14,33 @@ class TailwindParser
         SpaceClass::class,
     ];
 
-    public function parse(array $classes): string
+    private $missingClassHandler;
+
+    public function parse(array $classes): array
     {
         $css = '';
+        $missingClasses = [];
         foreach ($classes as $class) {
+            $parsed = false;
             foreach ($this->classTypes as $classType) {
                 if ($tailwindClass = $classType::parse($class)) {
                     $css .= $tailwindClass->toCss() . "\n";
+                    $parsed = true;
                     break;
                 }
             }
+            if (!$parsed) {
+                $missingClasses[] = $class;
+                if ($this->missingClassHandler) {
+                    $css .= call_user_func($this->missingClassHandler, $class) . "\n";
+                }
+            }
         }
-        return $css;
+        return ['css' => $css, 'missingClasses' => $missingClasses];
+    }
+
+    public function setMissingClassHandler(callable $handler): void
+    {
+        $this->missingClassHandler = $handler;
     }
 }

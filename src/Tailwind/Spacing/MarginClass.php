@@ -1,6 +1,6 @@
 <?php
 
-namespace Raakkan\PhpTailwind\Spacing;
+namespace Raakkan\PhpTailwind\Tailwind\Spacing;
 
 use Raakkan\PhpTailwind\AbstractTailwindClass;
 
@@ -9,13 +9,15 @@ class MarginClass extends AbstractTailwindClass
     private $direction;
     private $isNegative;
     private $isAuto;
+    private $isArbitrary;
 
-    public function __construct(string $value, string $direction = '', bool $isNegative = false, bool $isAuto = false)
+    public function __construct(string $value, string $direction = '', bool $isNegative = false, bool $isAuto = false, bool $isArbitrary = false)
     {
         parent::__construct($value);
         $this->direction = $direction;
         $this->isNegative = $isNegative;
         $this->isAuto = $isAuto;
+        $this->isArbitrary = $isArbitrary;
     }
 
     public function toCss(): string
@@ -24,63 +26,69 @@ class MarginClass extends AbstractTailwindClass
             return $this->getAutoMargin();
         }
 
-        $value = SpacingValueCalculator::calculate($this->value, $this->isNegative);
+        $value = $this->isArbitrary ? $this->value : SpacingValueCalculator::calculate($this->value, $this->isNegative);
+        if ($this->isArbitrary && $this->isNegative) {
+            $value = "-{$value}";
+        }
         $prefix = $this->isNegative ? '-' : '';
+        $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
+        
+        // $value = $this->escapeCalc($value);
         
         switch ($this->direction) {
             case 'x':
                 return <<<CSS
-.{$prefix}mx-{$this->value} {
+.{$prefix}mx-{$classValue} {
     margin-left: {$value};
     margin-right: {$value};
 }
 CSS;
             case 'y':
                 return <<<CSS
-.{$prefix}my-{$this->value} {
+.{$prefix}my-{$classValue} {
     margin-top: {$value};
     margin-bottom: {$value};
 }
 CSS;
             case 't':
                 return <<<CSS
-.{$prefix}mt-{$this->value} {
+.{$prefix}mt-{$classValue} {
     margin-top: {$value};
 }
 CSS;
             case 'r':
                 return <<<CSS
-.{$prefix}mr-{$this->value} {
+.{$prefix}mr-{$classValue} {
     margin-right: {$value};
 }
 CSS;
             case 'b':
                 return <<<CSS
-.{$prefix}mb-{$this->value} {
+.{$prefix}mb-{$classValue} {
     margin-bottom: {$value};
 }
 CSS;
             case 'l':
                 return <<<CSS
-.{$prefix}ml-{$this->value} {
+.{$prefix}ml-{$classValue} {
     margin-left: {$value};
 }
 CSS;
             case 'e':
                 return <<<CSS
-.{$prefix}me-{$this->value} {
+.{$prefix}me-{$classValue} {
     margin-inline-end: {$value};
 }
 CSS;
             case 's':
                 return <<<CSS
-.{$prefix}ms-{$this->value} {
+.{$prefix}ms-{$classValue} {
     margin-inline-start: {$value};
 }
 CSS;
             default:
                 return <<<CSS
-.{$prefix}m-{$this->value} {
+.{$prefix}m-{$classValue} {
     margin: {$value};
 }
 CSS;
@@ -151,10 +159,16 @@ CSS;
 
     public static function parse(string $class): ?self
     {
-        if (preg_match('/^(-?)(m)(x|y|t|r|b|l|e|s)?-(.+)$/', $class, $matches)) {
+        if (preg_match('/^(-?)(m)(x|y|t|r|b|l|e|s)?-((?:\[.+\]|\d+\/\d+|.+))$/', $class, $matches)) {
             [, $negative, , $direction, $value] = $matches;
             $isAuto = $value === 'auto';
-            return new self($value, $direction ?: '', $negative === '-', $isAuto);
+            $isArbitrary = preg_match('/^\[.+\]$/', $value);
+            if ($isArbitrary) {
+                $value = trim($value, '[]');
+            } else if (!$isAuto) {
+                $value = str_replace('/', '\/', $value);
+            }
+            return new self($value, $direction ?: '', $negative === '-', $isAuto, $isArbitrary);
         }
         return null;
     }

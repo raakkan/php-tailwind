@@ -3,22 +3,14 @@
 namespace Raakkan\PhpTailwind\Tests\Spacing;
 
 use PHPUnit\Framework\TestCase;
-use Raakkan\PhpTailwind\Spacing\MarginClass;
-use Raakkan\PhpTailwind\Spacing\PaddingClass;
-use Raakkan\PhpTailwind\Spacing\SpacingValueCalculator;
+use Raakkan\PhpTailwind\Tailwind\Spacing\MarginClass;
+use Raakkan\PhpTailwind\Tailwind\Spacing\PaddingClass;
+use Raakkan\PhpTailwind\Tailwind\Spacing\SpacingValueCalculator;
+use Raakkan\PhpTailwind\Tailwind\Spacing\SpaceClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class SpacingTest extends TestCase
 {
-    public function compress(string $css): string
-    {
-         // Remove comments
-        $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
-        // Remove all spaces
-        $css = preg_replace('/\s+/', '', $css);
-        return $css;
-    }
-    
     #[DataProvider('marginClassProvider')]
     public function testMarginClass(string $input, string $expected): void
     {
@@ -46,11 +38,11 @@ class SpacingTest extends TestCase
             ['ml-4', '.ml-4{margin-left:1rem;}'],
             ['mx-4', '.mx-4{margin-left:1rem;margin-right:1rem;}'],
             ['my-4', '.my-4{margin-top:1rem;margin-bottom:1rem;}'],
-            ['m-[10px]', '.m-[10px]{margin:10px;}'],
-            ['m-[2rem]', '.m-[2rem]{margin:2rem;}'],
-            ['m-1/2', '.m-1/2{margin:50%;}'],
-            ['m-1/3', '.m-1/3{margin:33.333333%;}'],
-            ['m-2/3', '.m-2/3{margin:66.666667%;}'],
+            ['m-[10px]', '.m-\[10px\]{margin:10px;}'],
+            ['m-[2rem]', '.m-\[2rem\]{margin:2rem;}'],
+            ['m-1/2', '.m-1\/2{margin:50%;}'],
+            ['m-1/3', '.m-1\/3{margin:33.333333%;}'],
+            ['m-2/3', '.m-2\/3{margin:66.666667%;}'],
             ['-m-1', '.-m-1{margin:-0.25rem;}'],
             ['-m-2', '.-m-2{margin:-0.5rem;}'],
             ['-mt-4', '.-mt-4{margin-top:-1rem;}'],
@@ -66,6 +58,15 @@ class SpacingTest extends TestCase
             ['me-4', '.me-4{margin-inline-end:1rem;}'],
             ['ms-auto', '.ms-auto{margin-inline-start:auto;}'],
             ['me-auto', '.me-auto{margin-inline-end:auto;}'],
+            ['m-[10px]', '.m-\[10px\]{margin:10px;}'],
+            ['m-[2rem]', '.m-\[2rem\]{margin:2rem;}'],
+            ['mt-[5vh]', '.mt-\[5vh\]{margin-top:5vh;}'],
+            ['mx-[10%]', '.mx-\[10\%\]{margin-left:10%;margin-right:10%;}'],
+            ['my-[calc(100%-20px)]', '.my-\[calc\(100\%-20px\)\]{margin-top:calc(100%-20px);margin-bottom:calc(100%-20px);}'],
+            ['-m-[10px]', '.-m-\[10px\]{margin:-10px;}'],
+            ['-mt-[2rem]', '.-mt-\[2rem\]{margin-top:-2rem;}'],
+            ['m-[20%]', '.m-\[20\%\]{margin:20%;}'],
+            ['mx-[10%]', '.mx-\[10\%\]{margin-left:10%;margin-right:10%;}'],
         ];
     }
 
@@ -96,11 +97,11 @@ class SpacingTest extends TestCase
             ['pl-4', '.pl-4{padding-left:1rem;}'],
             ['px-4', '.px-4{padding-left:1rem;padding-right:1rem;}'],
             ['py-4', '.py-4{padding-top:1rem;padding-bottom:1rem;}'],
-            ['p-[10px]', '.p-[10px]{padding:10px;}'],
-            ['p-[2rem]', '.p-[2rem]{padding:2rem;}'],
-            ['p-1/2', '.p-1/2{padding:50%;}'],
-            ['p-1/3', '.p-1/3{padding:33.333333%;}'],
-            ['p-2/3', '.p-2/3{padding:66.666667%;}'],
+            ['p-[10px]', '.p-\[10px\]{padding:10px;}'],
+            ['p-[2rem]', '.p-\[2rem\]{padding:2rem;}'],
+            ['p-1/2', '.p-1\/2{padding:50%;}'],
+            ['p-1/3', '.p-1\/3{padding:33.333333%;}'],
+            ['p-2/3', '.p-2\/3{padding:66.666667%;}'],
             ['ps-4', '.ps-4{padding-inline-start:1rem;}'],
             ['pe-4', '.pe-4{padding-inline-end:1rem;}'],
         ];
@@ -188,5 +189,83 @@ class SpacingTest extends TestCase
         $this->assertSame('.me-4{margin-inline-end:1rem;}', $this->compress(MarginClass::parse('me-4')->toCss()));
         $this->assertSame('.ps-4{padding-inline-start:1rem;}', $this->compress(PaddingClass::parse('ps-4')->toCss()));
         $this->assertSame('.pe-4{padding-inline-end:1rem;}', $this->compress(PaddingClass::parse('pe-4')->toCss()));
+    }
+
+    #[DataProvider('spaceClassProvider')]
+    public function testSpaceClass(string $input, string $expected): void
+    {
+        $spaceClass = SpaceClass::parse($input);
+        $this->assertInstanceOf(SpaceClass::class, $spaceClass);
+        $this->assertSame($expected, $this->compress($spaceClass->toCss()));
+    }
+
+    public static function spaceClassProvider(): array
+    {
+        return [
+            ['space-x-4', '.space-x-4>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem*var(--tw-space-x-reverse));margin-left:calc(1rem*calc(1-var(--tw-space-x-reverse)));}'],
+            ['space-y-4', '.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(1rem*var(--tw-space-y-reverse));margin-top:calc(1rem*calc(1-var(--tw-space-y-reverse)));}'],
+            ['space-x-reverse', '.space-x-reverse>:not([hidden])~:not([hidden]){--tw-space-x-reverse:1;}'],
+            ['space-y-reverse', '.space-y-reverse>:not([hidden])~:not([hidden]){--tw-space-y-reverse:1;}'],
+            ['space-x-2', '.space-x-2>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem*var(--tw-space-x-reverse));margin-left:calc(0.5rem*calc(1-var(--tw-space-x-reverse)));}'],
+            ['space-y-8', '.space-y-8>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(2rem*var(--tw-space-y-reverse));margin-top:calc(2rem*calc(1-var(--tw-space-y-reverse)));}'],
+            ['space-x-[10px]', '.space-x-\[10px\]>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(10px*var(--tw-space-x-reverse));margin-left:calc(10px*calc(1-var(--tw-space-x-reverse)));}'],
+            ['space-y-[2rem]', '.space-y-\[2rem\]>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(2rem*var(--tw-space-y-reverse));margin-top:calc(2rem*calc(1-var(--tw-space-y-reverse)));}'],
+            ['space-x-[5%]', '.space-x-\[5\%\]>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(5\%*var(--tw-space-x-reverse));margin-left:calc(5\%*calc(1-var(--tw-space-x-reverse)));}'],
+            ['space-y-[calc(1rem+10px)]', '.space-y-\[calc\(1rem\+10px\)\]>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(calc\(1rem\+10px\)*var(--tw-space-y-reverse));margin-top:calc(calc\(1rem\+10px\)*calc(1-var(--tw-space-y-reverse)));}'],
+            ['space-x-[calc(100%-20px)]', '.space-x-\[calc\(100\%-20px\)\]>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(calc\(100\%-20px\)*var(--tw-space-x-reverse));margin-left:calc(calc\(100\%-20px\)*calc(1-var(--tw-space-x-reverse)));}'],
+        ];
+    }
+
+    public function testInvalidSpaceClass(): void
+    {
+        $this->assertNull(SpaceClass::parse('invalid-space-class'));
+    }
+
+    public function testArbitrarySpaceClass(): void
+    {
+        $spaceClass = SpaceClass::parse('space-x-[15px]');
+        $this->assertInstanceOf(SpaceClass::class, $spaceClass);
+        $expected = '.space-x-\[15px\]>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(15px*var(--tw-space-x-reverse));margin-left:calc(15px*calc(1-var(--tw-space-x-reverse)));}';
+        $this->assertSame($expected, $this->compress($spaceClass->toCss()));
+
+        $spaceClass = SpaceClass::parse('space-y-[3vh]');
+        $this->assertInstanceOf(SpaceClass::class, $spaceClass);
+        $expected = '.space-y-\[3vh\]>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(3vh*var(--tw-space-y-reverse));margin-top:calc(3vh*calc(1-var(--tw-space-y-reverse)));}';
+        $this->assertSame($expected, $this->compress($spaceClass->toCss()));
+
+        $spaceClass = SpaceClass::parse('space-x-[calc(100%-20px)]');
+        $this->assertInstanceOf(SpaceClass::class, $spaceClass);
+        $expected = '.space-x-\[calc\(100\%-20px\)\]>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(calc\(100\%-20px\)*var(--tw-space-x-reverse));margin-left:calc(calc\(100\%-20px\)*calc(1-var(--tw-space-x-reverse)));}';
+        $this->assertSame($expected, $this->compress($spaceClass->toCss()));
+    }
+
+    public function testArbitraryMarginClass(): void
+    {
+        $marginClass = MarginClass::parse('m-[15px]');
+        $this->assertInstanceOf(MarginClass::class, $marginClass);
+        $expected = '.m-\[15px\]{margin:15px;}';
+        $this->assertSame($expected, $this->compress($marginClass->toCss()));
+
+        $marginClass = MarginClass::parse('mt-[3vh]');
+        $this->assertInstanceOf(MarginClass::class, $marginClass);
+        $expected = '.mt-\[3vh\]{margin-top:3vh;}';
+        $this->assertSame($expected, $this->compress($marginClass->toCss()));
+
+        $marginClass = MarginClass::parse('mx-[calc(100%-20px)]');
+        $this->assertInstanceOf(MarginClass::class, $marginClass);
+        $expected = '.mx-\[calc\(100\%-20px\)\]{margin-left:calc(100%-20px);margin-right:calc(100%-20px);}';
+        $this->assertSame($expected, $this->compress($marginClass->toCss()));
+
+        $marginClass = MarginClass::parse('m-[20%]');
+        $this->assertInstanceOf(MarginClass::class, $marginClass);
+        $expected = '.m-\[20\%\]{margin:20%;}';
+        $this->assertSame($expected, $this->compress($marginClass->toCss()));
+    }
+
+    public function compress(string $css): string
+    {
+        $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
+        $css = preg_replace('/\s+/', '', $css);
+        return $css;
     }
 }

@@ -6,6 +6,8 @@ class PhpTailwind
     private $parser;
     protected $initialClasses;
     protected $parsedClasses;
+    protected $missingClasses;
+
     public function __construct($initialClasses = '')
     {
         $this->parser = new TailwindParser();
@@ -15,6 +17,7 @@ class PhpTailwind
         } else {
             $this->initialClasses = '';
             $this->parsedClasses = '';
+            $this->missingClasses = [];
         }
     }
 
@@ -27,7 +30,9 @@ class PhpTailwind
     {
         $classes = array_unique(explode(' ', $classes));
         
-        $this->parsedClasses = $this->parser->parse($classes);
+        $result = $this->parser->parse($classes);
+        $this->parsedClasses = $result['css'];
+        $this->missingClasses = $result['missingClasses'];
         return $this;
     }
 
@@ -67,12 +72,15 @@ class PhpTailwind
     public function compress()
     {
         $css = $this->parsedClasses;
-        // Remove comments
         $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
-        // Remove all spaces
         $css = preg_replace('/\s+/', '', $css);
         
         $this->parsedClasses = $css;
         return $this;
+    }
+
+    public function getMissingClasses()
+    {
+        return $this->missingClasses;
     }
 }
