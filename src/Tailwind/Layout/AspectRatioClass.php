@@ -16,36 +16,58 @@ class AspectRatioClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if ($this->isArbitrary) {
-            $escapedValue = str_replace('/', '\/', $this->value);
-            return <<<CSS
-.aspect-\[{$escapedValue}\] {
-    aspect-ratio: {$this->value};
-}
-CSS;
+        if (!$this->isValidValue()) {
+            return '';
         }
 
-        switch ($this->value) {
+        $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
+        $classValue = str_replace('/', '\/', $classValue);
+        $value = $this->isArbitrary ? $this->value : $this->getPresetValue($this->value);
+
+        return ".aspect-{$classValue}{aspect-ratio:{$value};}";
+    }
+
+    private function isValidValue(): bool
+    {
+        $validPresets = ['auto', 'square', 'video'];
+
+        if (in_array($this->value, $validPresets)) {
+            return true;
+        }
+
+        if ($this->isArbitrary) {
+            return $this->isValidArbitraryValue();
+        }
+
+        return false;
+    }
+
+    private function isValidArbitraryValue(): bool
+    {
+        // Check for valid fractions or decimal numbers
+        if (preg_match('/^\d+(\.\d+)?\/\d+(\.\d+)?$/', $this->value)) {
+            return true;
+        }
+
+        // Check for single decimal number
+        if (is_numeric($this->value)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function getPresetValue(string $preset): string
+    {
+        switch ($preset) {
             case 'auto':
-                return <<<CSS
-.aspect-auto {
-    aspect-ratio: auto;
-}
-CSS;
+                return 'auto';
             case 'square':
-                return <<<CSS
-.aspect-square {
-    aspect-ratio: 1 / 1;
-}
-CSS;
+                return '1/1';
             case 'video':
-                return <<<CSS
-.aspect-video {
-    aspect-ratio: 16 / 9;
-}
-CSS;
+                return '16/9';
             default:
-                return '';
+                return $preset;
         }
     }
 

@@ -1,0 +1,66 @@
+<?php
+
+namespace Raakkan\PhpTailwind\Tailwind\Static;
+
+class TypographyClasses
+{
+    public static function getClasses(): array
+    {
+        return [
+            'antialiased' => '.antialiased{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}',
+            'subpixel-antialiased' => '.subpixel-antialiased{-webkit-font-smoothing: auto;-moz-osx-font-smoothing: auto;}',
+            'italic' => '.italic{font-style: italic;}',
+            'not-italic' => '.not-italic{font-style: normal;}',
+            'normal-nums' => '.normal-nums{font-variant-numeric: normal;}',
+            'ordinal' => '.ordinal{font-variant-numeric: ordinal;}',
+            'slashed-zero' => '.slashed-zero{font-variant-numeric: slashed-zero;}',
+            'lining-nums' => '.lining-nums{font-variant-numeric: lining-nums;}',
+            'oldstyle-nums' => '.oldstyle-nums{font-variant-numeric: oldstyle-nums;}',
+            'proportional-nums' => '.proportional-nums{font-variant-numeric: proportional-nums;}',
+            'tabular-nums' => '.tabular-nums{font-variant-numeric: tabular-nums;}',
+            'diagonal-fractions' => '.diagonal-fractions{font-variant-numeric: diagonal-fractions;}',
+            'stacked-fractions' => '.stacked-fractions{font-variant-numeric: stacked-fractions;}',
+            'list-inside' => '.list-inside{list-style-position: inside;}',
+            'list-outside' => '.list-outside{list-style-position: outside;}',
+            'text-left' => '.text-left{text-align: left;}',
+            'text-center' => '.text-center{text-align: center;}',
+            'text-right' => '.text-right{text-align: right;}',
+            'text-justify' => '.text-justify{text-align: justify;}',
+            'text-start' => '.text-start{text-align: start;}',
+            'text-end' => '.text-end{text-align: end;}',
+            'underline' => '.underline{text-decoration-line: underline;}',
+            'overline' => '.overline{text-decoration-line: overline;}',
+            'line-through' => '.line-through{text-decoration-line: line-through;}',
+            'no-underline' => '.no-underline{text-decoration-line: none;}',
+            'decoration-solid' => '.decoration-solid{text-decoration-style: solid;}',
+            'decoration-double' => '.decoration-double{text-decoration-style: double;}',
+            'decoration-dotted' => '.decoration-dotted{text-decoration-style: dotted;}',
+            'decoration-dashed' => '.decoration-dashed{text-decoration-style: dashed;}',
+            'decoration-wavy' => '.decoration-wavy{text-decoration-style: wavy;}',
+            'uppercase' => '.uppercase{text-transform: uppercase;}',
+            'lowercase' => '.lowercase{text-transform: lowercase;}',
+            'capitalize' => '.capitalize{text-transform: capitalize;}',
+            'normal-case' => '.normal-case{text-transform: none;}',
+            'truncate' => '.truncate{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}',
+            'text-ellipsis' => '.text-ellipsis{text-overflow: ellipsis;}',
+            'text-clip' => '.text-clip{text-overflow: clip;}',
+            'text-wrap' => '.text-wrap{text-wrap: wrap;}',
+            'text-nowrap' => '.text-nowrap{text-wrap: nowrap;}',
+            'text-balance' => '.text-balance{text-wrap: balance;}',
+            'text-pretty' => '.text-pretty{text-wrap: pretty;}',
+            'whitespace-normal' => '.whitespace-normal{white-space: normal;}',
+            'whitespace-nowrap' => '.whitespace-nowrap{white-space: nowrap;}',
+            'whitespace-pre' => '.whitespace-pre{white-space: pre;}',
+            'whitespace-pre-line' => '.whitespace-pre-line{white-space: pre-line;}',
+            'whitespace-pre-wrap' => '.whitespace-pre-wrap{white-space: pre-wrap;}',
+            'whitespace-break-spaces' => '.whitespace-break-spaces{white-space: break-spaces;}',
+            'break-normal' => '.break-normal{overflow-wrap: normal;word-break: normal;}',
+            'break-words' => '.break-words{overflow-wrap: break-word;}',
+            'break-all' => '.break-all{word-break: break-all;}',
+            'break-keep' => '.break-keep{word-break: keep-all;}',
+            'hyphens-none' => '.hyphens-none{hyphens: none;}',
+            'hyphens-manual' => '.hyphens-manual{hyphens: manual;}',
+            'hyphens-auto' => '.hyphens-auto{hyphens: auto;}',
+        ];
+    }
+}

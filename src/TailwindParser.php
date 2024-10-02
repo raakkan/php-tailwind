@@ -5,6 +5,8 @@ namespace Raakkan\PhpTailwind;
 use Raakkan\PhpTailwind\Tailwind\Spacing\MarginClass;
 use Raakkan\PhpTailwind\Tailwind\Spacing\PaddingClass;
 use Raakkan\PhpTailwind\Tailwind\Spacing\SpaceClass;
+use Raakkan\PhpTailwind\Tailwind\Layout\ObjectPositionClass;
+use Raakkan\PhpTailwind\Tailwind\StaticClass;
 
 class TailwindParser
 {
@@ -12,6 +14,8 @@ class TailwindParser
         MarginClass::class,
         PaddingClass::class,
         SpaceClass::class,
+        ObjectPositionClass::class,
+        StaticClass::class,
     ];
 
     private $missingClassHandler;

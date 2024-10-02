@@ -4,7 +4,7 @@ namespace Raakkan\PhpTailwind\Tailwind\Spacing;
 
 class SpacingValueCalculator
 {
-    private static $spacingScale = [
+    public static $spacingScale = [
         '0' => '0px',
         'px' => '1px',
         '0.5' => '0.125rem',

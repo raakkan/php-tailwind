@@ -22,76 +22,38 @@ class MarginClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
+        if (!$this->isValidValue()) {
+            return '';
+        }
+
         if ($this->isAuto) {
             return $this->getAutoMargin();
         }
 
-        $value = $this->isArbitrary ? $this->value : SpacingValueCalculator::calculate($this->value, $this->isNegative);
-        if ($this->isArbitrary && $this->isNegative) {
-            $value = "-{$value}";
-        }
-        $prefix = $this->isNegative ? '-' : '';
-        $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
+        $value = SpacingValueCalculator::calculate($this->value, $this->isNegative);
         
-        // $value = $this->escapeCalc($value);
+        $prefix = $this->isNegative ? '-' : '';
+        $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : str_replace(['/', '.'], ['\/', '\.'], $this->value);
         
         switch ($this->direction) {
             case 'x':
-                return <<<CSS
-.{$prefix}mx-{$classValue} {
-    margin-left: {$value};
-    margin-right: {$value};
-}
-CSS;
+                return ".{$prefix}mx-{$classValue}{margin-left:{$value};margin-right:{$value};}";
             case 'y':
-                return <<<CSS
-.{$prefix}my-{$classValue} {
-    margin-top: {$value};
-    margin-bottom: {$value};
-}
-CSS;
+                return ".{$prefix}my-{$classValue}{margin-top:{$value};margin-bottom:{$value};}";
             case 't':
-                return <<<CSS
-.{$prefix}mt-{$classValue} {
-    margin-top: {$value};
-}
-CSS;
+                return ".{$prefix}mt-{$classValue}{margin-top:{$value};}";
             case 'r':
-                return <<<CSS
-.{$prefix}mr-{$classValue} {
-    margin-right: {$value};
-}
-CSS;
+                return ".{$prefix}mr-{$classValue}{margin-right:{$value};}";
             case 'b':
-                return <<<CSS
-.{$prefix}mb-{$classValue} {
-    margin-bottom: {$value};
-}
-CSS;
+                return ".{$prefix}mb-{$classValue}{margin-bottom:{$value};}";
             case 'l':
-                return <<<CSS
-.{$prefix}ml-{$classValue} {
-    margin-left: {$value};
-}
-CSS;
+                return ".{$prefix}ml-{$classValue}{margin-left:{$value};}";
             case 'e':
-                return <<<CSS
-.{$prefix}me-{$classValue} {
-    margin-inline-end: {$value};
-}
-CSS;
+                return ".{$prefix}me-{$classValue}{margin-inline-end:{$value};}";
             case 's':
-                return <<<CSS
-.{$prefix}ms-{$classValue} {
-    margin-inline-start: {$value};
-}
-CSS;
+                return ".{$prefix}ms-{$classValue}{margin-inline-start:{$value};}";
             default:
-                return <<<CSS
-.{$prefix}m-{$classValue} {
-    margin: {$value};
-}
-CSS;
+                return ".{$prefix}m-{$classValue}{margin:{$value};}";
         }
     }
 
@@ -99,62 +61,74 @@ CSS;
     {
         switch ($this->direction) {
             case 'x':
-                return <<<CSS
-.mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-}
-CSS;
+                return ".mx-auto{margin-left:auto;margin-right:auto;}";
             case 'y':
-                return <<<CSS
-.my-auto {
-    margin-top: auto;
-    margin-bottom: auto;
-}
-CSS;
+                return ".my-auto{margin-top:auto;margin-bottom:auto;}";
             case 't':
-                return <<<CSS
-.mt-auto {
-    margin-top: auto;
-}
-CSS;
+                return ".mt-auto{margin-top:auto;}";
             case 'r':
-                return <<<CSS
-.mr-auto {
-    margin-right: auto;
-}
-CSS;
+                return ".mr-auto{margin-right:auto;}";
             case 'b':
-                return <<<CSS
-.mb-auto {
-    margin-bottom: auto;
-}
-CSS;
+                return ".mb-auto{margin-bottom:auto;}";
             case 'l':
-                return <<<CSS
-.ml-auto {
-    margin-left: auto;
-}
-CSS;
+                return ".ml-auto{margin-left:auto;}";
             case 'e':
-                return <<<CSS
-.me-auto {
-    margin-inline-end: auto;
-}
-CSS;
+                return ".me-auto{margin-inline-end:auto;}";
             case 's':
-                return <<<CSS
-.ms-auto {
-    margin-inline-start: auto;
-}
-CSS;
+                return ".ms-auto{margin-inline-start:auto;}";
             default:
-                return <<<CSS
-.m-auto {
-    margin: auto;
-}
-CSS;
+                return ".m-auto{margin:auto;}";
         }
+    }
+
+    private function isValidValue(): bool
+    {
+        if ($this->isAuto) {
+            return true; // 'auto' is a valid value for margin
+        }
+
+        $validValues = ['0', 'px', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '5', '6', '7', '8', '9', '10', '11', '12', '14', '16', '20', '24', '28', '32', '36', '40', '44', '48', '52', '56', '60', '64', '72', '80', '96'];
+
+        if (in_array($this->value, $validValues)) {
+            return true;
+        }
+
+        // Check for valid fractional values
+        if (preg_match('/^(\d+)\/(\d+)$/', $this->value, $matches)) {
+            $numerator = intval($matches[1]);
+            $denominator = intval($matches[2]);
+            
+            return $denominator !== 0; // Allow any fraction as long as denominator is not zero
+        }
+
+        // Check for valid arbitrary values
+        if ($this->isArbitrary) {
+            return $this->isValidArbitraryValue();
+        }
+        
+        return false;
+    }
+
+    private function isValidArbitraryValue(): bool
+    {
+        // Remove square brackets
+        $value = trim($this->value, '[]');
+
+        // Check for valid CSS length units
+        $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh', 'vmin', 'vmax', 'ex', 'ch', 'cm', 'mm', 'in', 'pt', 'pc'];
+        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')?$/';
+
+        if (preg_match($pattern, $value)) {
+            return true;
+        }
+
+        // Check for calc() expressions
+        if (strpos($value, 'calc(') === 0 && substr($value, -1) === ')') {
+            // Basic check for calc() - you might want to add more sophisticated validation
+            return true;
+        }
+
+        return false;
     }
 
     public static function parse(string $class): ?self
@@ -163,11 +137,7 @@ CSS;
             [, $negative, , $direction, $value] = $matches;
             $isAuto = $value === 'auto';
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            if ($isArbitrary) {
-                $value = trim($value, '[]');
-            } else if (!$isAuto) {
-                $value = str_replace('/', '\/', $value);
-            }
+            
             return new self($value, $direction ?: '', $negative === '-', $isAuto, $isArbitrary);
         }
         return null;
