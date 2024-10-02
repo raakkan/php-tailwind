@@ -3,6 +3,9 @@
 namespace Raakkan\PhpTailwind;
 class PhpTailwind
 {
+    use Concerns\HasPreflight;
+    use Concerns\HasHtmlFiles;
+    use Concerns\HasBladeFiles;
     private $parser;
     protected $initialClasses;
     protected $parsedClasses;
@@ -30,6 +33,7 @@ class PhpTailwind
     {
         $classes = array_unique(explode(' ', $classes));
         
+        $classes = array_merge($classes, $this->getClassesFromHtmlFiles(), $this->getClassesFromBladeFiles());
         $result = $this->parser->parse($classes);
         $this->parsedClasses = $result['css'];
         $this->missingClasses = $result['missingClasses'];
@@ -38,35 +42,10 @@ class PhpTailwind
 
     public function toString()
     {
-        return $this->parsedClasses;
-    }
-
-    public function beautify()
-    {
-        $css = $this->parsedClasses;
-        $beautified = '';
-        $indentLevel = 0;
-        $inRule = false;
-
-        foreach (explode(';', $css) as $declaration) {
-            $declaration = trim($declaration);
-            if (empty($declaration)) continue;
-
-            if (strpos($declaration, '}') !== false) {
-                $indentLevel--;
-                $beautified .= str_repeat('    ', $indentLevel) . "}\n";
-                $inRule = false;
-            } elseif (strpos($declaration, '{') !== false) {
-                $beautified .= str_repeat('    ', $indentLevel) . "$declaration\n";
-                $indentLevel++;
-                $inRule = true;
-            } else {
-                $beautified .= str_repeat('    ', $indentLevel) . "$declaration;\n";
-            }
+        if ($this->isPreflight()) {
+            return $this->preflightStyle() . $this->parsedClasses;
         }
-
-        $this->parsedClasses = $beautified;
-        return $this;
+        return $this->parsedClasses;
     }
 
     public function compress()

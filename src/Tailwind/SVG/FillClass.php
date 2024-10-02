@@ -1,10 +1,10 @@
 <?php
 
-namespace Raakkan\PhpTailwind\Tailwind\Typography;
+namespace Raakkan\PhpTailwind\Tailwind\SVG;
 
 use Raakkan\PhpTailwind\AbstractTailwindClass;
 
-class TextDecorationColorClass extends AbstractTailwindClass
+class FillClass extends AbstractTailwindClass
 {
     private $isArbitrary;
 
@@ -21,23 +21,25 @@ class TextDecorationColorClass extends AbstractTailwindClass
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        $colorValue = $this->getColorValue();
-
-        return ".decoration-{$classValue}{text-decoration-color:{$colorValue};}";
+        $fillValue = $this->getFillValue();
+        
+        return ".fill-{$classValue} {fill: {$fillValue};}";
     }
 
-    private function getColorValue(): string
+    private function getFillValue(): string
     {
         if ($this->isArbitrary) {
             return trim($this->value, '[]');
         }
 
-        $specialColors = ['inherit', 'current', 'transparent'];
-        if (in_array($this->value, $specialColors)) {
+        $specialValues = ['none', 'inherit', 'current', 'transparent'];
+        if (in_array($this->value, $specialValues)) {
             return $this->value === 'current' ? 'currentColor' : $this->value;
         }
 
-        return $this->getColors()[$this->value]['hex'] ?? $this->value;
+        $colors = $this->getColors();
+        $colorName = str_replace(['fill-'], '', $this->value);
+        return $colors[$colorName]['hex'] ?? '';
     }
 
     private function isValidValue(): bool
@@ -46,36 +48,26 @@ class TextDecorationColorClass extends AbstractTailwindClass
             return $this->isValidArbitraryValue();
         }
 
-        $validValues = array_merge(array_keys($this->getColors()), ['inherit', 'current', 'transparent']);
+        $validValues = array_merge(
+            ['none', 'inherit', 'current', 'transparent'],
+            array_keys($this->getColors())
+        );
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
-        // Allow hex colors, rgb, rgba, hsl, hsla
         return preg_match('/^(#[0-9A-Fa-f]{3,8}|rgb\(.*\)|rgba\(.*\)|hsl\(.*\)|hsla\(.*\))$/', $value);
     }
 
     public static function parse(string $class): ?self
     {
-        if (preg_match('/^decoration-((?:\[.+\]|inherit|current|transparent|black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-(?:50|100|200|300|400|500|600|700|800|900|950))?)$/', $class, $matches)) {
+        if (preg_match('/^fill-((?:\[.+\]|none|inherit|current|transparent|black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
             return new self($value, $isArbitrary);
         }
         return null;
-    }
-
-    protected function escapeArbitraryValue(string $value): string
-    {
-        // Remove square brackets
-        $value = trim($value, '[]');
-        
-        // Escape special characters
-        $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
-        return $value;
     }
 }

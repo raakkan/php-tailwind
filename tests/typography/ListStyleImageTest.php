@@ -25,7 +25,7 @@ class ListStyleImageTest extends TestCase
             // Arbitrary values
             ['list-image-[url(checkmark.png)]', '.list-image-\[url\(checkmark\.png\)\]{list-style-image:url(checkmark.png);}'],
             ['list-image-[url("bullet.svg")]', '.list-image-\[url\(\"bullet\.svg\"\)\]{list-style-image:url("bullet.svg");}'],
-            ['list-image-[url(\'custom.gif\')]', '.list-image-\[url\(\'custom\.gif\'\)\]{list-style-image:url(\'custom.gif\');}'],
+            ['list-image-[url(\'custom.gif\')]', '.list-image-\[url\(\\\'custom\.gif\\\'\)\]{list-style-image:url(\'custom.gif\');}'],
             ['list-image-[inherit]', '.list-image-\[inherit\]{list-style-image:inherit;}'],
             ['list-image-[initial]', '.list-image-\[initial\]{list-style-image:initial;}'],
             ['list-image-[revert]', '.list-image-\[revert\]{list-style-image:revert;}'],

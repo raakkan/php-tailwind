@@ -26,8 +26,8 @@ class FontFamilyTest extends TestCase
 
             // Arbitrary values (as per Tailwind documentation)
             ['font-[ui-sans-serif]', '.font-\[ui-sans-serif\]{font-family:ui-sans-serif;}'],
-            ['font-[\'Open_Sans\']', '.font-\[\'Open_Sans\'\]{font-family:\'Open_Sans\';}'],
-            ['font-["Helvetica_Neue"]', '.font-\["Helvetica_Neue"\]{font-family:"Helvetica_Neue";}'],
+            ['font-[\'Open_Sans\']', '.font-\[\\\'Open_Sans\\\'\]{font-family:\'Open_Sans\';}'],
+            ['font-["Helvetica_Neue"]', '.font-\[\"Helvetica_Neue\"\]{font-family:"Helvetica_Neue";}'],
             ['font-[Inter]', '.font-\[Inter\]{font-family:Inter;}'],
             ['font-[system-ui]', '.font-\[system-ui\]{font-family:system-ui;}'],
             ['font-[ui-monospace]', '.font-\[ui-monospace\]{font-family:ui-monospace;}'],

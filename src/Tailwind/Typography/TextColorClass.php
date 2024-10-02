@@ -24,18 +24,19 @@ class TextColorClass extends AbstractTailwindClass
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         $colorValue = $this->getColorValue();
-
+        
+        $css = ".text-{$classValue}";
         if ($this->opacity !== null) {
-            $classValue .= "\\/{$this->opacity}";
-            $opacityValue = $this->getOpacityValue();
-            return ".text-{$classValue}{color:rgb({$colorValue} / {$opacityValue});}";
+            $css .= "\\/{$this->opacity}";
         }
-
-        if ($this->isArbitrary) {
-            return ".text-{$classValue}{color:{$colorValue};}";
-        } else {
-            return ".text-{$classValue}{color:rgb({$colorValue});}";
+        $css .= " {";
+        
+        if ($this->opacity === null) {
+            $css .= "--tw-text-opacity: 1;";
         }
+        $css .= "color: {$colorValue};}";
+        
+        return $css;
     }
 
     private function getColorValue(): string
@@ -44,15 +45,46 @@ class TextColorClass extends AbstractTailwindClass
             return trim($this->value, '[]');
         }
 
-        return $this->getColors()[$this->value] ?? '';
+        $specialColors = ['inherit', 'current', 'transparent'];
+        if (in_array($this->value, $specialColors)) {
+            return $this->value === 'current' ? 'currentColor' : $this->value;
+        }
+
+        $colors = $this->getColors();
+        $colorName = str_replace(['text-'], '', $this->value);
+        $color = $colors[$colorName] ?? '';
+        
+        if ($color) {
+            if ($this->opacity !== null) {
+                return "rgb({$color['rgb']} / {$this->getOpacityValue()})";
+            }
+            return "rgb({$color['rgb']} / var(--tw-text-opacity))";
+        }
+
+        return '';
     }
 
     private function getOpacityValue(): string
     {
         if ($this->opacity !== null) {
-            return number_format(intval($this->opacity) / 100, 2);
+            $opacityInt = intval($this->opacity);
+            if ($opacityInt % 5 === 0 && $opacityInt >= 0 && $opacityInt <= 100) {
+                return ($opacityInt === 100) ? '1' : rtrim(sprintf('%.2f', $opacityInt / 100), '0');
+            }
         }
-        return '1';
+        return '';
+    }
+
+    private function hexToRgb($hex): string
+    {
+        $hex = ltrim($hex, '#');
+        if (strlen($hex) == 3) {
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        }
+        $r = hexdec(substr($hex, 0, 2));
+        $g = hexdec(substr($hex, 2, 2));
+        $b = hexdec(substr($hex, 4, 2));
+        return "{$r} {$g} {$b}";
     }
 
     private function isValidValue(): bool
@@ -74,9 +106,9 @@ class TextColorClass extends AbstractTailwindClass
 
     public static function parse(string $class): ?self
     {
-        if (preg_match('/^text-((?:\[.+\]|inherit|current|transparent|black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?(?:\/[0-9.]+)?)$/', $class, $matches)) {
+        if (preg_match('/^text-((?:\[.+?\]|inherit|current|transparent|black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?(?:\/[0-9.]+)?)$/', $class, $matches)) {
             $value = $matches[1];
-            $isArbitrary = preg_match('/^\[.+\]$/', $value);
+            $isArbitrary = preg_match('/^\[.+?\]$/', $value);
             $opacity = null;
             
             if (strpos($value, '/') !== false) {
@@ -89,14 +121,10 @@ class TextColorClass extends AbstractTailwindClass
         return null;
     }
 
-    // protected function escapeArbitraryValue(string $value): string
+    // private function escapeArbitraryValue(string $value): string
     // {
-    //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
-    //     // Escape special characters
-    //     $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
+    //     $value = str_replace(',', '\\2c ', $value);
     //     return $value;
     // }
 }
