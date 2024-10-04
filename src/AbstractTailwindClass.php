@@ -18,6 +18,15 @@ abstract class AbstractTailwindClass
         return null;
     }
 
+    public function getStyleOnly(): string
+    {
+        $css = $this->toCss();
+        if (preg_match('/\{(.*?)\}/s', $css, $matches)) {
+            return trim($matches[1]);
+        }
+        return '';
+    }
+
     protected function escapeCalc(string $value): string
     {
         return preg_replace_callback('/calc\((.*?)\)/', function($matches) {

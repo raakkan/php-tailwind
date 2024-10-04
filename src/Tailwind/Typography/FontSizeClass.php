@@ -17,7 +17,11 @@ class FontSizeClass extends AbstractTailwindClass
     public function toCss(): string
     {
         if (!$this->isValidValue()) {
-            return '';
+            if(TextColorClass::parse('text-'.$this->value)) {
+                return TextColorClass::parse('text-'.$this->value)->toCss();
+            } else {
+                return '';
+            }
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;

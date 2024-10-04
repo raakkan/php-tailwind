@@ -19,6 +19,7 @@ class TextColorClass extends AbstractTailwindClass
     public function toCss(): string
     {
         if (!$this->isValidValue()) {
+            // return FontSizeClass::parse('text-'.$this->value)->toCss();
             return '';
         }
 

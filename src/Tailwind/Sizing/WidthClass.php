@@ -21,7 +21,7 @@ class WidthClass extends AbstractTailwindClass
             return '';
         }
 
-        $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : str_replace('.', '\\.', $this->value);
+        $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : str_replace(['.', '/'], ['\\.', '\\/'], $this->value);
         $widthValue = $this->getWidthValue();
 
         return ".w-{$classValue}{width:{$widthValue};}";

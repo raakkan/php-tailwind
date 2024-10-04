@@ -17,7 +17,11 @@ class FontFamilyClass extends AbstractTailwindClass
     public function toCss(): string
     {
         if (!$this->isValidValue()) {
-            return '';
+            if (FontWeightClass::parse('font-'.$this->value)) {
+                return FontWeightClass::parse('font-'.$this->value)->toCss();
+            } else {
+                return '';
+            }
         }
 
         $classValue = $this->value;

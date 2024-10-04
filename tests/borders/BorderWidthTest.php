@@ -27,6 +27,12 @@ class BorderWidthTest extends TestCase
             ['border-8', ".border-8{border-width:8px;}"],
 
             // Individual sides
+            ['border-t', ".border-t{border-top-width:1px;}"],
+            ['border-r', ".border-r{border-right-width:1px;}"],
+            ['border-b', ".border-b{border-bottom-width:1px;}"],
+            ['border-l', ".border-l{border-left-width:1px;}"],
+            ['border-x', ".border-x{border-left-width:1px;border-right-width:1px;}"],
+            ['border-y', ".border-y{border-top-width:1px;border-bottom-width:1px;}"],
             ['border-t-0', ".border-t-0{border-top-width:0px;}"],
             ['border-r-2', ".border-r-2{border-right-width:2px;}"],
             ['border-b-4', ".border-b-4{border-bottom-width:4px;}"],

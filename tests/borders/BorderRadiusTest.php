@@ -21,6 +21,9 @@ class BorderRadiusTest extends TestCase
         return [
             // warnings for rounded need to check
             ['rounded', ".rounded{border-radius:0.25rem;}"],
+            ['rounded-t', ".rounded-t{border-top-left-radius:0.25rem;border-top-right-radius:0.25rem;}"],
+            ['rounded-r', ".rounded-r{border-top-right-radius:0.25rem;border-bottom-right-radius:0.25rem;}"],
+            ['rounded-t-none', ".rounded-t-none{border-top-left-radius:0px;border-top-right-radius:0px;}"],
             ['rounded-none', ".rounded-none{border-radius:0px;}"],
             ['rounded-sm', ".rounded-sm{border-radius:0.125rem;}"],
             ['rounded-md', ".rounded-md{border-radius:0.375rem;}"],

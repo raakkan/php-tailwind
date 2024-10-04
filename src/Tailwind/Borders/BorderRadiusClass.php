@@ -26,7 +26,7 @@ class BorderRadiusClass extends AbstractTailwindClass
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         
         if ($this->value === 'DEFAULT') {
-            $className = 'rounded';
+            $className = $this->side ? "rounded-{$this->side}" : 'rounded';
         } else {
             $className = $this->side ? "rounded-{$this->side}-{$classValue}" : "rounded-{$classValue}";
         }
@@ -118,7 +118,9 @@ class BorderRadiusClass extends AbstractTailwindClass
             return new self('DEFAULT', '', false);
         }
         if (preg_match('/^rounded(-([trblse]{1,2}))?(-(\[.+\]|[a-z0-9]+))?$/', $class, $matches)) {
-            [, , $side, , $value] = $matches;
+            $side = $matches[2] ?? '';
+            $value = $matches[4] ?? 'DEFAULT';  // Set default value if not provided
+            
             $isArbitrary = $value && preg_match('/^\[.+\]$/', $value);
             
             return new self($value, $side, $isArbitrary);

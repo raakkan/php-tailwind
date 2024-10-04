@@ -3,6 +3,7 @@
 namespace Raakkan\PhpTailwind\Tailwind\Typography;
 
 use Raakkan\PhpTailwind\AbstractTailwindClass;
+use Raakkan\PhpTailwind\Tailwind\StaticClass;
 
 class FontWeightClass extends AbstractTailwindClass
 {
@@ -17,7 +18,11 @@ class FontWeightClass extends AbstractTailwindClass
     public function toCss(): string
     {
         if (!$this->isValidValue()) {
-            return '';
+            if (StaticClass::parse('font-'.$this->value)) {
+                return StaticClass::parse('font-'.$this->value)->toCss();
+            } else {
+                return '';
+            }
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;

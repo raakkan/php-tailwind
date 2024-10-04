@@ -7,13 +7,17 @@ class PhpTailwind
     use Concerns\HasHtmlFiles;
     use Concerns\HasBladeFiles;
     private $parser;
+    private $minifier;
+    private $minifiedCss;
+    private $css;
     protected $initialClasses;
     protected $parsedClasses;
     protected $missingClasses;
-
+    protected $invalidCssClasses;
     public function __construct($initialClasses = '')
     {
         $this->parser = new TailwindParser();
+        $this->minifier = new Minify();
         if (!empty($initialClasses)) {
             $this->initialClasses = $initialClasses;
             $this->parse($initialClasses);
@@ -21,6 +25,7 @@ class PhpTailwind
             $this->initialClasses = '';
             $this->parsedClasses = '';
             $this->missingClasses = [];
+            $this->invalidCssClasses = [];
         }
     }
 
@@ -29,43 +34,54 @@ class PhpTailwind
         return new self($initialClasses);
     }
 
-    public function parse($classes)
+    public function parse(string | array | null $classes = null)
     {
-        $classes = array_unique(explode(' ', $classes));
+        $classes = array_unique($classes);
         
-        $classes = array_merge($classes, $this->getClassesFromHtmlFiles(), $this->getClassesFromBladeFiles());
         $result = $this->parser->parse($classes);
         $this->parsedClasses = $result['css'];
         $this->missingClasses = $result['missingClasses'];
+        $this->invalidCssClasses = $result['invalidCssClasses'];
+        return $this;
+    }
+
+    public function minify()
+    {
+        $css = $this->parsedClasses;
+        if ($this->isPreflight()) {
+            $css = $this->preflightStyle() . $css;
+        }
+        $this->minifiedCss = $this->minifier->add($css)->minify();
         return $this;
     }
 
     public function toString()
     {
-        if ($this->isPreflight()) {
-            return $this->preflightStyle() . $this->parsedClasses;
+        $css = '';
+        if ($this->minifiedCss) {
+            $css = $this->minifiedCss;
+        } else {
+            $css = $this->parsedClasses;
+            if ($this->isPreflight()) {
+                $css = $this->preflightStyle() . $css;
+            }
         }
-        return $this->parsedClasses;
-    }
-
-    public function compress()
-    {
-        $css = $this->parsedClasses;
-        // Remove comments
-        $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
-        // Remove spaces around semicolons and braces
-        $css = preg_replace('/\s*([{}:;])\s*/', '$1', $css);
-        // Remove spaces around commas except within property values
-        $css = preg_replace('/\s*,\s*(?![^()]*\))/', ',', $css);
-        // Remove spaces at the beginning and end of the string
-        $css = trim($css);
         
-        $this->parsedClasses = $css;
-        return $this;
+        return $css;
     }
 
     public function getMissingClasses()
     {
-        return $this->missingClasses;
+        return $this->parser->getMissingClasses();
+    }
+
+    public function getInvalidClasses()
+    {
+        return $this->parser->getInvalidCssClasses();
+    }
+
+    public function getParsedClasses()
+    {
+        return $this->parser->getParsedClasses();
     }
 }

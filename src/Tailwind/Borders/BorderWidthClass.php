@@ -28,8 +28,9 @@ class BorderWidthClass extends AbstractTailwindClass
         $sidePrefix = $this->getSidePrefix();
         $properties = $this->getBorderProperties();
 
-        if($this->value === 'DEFAULT') {
-            $css = ".border{";
+        // Update this condition to handle 'border' and 'border-{side}' cases
+        if ($this->value === 'DEFAULT' || $this->value === '') {
+            $css = ".border{$sidePrefix}{";
         } else {
             $css = ".border{$sidePrefix}-{$classValue}{";
         }
@@ -54,6 +55,7 @@ class BorderWidthClass extends AbstractTailwindClass
             '4' => '4px',
             '8' => '8px',
             'DEFAULT' => '1px',
+            '' => '1px', // Add this line to handle 'border-{side}' cases
         ];
 
         return $borderWidths[$this->value] ?? $this->value;
@@ -97,7 +99,8 @@ class BorderWidthClass extends AbstractTailwindClass
             return $this->isValidArbitraryValue();
         }
 
-        $validValues = ['0', '2', '4', '8', 'DEFAULT'];
+        // Add empty string to valid values for 'border-{side}' cases
+        $validValues = ['0', '2', '4', '8', 'DEFAULT', ''];
         return in_array($this->value, $validValues);
     }
 
@@ -116,9 +119,10 @@ class BorderWidthClass extends AbstractTailwindClass
             return new self('DEFAULT', '', false);
         }
 
-        if (preg_match('/^border(-[trblxyes])?-(.+)$/', $class, $matches)) {
+        // Update the regex to handle 'border-{side}' cases
+        if (preg_match('/^border(-[trblxyes])?(-(.+))?$/', $class, $matches)) {
             $side = ltrim($matches[1] ?? '', '-');
-            $value = $matches[2];
+            $value = $matches[3] ?? '';
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
             
             return new self($value, $side, $isArbitrary);

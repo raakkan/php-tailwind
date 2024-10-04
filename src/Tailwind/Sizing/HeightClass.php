@@ -21,7 +21,7 @@ class HeightClass extends AbstractTailwindClass
             return '';
         }
 
-        $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : str_replace('.', '\\.', $this->value);
+        $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : str_replace(['.', '/'], ['\\.', '\\/'], $this->value);
         $heightValue = $this->getHeightValue();
 
         return ".h-{$classValue}{height:{$heightValue};}";

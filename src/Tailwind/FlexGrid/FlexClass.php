@@ -3,6 +3,7 @@
 namespace Raakkan\PhpTailwind\Tailwind\FlexGrid;
 
 use Raakkan\PhpTailwind\AbstractTailwindClass;
+use Raakkan\PhpTailwind\Tailwind\StaticClass;
 
 class FlexClass extends AbstractTailwindClass
 {
@@ -17,7 +18,11 @@ class FlexClass extends AbstractTailwindClass
     public function toCss(): string
     {
         if (!$this->isValidValue()) {   
-            return '';
+            if (StaticClass::parse('flex-'.$this->value)) {
+                return StaticClass::parse('flex-'.$this->value)->toCss();
+            } else {
+                return '';
+            }
         }
         
         $classValue = $this->value;
