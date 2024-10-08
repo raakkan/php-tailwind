@@ -34,7 +34,7 @@ class StaticClass extends AbstractTailwindClass
     {
         $classes = [];
         foreach (static::$static_classes as $static_class) {
-            $classes = array_merge($classes, $static_class::getClasses());
+            $classes = array_merge($classes, $static_class::getClasses(), static::getOtherClasses());
         }
 
         return $classes;
@@ -42,6 +42,7 @@ class StaticClass extends AbstractTailwindClass
 
     public static function parse($class): ?self
     {
+        
         $classes = [];
         foreach (static::$static_classes as $static_class) {
             $classes = array_merge($classes, $static_class::getClasses());
@@ -50,7 +51,7 @@ class StaticClass extends AbstractTailwindClass
         $classes = array_unique($classes);
         $other_classes = static::getOtherClasses();
         $classes = array_merge($classes, $other_classes);
-
+      
         if(array_key_exists($class, $classes)) {
             return new self($class);
         }

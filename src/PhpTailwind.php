@@ -36,8 +36,11 @@ class PhpTailwind
 
     public function parse(string | array | null $classes = null)
     {
+        if (is_string($classes)) {
+            $classes = explode(' ', $classes);
+        }
         $classes = array_unique($classes);
-        
+        $this->initialClasses = $classes;
         $result = $this->parser->parse($classes);
         $this->parsedClasses = $result['css'];
         $this->missingClasses = $result['missingClasses'];

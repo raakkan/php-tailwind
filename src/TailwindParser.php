@@ -19,8 +19,11 @@ class TailwindParser
         $this->classTypes = TailwindClassDiscovery::discoverClasses();
     }
 
-    public function parse(array $classes): array
+    public function parse(array|string $classes): array
     {
+        if (is_string($classes)) {
+            $classes = explode(' ', $classes);
+        }
         $responsiveClasses = $this->parseResponsiveClass($classes);
         $missingClasses = [];
         $parsedClasses = [];
@@ -62,6 +65,7 @@ class TailwindParser
 
     private function parseClass(string $class, string &$css, string $breakpoint): bool
     {
+        $class = str_replace(['{', '}', ' ', '\'', '"', '\\\''], '', $class);
         foreach ($this->classTypes as $classType) {
             if ($tailwindClass = $classType::parse($class)) {
                 $classCss = $tailwindClass->toCss();
