@@ -1,7 +1,8 @@
 <?php
 
-namespace Raakkan\PhpTailwind\Tailwind;
+namespace Raakkan\PhpTailwind;
 
+use Raakkan\PhpTailwind\Tailwind\PseudoClass;
 use Raakkan\PhpTailwind\AbstractTailwindClass;
 use Raakkan\PhpTailwind\TailwindClassDiscovery;
 
@@ -47,11 +48,12 @@ class DarkModeClass extends AbstractTailwindClass
     protected function buildSelector(string $darkClass, string $pseudoClass): string
     {
         $selector = '.' . $this->escapeSelector($darkClass);
-        $selector .= ':where(.dark, .dark *)';
         
         if ($pseudoClass) {
             $selector .= ':' . $pseudoClass;
         }
+        
+        $selector .= ':where(.dark, .dark *)';
         
         return $selector;
     }

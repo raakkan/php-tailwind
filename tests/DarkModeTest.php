@@ -3,7 +3,7 @@
 namespace Raakkan\PhpTailwind\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Raakkan\PhpTailwind\Tailwind\DarkModeClass;
+use Raakkan\PhpTailwind\DarkModeClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class DarkModeTest extends TestCase
@@ -22,8 +22,8 @@ class DarkModeTest extends TestCase
             ['dark:text-white', '.dark\:text-white:where(.dark, .dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity));}'],
             ['dark:bg-black', '.dark\:bg-black:where(.dark, .dark *){--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity));}'],
             ['dark:border-gray-700', '.dark\:border-gray-700:where(.dark, .dark *){--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity));}'],
-            ['dark:hover:text-gray-300', '.dark\:hover\:text-gray-300:where(.dark, .dark *):hover{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity));}'],
-            ['dark:focus:border-blue-500', '.dark\:focus\:border-blue-500:where(.dark, .dark *):focus{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity));}'],
+            ['dark:hover:text-gray-300', '.dark\:hover\:text-gray-300:hover:where(.dark, .dark *){--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity));}'],
+            ['dark:focus:border-blue-500', '.dark\:focus\:border-blue-500:focus:where(.dark, .dark *){--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity));}'],
             ['dark:text-[#ff00ff]', '.dark\:text-\[\#ff00ff\]:where(.dark, .dark *){color:#ff00ff;}'],
             ['dark:bg-[rgb(255,0,255)]', '.dark\:bg-\[rgb\(255\2c 0\2c 255\)\]:where(.dark, .dark *){background-color:rgb(255,0,255);}'],
             ['dark:text-blue-500/75', '.dark\:text-blue-500\/75:where(.dark, .dark *){color:rgb(59 130 246 / 0.75);}'],

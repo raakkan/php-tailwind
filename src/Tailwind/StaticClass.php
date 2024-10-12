@@ -66,6 +66,7 @@ class StaticClass extends AbstractTailwindClass
             'not-sr-only' => '.not-sr-only{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal;}',
             'forced-color-adjust-auto' => '.forced-color-adjust-auto{forced-color-adjust: auto;}',
             'forced-color-adjust-none' => '.forced-color-adjust-none{forced-color-adjust: none;}',
+            'transform' => '.transform{transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));}'
         ];
     }
 }

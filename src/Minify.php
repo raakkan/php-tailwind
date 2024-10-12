@@ -50,7 +50,7 @@ class Minify
         $this->removeComments();
         $this->removeWhitespace();
         $this->shortenHexColors();
-        $this->shortenZeroes();
+        // $this->shortenZeroes();
         $this->shortenFontWeights();
         $this->stripEmptyTags();
         $this->optimizeShorthands();

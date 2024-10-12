@@ -25,6 +25,7 @@ class PseudoClassTest extends TestCase
             ['hover:rounded-lg', ".hover\\:rounded-lg:hover{border-radius:0.5rem;}"],
             ['focus:border-2', ".focus\\:border-2:focus{border-width:2px;}"],
             ['active:opacity-75', ".active\\:opacity-75:active{opacity:0.75;}"],
+            ['focus:ring-[#FF7F00]', ".focus\\:ring-\[\\#FF7F00\]:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(255 127 0 / var(--tw-ring-opacity));}"],
         ];
     }
 

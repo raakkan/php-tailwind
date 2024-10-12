@@ -5,7 +5,8 @@ namespace Raakkan\PhpTailwind\Tests\Backgrounds;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Backgrounds\BackgroundColorClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-
+ 
+//TODO : bg-[#FF9933] dark:bg-[#E67300] this classes not applayed in html elament test ok
 class BackgroundColorTest extends TestCase
 {
     #[DataProvider('standardColorProvider')]
@@ -59,6 +60,7 @@ class BackgroundColorTest extends TestCase
     public static function arbitraryValueProvider(): array
     {
         return [
+            ['bg-[#FF9933]', ".bg-\\[\\#FF9933\\] {--tw-bg-opacity: 1;background-color: #FF9933;}"],
             ['bg-[#1da1f2]', ".bg-\\[\\#1da1f2\\] {--tw-bg-opacity: 1;background-color: #1da1f2;}"],
             ['bg-[#50d71e]', ".bg-\\[\\#50d71e\\] {--tw-bg-opacity: 1;background-color: #50d71e;}"],
             ['bg-[rgb(255,0,0)]', ".bg-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-bg-opacity: 1;background-color: rgb(255,0,0);}"],

@@ -15,7 +15,7 @@ class PseudoClass extends AbstractTailwindClass
     {
         parent::__construct($class);
         $this->tailwindClasses = array_filter(TailwindClassDiscovery::discoverClasses(), function($className) {
-            return $className !== self::class && $className !== DarkModeClass::class;
+            return $className !== self::class;
         });
         
         $this->pseudoClass = $pseudoClass;
@@ -29,13 +29,20 @@ class PseudoClass extends AbstractTailwindClass
             if ($tailwindClass::parse($this->actualClass)) {
                 $parsedClass = $tailwindClass::parse($this->actualClass);
                 
-                $selector = '.' . str_replace(':', '\\:', $this->value) . ':' . $this->pseudoClass;
+                $selector = '.' . $this->escapeSelector($this->value) . ':' . $this->pseudoClass;
                 $styles = trim(preg_replace('/\s+/', ' ', $parsedClass->getStyleOnly()));
                 $css .= $selector . '{' . $styles . '}';
                 break;
             }
         }
         return $css;
+    }
+
+    private function escapeSelector(string $selector): string
+    {
+        return preg_replace_callback('/([^a-zA-Z0-9\-_])/', function($matches) {
+            return '\\' . $matches[1];
+        }, $selector);
     }
 
     public static function parse($class): ?self
