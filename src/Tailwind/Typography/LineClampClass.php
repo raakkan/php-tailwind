@@ -16,7 +16,7 @@ class LineClampClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -42,12 +42,14 @@ class LineClampClass extends AbstractTailwindClass
         }
 
         $validValues = array_merge(['none'], range(1, 6));
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         return is_numeric($value) && $value > 0;
     }
 
@@ -56,9 +58,10 @@ class LineClampClass extends AbstractTailwindClass
         if (preg_match('/^line-clamp-((?:\[.+\]|none|[1-6]))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -66,10 +69,10 @@ class LineClampClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

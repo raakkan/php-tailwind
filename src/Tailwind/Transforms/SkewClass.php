@@ -7,7 +7,9 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class SkewClass extends AbstractTailwindClass
 {
     private $axis;
+
     private $isArbitrary;
+
     private $isNegative;
 
     public function __construct(string $value, string $axis, bool $isArbitrary = false, bool $isNegative = false)
@@ -20,22 +22,23 @@ class SkewClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $skewValue = $this->getSkewValue();
         $classValue = $this->value;
         $prefix = '';
-        if ($this->isNegative && !$this->isArbitrary) {
+        if ($this->isNegative && ! $this->isArbitrary) {
             $classValue = "{$this->value}";
             $prefix = '-';
         }
         if ($this->isArbitrary) {
             $classValue = "\\[{$this->escapeArbitraryValue($this->value)}\\]";
         }
-        
+
         $property = "--tw-skew-{$this->axis}";
+
         return ".{$prefix}skew-{$this->axis}-{$classValue}{{$property}:{$skewValue};transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));}";
     }
 
@@ -51,6 +54,7 @@ class SkewClass extends AbstractTailwindClass
         ];
 
         $value = $this->isArbitrary ? $this->value : ($skews[$this->value] ?? '0deg');
+
         return $this->isNegative ? "-{$value}" : $value;
     }
 
@@ -61,6 +65,7 @@ class SkewClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '1', '2', '3', '6', '12'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -78,8 +83,10 @@ class SkewClass extends AbstractTailwindClass
                     $isNegative = false; // Reset isNegative as it's now part of the value
                 }
             }
+
             return new self($value, $axis, $isArbitrary, $isNegative);
         }
+
         return null;
     }
 }

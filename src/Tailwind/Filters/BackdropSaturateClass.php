@@ -16,13 +16,13 @@ class BackdropSaturateClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $saturateValue = $this->getSaturateValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         return ".backdrop-saturate-{$classValue}{--tw-backdrop-saturate:saturate({$saturateValue});-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);}";
     }
 
@@ -46,6 +46,7 @@ class BackdropSaturateClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '50', '100', '150', '200'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -57,8 +58,10 @@ class BackdropSaturateClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

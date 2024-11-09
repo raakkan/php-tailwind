@@ -3,7 +3,6 @@
 namespace Raakkan\PhpTailwind\Concerns;
 
 use InvalidArgumentException;
-use Illuminate\View\FileViewFinder;
 
 trait HasBladeFiles
 {
@@ -12,8 +11,9 @@ trait HasBladeFiles
     /**
      * Add one or more Blade files or views to be processed.
      *
-     * @param string|array $items
+     * @param  string|array  $items
      * @return $this
+     *
      * @throws InvalidArgumentException
      */
     public function addBladeFiles($items)
@@ -34,7 +34,7 @@ trait HasBladeFiles
     /**
      * Check if the given item is a valid Blade file or view.
      *
-     * @param string $item
+     * @param  string  $item
      * @return bool
      */
     protected function isValidBladeItem($item)
@@ -63,12 +63,12 @@ trait HasBladeFiles
     /**
      * Get the content of a Blade file or view.
      *
-     * @param string $item
+     * @param  string  $item
      * @return string
      */
     protected function getBladeContent($item)
     {
-        
+
         if (file_exists($item)) {
             return file_get_contents($item);
         }
@@ -82,7 +82,7 @@ trait HasBladeFiles
                 $path = $finder->find($item);
             } catch (\Exception $e) {
                 // If not found, try to handle namespaced views
-                
+
                 $segments = explode('::', $item);
                 if (count($segments) == 2) {
                     $namespace = $segments[0];
@@ -90,7 +90,7 @@ trait HasBladeFiles
                     $hints = $finder->getHints();
                     if (isset($hints[$namespace])) {
                         foreach ($hints[$namespace] as $hint) {
-                            $path = $hint . '/' . str_replace('.', '/', $view) . '.blade.php';
+                            $path = $hint.'/'.str_replace('.', '/', $view).'.blade.php';
                             if (file_exists($path)) {
                                 break;
                             }
@@ -99,10 +99,10 @@ trait HasBladeFiles
                 }
             }
 
-            if (!isset($path) || !file_exists($path)) {
+            if (! isset($path) || ! file_exists($path)) {
                 throw new InvalidArgumentException("Unable to get content for: {$item}");
             }
-            
+
             // Return the raw content of the view file
             return file_get_contents($path);
         }
@@ -113,7 +113,7 @@ trait HasBladeFiles
     /**
      * Extract CSS classes from content.
      *
-     * @param string $content
+     * @param  string  $content
      * @return array
      */
     protected function extractClassesFromContent($content)
@@ -122,10 +122,10 @@ trait HasBladeFiles
 
         // Match classes in standard HTML attributes
         preg_match_all('/class=["\']([^"\']*)["\']/', $content, $matches);
-        
+
         // Match classes in Blade directives (e.g., @class(['foo' => true]))
         preg_match_all('/@class\(\[(.*?)\]\)/', $content, $bladeMatches);
-        
+
         if (isset($matches[1])) {
             foreach ($matches[1] as $match) {
                 // Remove any PHP variables or method calls
@@ -135,7 +135,7 @@ trait HasBladeFiles
                 $classes = array_merge($classes, array_filter($fileClasses));
             }
         }
-        
+
         if (isset($bladeMatches[1])) {
             foreach ($bladeMatches[1] as $bladeMatch) {
                 preg_match_all('/[\'"]([^\'"]+)[\'"]/', $bladeMatch, $bladeClasses);
@@ -146,8 +146,8 @@ trait HasBladeFiles
         }
 
         // Remove any remaining items that contain PHP syntax
-        $classes = array_filter($classes, function($class) {
-            return !preg_match('/[\$\{\}]/', $class);
+        $classes = array_filter($classes, function ($class) {
+            return ! preg_match('/[\$\{\}]/', $class);
         });
 
         return $classes;

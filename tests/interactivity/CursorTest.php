@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Interactivity;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Interactivity\CursorClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class CursorTest extends TestCase
 {

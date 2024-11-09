@@ -17,8 +17,8 @@ class OutlineWidthClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
-            return StaticClass::parse('outline-'. $this->value)->toCss();
+        if (! $this->isValidValue()) {
+            return StaticClass::parse('outline-'.$this->value)->toCss();
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
@@ -53,6 +53,7 @@ class OutlineWidthClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '1', '2', '4', '8'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -60,7 +61,7 @@ class OutlineWidthClass extends AbstractTailwindClass
     {
         $value = trim($this->value, '[]');
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')$/';
 
         return preg_match($pattern, $value) || preg_match('/^(calc|clamp|min|max)\(.*\)$/', $value);
     }
@@ -70,9 +71,10 @@ class OutlineWidthClass extends AbstractTailwindClass
         if (preg_match('/^outline-(.+)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

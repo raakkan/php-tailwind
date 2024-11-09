@@ -16,13 +16,13 @@ class DropShadowClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $dropShadowValue = $this->getDropShadowValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         return ".drop-shadow-{$classValue}{--tw-drop-shadow:{$dropShadowValue};filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}";
     }
 
@@ -48,6 +48,7 @@ class DropShadowClass extends AbstractTailwindClass
         }
 
         $validValues = ['sm', 'DEFAULT', 'md', 'lg', 'xl', '2xl', 'none'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -62,8 +63,10 @@ class DropShadowClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

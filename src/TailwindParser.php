@@ -9,11 +9,17 @@ class TailwindParser
     use HandleResponsiveClasses;
 
     private $classTypes = [];
+
     private $missingClassHandler;
+
     private $invalidCssClasses = [];
+
     private $parsedClasses = [];
+
     private $missingClasses = [];
+
     private $css = '';
+
     public function __construct()
     {
         $this->classTypes = TailwindClassDiscovery::discoverClasses();
@@ -31,14 +37,15 @@ class TailwindParser
 
         $css = $this->wrapResponsiveStyles($responsiveClasses, function ($breakpointClasses, $breakpoint) use (&$missingClasses, &$parsedClasses, &$darkModeClasses) {
             $breakpointCss = '';
-            
+
             foreach ($breakpointClasses as $classInfo) {
                 $class = $classInfo['parsed'];
                 if (strpos($class, 'dark:') === 0) {
                     $darkModeClasses[] = ['class' => $class, 'breakpoint' => $breakpoint];
+
                     continue;
                 }
-                
+
                 $parsed = $this->parseClass($class, $breakpointCss, $breakpoint);
                 $classWithBreakpoint = $this->addBreakpointToClass($class, $breakpoint);
                 if ($parsed) {
@@ -47,7 +54,7 @@ class TailwindParser
                     $missingClasses[] = $classWithBreakpoint;
                 }
             }
-            
+
             return $breakpointCss;
         });
 
@@ -63,7 +70,7 @@ class TailwindParser
             'css' => $this->css,
             'missingClasses' => $this->missingClasses,
             'parsedClasses' => $this->parsedClasses,
-            'invalidCssClasses' => $this->invalidCssClasses
+            'invalidCssClasses' => $this->invalidCssClasses,
         ];
     }
 
@@ -72,6 +79,7 @@ class TailwindParser
         if ($breakpoint === 'default') {
             return $class;
         }
+
         return "{$breakpoint}\\:{$class}";
     }
 
@@ -83,9 +91,11 @@ class TailwindParser
                 $classCss = $tailwindClass->toCss();
                 if ($this->isValidCssStyle($classCss)) {
                     $css .= $this->addBreakpointToSelector($classCss, $breakpoint);
+
                     return true;
                 } else {
                     $this->invalidCssClasses[] = $classCss;
+
                     return false;
                 }
             }
@@ -95,6 +105,7 @@ class TailwindParser
             $handlerCss = call_user_func($this->missingClassHandler, $class);
             if ($this->isValidCssStyle($handlerCss)) {
                 $css .= $this->addBreakpointToSelector($handlerCss, $breakpoint);
+
                 return true;
             } else {
                 $this->invalidCssClasses[] = $handlerCss;
@@ -117,12 +128,12 @@ class TailwindParser
         }
 
         $selector = trim($parts[0]);
-        $declarations = '{' . $parts[1];
+        $declarations = '{'.$parts[1];
 
         // Add the breakpoint to the selector
-        $newSelector = ".{$breakpoint}\\:" . str_replace('.', '', $selector);
+        $newSelector = ".{$breakpoint}\\:".str_replace('.', '', $selector);
 
-        return $newSelector . $declarations;
+        return $newSelector.$declarations;
     }
 
     private function isValidCssStyle(string $cssRule): bool
@@ -137,8 +148,8 @@ class TailwindParser
 
     public function getInvalidCssClasses(): array
     {
-        return array_values(array_filter($this->invalidCssClasses, function($value) {
-            return !empty(trim($value));
+        return array_values(array_filter($this->invalidCssClasses, function ($value) {
+            return ! empty(trim($value));
         }));
     }
 
@@ -166,6 +177,7 @@ class TailwindParser
                 $this->missingClasses[] = $classWithBreakpoint;
             }
         }
+
         return $darkModeCss;
     }
 

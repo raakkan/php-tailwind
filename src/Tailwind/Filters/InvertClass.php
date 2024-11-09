@@ -16,13 +16,13 @@ class InvertClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $invertValue = $this->getInvertValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         return ".invert-{$classValue}{--tw-invert:invert({$invertValue});filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}";
     }
 
@@ -43,6 +43,7 @@ class InvertClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '100'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -54,8 +55,10 @@ class InvertClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

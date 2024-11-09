@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Interactivity;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Interactivity\AccentColorClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class AccentColorTest extends TestCase
 {
@@ -19,13 +19,13 @@ class AccentColorTest extends TestCase
     public static function standardAccentColorProvider(): array
     {
         return [
-            ['accent-red-500', ".accent-red-500 {accent-color: #ef4444;}"],
-            ['accent-blue-300', ".accent-blue-300 {accent-color: #93c5fd;}"],
-            ['accent-green-700', ".accent-green-700 {accent-color: #15803d;}"],
-            ['accent-indigo-500', ".accent-indigo-500 {accent-color: #6366f1;}"],
-            ['accent-black', ".accent-black {accent-color: #000000;}"],
-            ['accent-white', ".accent-white {accent-color: #ffffff;}"],
-            ['accent-slate-700', ".accent-slate-700 {accent-color: #334155;}"],
+            ['accent-red-500', '.accent-red-500 {accent-color: #ef4444;}'],
+            ['accent-blue-300', '.accent-blue-300 {accent-color: #93c5fd;}'],
+            ['accent-green-700', '.accent-green-700 {accent-color: #15803d;}'],
+            ['accent-indigo-500', '.accent-indigo-500 {accent-color: #6366f1;}'],
+            ['accent-black', '.accent-black {accent-color: #000000;}'],
+            ['accent-white', '.accent-white {accent-color: #ffffff;}'],
+            ['accent-slate-700', '.accent-slate-700 {accent-color: #334155;}'],
         ];
     }
 
@@ -59,11 +59,11 @@ class AccentColorTest extends TestCase
     public static function arbitraryValueProvider(): array
     {
         return [
-            ['accent-[#1da1f2]', ".accent-\\[\\#1da1f2\\] {accent-color: #1da1f2;}"],
-            ['accent-[#50d71e]', ".accent-\\[\\#50d71e\\] {accent-color: #50d71e;}"],
-            ['accent-[rgb(255,0,0)]', ".accent-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {accent-color: rgb(255,0,0);}"],
-            ['accent-[hsl(200,100%,50%)]', ".accent-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {accent-color: hsl(200,100%,50%);}"],
-            ['accent-[rgba(255,0,0,0.5)]', ".accent-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {accent-color: rgba(255,0,0,0.5);}"],
+            ['accent-[#1da1f2]', '.accent-\\[\\#1da1f2\\] {accent-color: #1da1f2;}'],
+            ['accent-[#50d71e]', '.accent-\\[\\#50d71e\\] {accent-color: #50d71e;}'],
+            ['accent-[rgb(255,0,0)]', '.accent-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {accent-color: rgb(255,0,0);}'],
+            ['accent-[hsl(200,100%,50%)]', '.accent-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {accent-color: hsl(200,100%,50%);}'],
+            ['accent-[rgba(255,0,0,0.5)]', '.accent-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {accent-color: rgba(255,0,0,0.5);}'],
         ];
     }
 
@@ -78,10 +78,10 @@ class AccentColorTest extends TestCase
     public static function specialColorProvider(): array
     {
         return [
-            ['accent-inherit', ".accent-inherit {accent-color: inherit;}"],
-            ['accent-current', ".accent-current {accent-color: currentColor;}"],
-            ['accent-transparent', ".accent-transparent {accent-color: transparent;}"],
-            ['accent-auto', ".accent-auto {accent-color: auto;}"],
+            ['accent-inherit', '.accent-inherit {accent-color: inherit;}'],
+            ['accent-current', '.accent-current {accent-color: currentColor;}'],
+            ['accent-transparent', '.accent-transparent {accent-color: transparent;}'],
+            ['accent-auto', '.accent-auto {accent-color: auto;}'],
         ];
     }
 
@@ -114,14 +114,14 @@ class AccentColorTest extends TestCase
     public static function edgeCaseProvider(): array
     {
         return [
-            ['accent-[#f00]', ".accent-\\[\\#f00\\] {accent-color: #f00;}"],
-            ['accent-[#ff0000]', ".accent-\\[\\#ff0000\\] {accent-color: #ff0000;}"],
-            ['accent-[rgb(255,0,0)]', ".accent-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {accent-color: rgb(255,0,0);}"],
-            ['accent-[rgba(255,0,0,0.5)]', ".accent-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {accent-color: rgba(255,0,0,0.5);}"],
-            ['accent-[hsl(0,100%,50%)]', ".accent-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {accent-color: hsl(0,100%,50%);}"],
-            ['accent-[hsla(0,100%,50%,0.5)]', ".accent-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {accent-color: hsla(0,100%,50%,0.5);}"],
-            ['accent-slate-50', ".accent-slate-50 {accent-color: #f8fafc;}"],
-            ['accent-rose-950', ".accent-rose-950 {accent-color: #4c0519;}"],
+            ['accent-[#f00]', '.accent-\\[\\#f00\\] {accent-color: #f00;}'],
+            ['accent-[#ff0000]', '.accent-\\[\\#ff0000\\] {accent-color: #ff0000;}'],
+            ['accent-[rgb(255,0,0)]', '.accent-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {accent-color: rgb(255,0,0);}'],
+            ['accent-[rgba(255,0,0,0.5)]', '.accent-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {accent-color: rgba(255,0,0,0.5);}'],
+            ['accent-[hsl(0,100%,50%)]', '.accent-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {accent-color: hsl(0,100%,50%);}'],
+            ['accent-[hsla(0,100%,50%,0.5)]', '.accent-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {accent-color: hsla(0,100%,50%,0.5);}'],
+            ['accent-slate-50', '.accent-slate-50 {accent-color: #f8fafc;}'],
+            ['accent-rose-950', '.accent-rose-950 {accent-color: #4c0519;}'],
         ];
     }
 }

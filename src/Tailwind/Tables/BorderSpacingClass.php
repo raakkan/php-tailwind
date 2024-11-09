@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class BorderSpacingClass extends AbstractTailwindClass
 {
     private $isArbitrary;
+
     private $axis;
 
     public function __construct(string $value, string $axis = '', bool $isArbitrary = false)
@@ -18,7 +19,7 @@ class BorderSpacingClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -32,7 +33,7 @@ class BorderSpacingClass extends AbstractTailwindClass
         foreach ($properties as $property) {
             $css .= "{$property}:{$spacingValue};";
         }
-        $css .= "border-spacing:var(--tw-border-spacing-x) var(--tw-border-spacing-y);}";
+        $css .= 'border-spacing:var(--tw-border-spacing-x) var(--tw-border-spacing-y);}';
 
         return $css;
     }
@@ -97,7 +98,7 @@ class BorderSpacingClass extends AbstractTailwindClass
     private function getBorderSpacingProperties(): array
     {
         $properties = ['--tw-border-spacing-x', '--tw-border-spacing-y'];
-        
+
         if ($this->axis === 'x') {
             return ['--tw-border-spacing-x'];
         } elseif ($this->axis === 'y') {
@@ -117,6 +118,7 @@ class BorderSpacingClass extends AbstractTailwindClass
             array_keys($this->getBorderSpacingValues()),
             ['px', '0.5', '1.5', '2.5', '3.5']
         );
+
         return in_array($this->value, $validValues);
     }
 
@@ -124,7 +126,7 @@ class BorderSpacingClass extends AbstractTailwindClass
     {
         $value = trim($this->value, '[]');
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')$/';
 
         return preg_match($pattern, $value) || preg_match('/^(calc|clamp|min|max)\(.*\)$/', $value);
     }
@@ -135,9 +137,10 @@ class BorderSpacingClass extends AbstractTailwindClass
             $axis = ltrim($matches[1] ?? '', '-');
             $value = $matches[2];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $axis, $isArbitrary);
         }
+
         return null;
     }
 }

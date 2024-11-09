@@ -17,14 +17,14 @@ class FlexClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {   
+        if (! $this->isValidValue()) {
             if (StaticClass::parse('flex-'.$this->value)) {
                 return StaticClass::parse('flex-'.$this->value)->toCss();
             } else {
                 return '';
             }
         }
-        
+
         $classValue = $this->value;
 
         if ($this->isArbitrary) {
@@ -35,14 +35,14 @@ class FlexClass extends AbstractTailwindClass
         }
 
         $cssValue = $this->calculateValue();
-        
+
         return ".flex-{$escapedClassValue}{flex:{$cssValue};}";
     }
 
     private function isValidValue(): bool
     {
         $validValues = ['1', 'auto', 'initial', 'none'];
-        
+
         if (in_array($this->value, $validValues)) {
             return true;
         }
@@ -50,7 +50,7 @@ class FlexClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             return $this->isValidArbitraryValue($this->value);
         }
-        
+
         return false;
     }
 
@@ -74,6 +74,7 @@ class FlexClass extends AbstractTailwindClass
 
         if ($this->isArbitrary) {
             $value = trim($this->value, '[]');
+
             return str_replace('_', ' ', $value);
         }
 
@@ -84,10 +85,10 @@ class FlexClass extends AbstractTailwindClass
     {
         // Remove brackets for validation
         $innerValue = trim($value, '[]');
-        
+
         // Replace underscores with spaces for validation
         $innerValue = str_replace('_', ' ', $innerValue);
-        
+
         // Check for valid flex shorthand syntax
         if (preg_match('/^(\d+(\s+\d+(\s+(\d+(%|px|em|rem)|auto|none|inherit|initial|unset)))?)$/', $innerValue)) {
             return true;
@@ -106,8 +107,10 @@ class FlexClass extends AbstractTailwindClass
         if (preg_match('/^flex-(.+)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

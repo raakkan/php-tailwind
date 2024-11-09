@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class RotateClass extends AbstractTailwindClass
 {
     private $isArbitrary;
+
     private $isNegative;
 
     public function __construct(string $value, bool $isArbitrary = false, bool $isNegative = false)
@@ -18,19 +19,19 @@ class RotateClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $rotateValue = $this->getRotateValue();
         $classValue = $this->value;
-        if ($this->isNegative && !$this->isArbitrary) {
+        if ($this->isNegative && ! $this->isArbitrary) {
             $classValue = "-{$this->value}";
         }
         if ($this->isArbitrary) {
             $classValue = "\\[{$this->escapeArbitraryValue($this->value)}\\]";
         }
-        
+
         return ".rotate-{$classValue}{--tw-rotate:{$rotateValue};transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));}";
     }
 
@@ -49,6 +50,7 @@ class RotateClass extends AbstractTailwindClass
         ];
 
         $value = $this->isArbitrary ? $this->value : ($rotates[$this->value] ?? '0deg');
+
         return $this->isNegative ? "-{$value}" : $value;
     }
 
@@ -59,6 +61,7 @@ class RotateClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '1', '2', '3', '6', '12', '45', '90', '180'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -75,8 +78,10 @@ class RotateClass extends AbstractTailwindClass
                     $isNegative = false; // Reset isNegative as it's now part of the value
                 }
             }
+
             return new self($value, $isArbitrary, $isNegative);
         }
+
         return null;
     }
 }

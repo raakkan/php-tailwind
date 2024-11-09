@@ -19,7 +19,7 @@ trait HandleResponsiveClasses
             $classWithoutBreakpoint = $class;
 
             foreach ($this->breakpoints as $bp) {
-                $prefix = $bp . ':';
+                $prefix = $bp.':';
                 if (strpos($class, $prefix) === 0) {
                     $breakpoint = $bp;
                     $classWithoutBreakpoint = substr($class, strlen($prefix));
@@ -29,7 +29,7 @@ trait HandleResponsiveClasses
 
             $responsiveClasses[$breakpoint][] = [
                 'original' => $class,
-                'parsed' => $classWithoutBreakpoint
+                'parsed' => $classWithoutBreakpoint,
             ];
         }
 
@@ -64,6 +64,7 @@ trait HandleResponsiveClasses
     protected function wrapInMediaQuery(string $breakpoint, string $css): string
     {
         $minWidth = $this->getBreakpointWidth($breakpoint);
+
         return "@media (min-width: {$minWidth}) { {$css} }";
     }
 

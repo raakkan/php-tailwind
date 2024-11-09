@@ -16,13 +16,13 @@ class WillChangeClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         $willChangeValue = $this->getWillChangeValue();
-        
+
         return ".will-change-{$classValue}{will-change:{$willChangeValue};}";
     }
 
@@ -54,6 +54,7 @@ class WillChangeClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getWillChangeValues());
+
         return in_array($this->value, $validValues);
     }
 
@@ -65,8 +66,10 @@ class WillChangeClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

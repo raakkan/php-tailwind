@@ -7,8 +7,11 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class SpaceClass extends AbstractTailwindClass
 {
     private $direction;
+
     private $isReverse;
+
     private $isArbitrary;
+
     private $isNegative;
 
     public function __construct(string $value, string $direction, bool $isReverse = false, bool $isArbitrary = false, bool $isNegative = false)
@@ -26,7 +29,7 @@ class SpaceClass extends AbstractTailwindClass
             return ".space-{$this->direction}-reverse>:not([hidden])~:not([hidden]){--tw-space-{$this->direction}-reverse:1;}";
         }
 
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -39,16 +42,16 @@ class SpaceClass extends AbstractTailwindClass
     private function generateSpaceCss(string $classValue, string $value): string
     {
         $prefix = $this->isNegative ? '-' : '';
-        $value = $this->isArbitrary && $this->isNegative ? '-' . $value : $value;
+        $value = $this->isArbitrary && $this->isNegative ? '-'.$value : $value;
         $property1 = $this->direction === 'x' ? 'margin-right' : 'margin-top';
         $property2 = $this->direction === 'x' ? 'margin-left' : 'margin-bottom';
 
         $calc1 = $this->direction === 'x' ? "calc({$value} * var(--tw-space-{$this->direction}-reverse))" : "calc({$value} * calc(1 - var(--tw-space-{$this->direction}-reverse)))";
         $calc2 = $this->direction === 'x' ? "calc({$value} * calc(1 - var(--tw-space-{$this->direction}-reverse)))" : "calc({$value} * var(--tw-space-{$this->direction}-reverse))";
 
-        return ".{$prefix}space-{$this->direction}-{$classValue}>:not([hidden])~:not([hidden]){" .
-               "--tw-space-{$this->direction}-reverse:0;" .
-               "{$property1}:{$calc1};" .
+        return ".{$prefix}space-{$this->direction}-{$classValue}>:not([hidden])~:not([hidden]){".
+               "--tw-space-{$this->direction}-reverse:0;".
+               "{$property1}:{$calc1};".
                "{$property2}:{$calc2};}";
     }
 
@@ -84,7 +87,7 @@ class SpaceClass extends AbstractTailwindClass
 
         // Check for valid CSS length units
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh', 'vmin', 'vmax', 'ex', 'ch', 'cm', 'mm', 'in', 'pt', 'pc'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')?$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')?$/';
 
         if (preg_match($pattern, $value)) {
             return true;
@@ -95,6 +98,7 @@ class SpaceClass extends AbstractTailwindClass
             // Basic check for calc() - you might want to add more sophisticated validation
             return true;
         }
+
         return false;
     }
 
@@ -106,13 +110,14 @@ class SpaceClass extends AbstractTailwindClass
             $isReverse = isset($matches[3]) && $matches[3] === '-reverse';
             $value = $isReverse ? '0' : ($matches[5] ?? '0');
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
-            
+
             return new self($value, $direction, $isReverse, $isArbitrary, $isNegative);
         }
+
         return null;
     }
 }

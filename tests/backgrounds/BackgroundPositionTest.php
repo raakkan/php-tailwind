@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Backgrounds;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Backgrounds\BackgroundPositionClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class BackgroundPositionTest extends TestCase
 {
@@ -43,7 +43,7 @@ class BackgroundPositionTest extends TestCase
             ['bg-[0_0]', '.bg-\[0_0\]{background-position:0 0;}'],
             ['bg-[100%_100%]', '.bg-\[100\%_100\%\]{background-position:100% 100%;}'],
             ['bg-[center_top]', '.bg-\[center_top\]{background-position:center top;}'],
-            
+
             // Edge cases
             ['bg-[calc(100%_-_10px)_calc(100%_-_20px)]', '.bg-\[calc\(100\%_-_10px\)_calc\(100\%_-_20px\)\]{background-position:calc(100% - 10px) calc(100% - 20px);}'],
             ['bg-[var(--position)]', '.bg-\[var\(--position\)\]{background-position:var(--position);}'],

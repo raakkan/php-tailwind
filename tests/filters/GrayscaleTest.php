@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Filters;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Filters\GrayscaleClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class GrayscaleTest extends TestCase
 {

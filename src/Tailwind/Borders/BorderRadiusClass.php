@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class BorderRadiusClass extends AbstractTailwindClass
 {
     private $side;
+
     private $isArbitrary;
 
     public function __construct(string $value, string $side = '', bool $isArbitrary = false)
@@ -18,21 +19,21 @@ class BorderRadiusClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $value = $this->getCssValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         if ($this->value === 'DEFAULT') {
             $className = $this->side ? "rounded-{$this->side}" : 'rounded';
         } else {
             $className = $this->side ? "rounded-{$this->side}-{$classValue}" : "rounded-{$classValue}";
         }
-        
+
         $properties = $this->getRadiusProperties($value);
-        
+
         return ".{$className}{{$properties}}";
     }
 
@@ -100,6 +101,7 @@ class BorderRadiusClass extends AbstractTailwindClass
         }
 
         $validValues = ['DEFAULT', 'none', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -107,7 +109,7 @@ class BorderRadiusClass extends AbstractTailwindClass
     {
         $value = trim($this->value, '[]');
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh', 'vmin', 'vmax'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')?$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')?$/';
 
         return preg_match($pattern, $value) || (strpos($value, 'calc(') === 0 && substr($value, -1) === ')');
     }
@@ -120,11 +122,12 @@ class BorderRadiusClass extends AbstractTailwindClass
         if (preg_match('/^rounded(-([trblse]{1,2}))?(-(\[.+\]|[a-z0-9]+))?$/', $class, $matches)) {
             $side = $matches[2] ?? '';
             $value = $matches[4] ?? 'DEFAULT';  // Set default value if not provided
-            
+
             $isArbitrary = $value && preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $side, $isArbitrary);
         }
+
         return null;
     }
 }

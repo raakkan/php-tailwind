@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\FlexGrid;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\FlexGrid\GridColumnUtilityClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class GridColumnUtilityClassTest extends TestCase
 {
@@ -23,19 +23,19 @@ class GridColumnUtilityClassTest extends TestCase
             ['col-span-1', '.col-span-1{grid-column:span 1 / span 1;}'],
             ['col-span-12', '.col-span-12{grid-column:span 12 / span 12;}'],
             ['col-span-full', '.col-span-full{grid-column:1 / -1;}'],
-            
+
             // Start classes
             ['col-start-1', '.col-start-1{grid-column-start:1;}'],
             ['col-start-13', '.col-start-13{grid-column-start:13;}'],
             ['col-start-auto', '.col-start-auto{grid-column-start:auto;}'],
-            
+
             // End classes
             ['col-end-1', '.col-end-1{grid-column-end:1;}'],
             ['col-end-13', '.col-end-13{grid-column-end:13;}'],
             ['col-end-auto', '.col-end-auto{grid-column-end:auto;}'],
             // Auto class
             ['col-auto', '.col-auto{grid-column:auto;}'],
-            
+
             // Arbitrary value classes
             ['col-[1/3]', '.col-\[1\/3\]{grid-column:1/3;}'],
             ['col-[span_2/3]', '.col-\[span_2\/3\]{grid-column:span 2/3;}'],

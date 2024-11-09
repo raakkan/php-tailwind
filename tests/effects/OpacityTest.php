@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Effects;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Effects\OpacityClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class OpacityTest extends TestCase
 {

@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class CaretColorClass extends AbstractTailwindClass
 {
     private $isArbitrary;
+
     private $opacity;
 
     public function __construct(string $value, bool $isArbitrary = false, ?string $opacity = null)
@@ -18,19 +19,19 @@ class CaretColorClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         $colorValue = $this->getColorValue();
-        
+
         $css = ".caret-{$classValue}";
         if ($this->opacity !== null) {
             $css .= "\\/{$this->opacity}";
         }
         $css .= " {caret-color: {$colorValue};}";
-        
+
         return $css;
     }
 
@@ -48,11 +49,12 @@ class CaretColorClass extends AbstractTailwindClass
         $colors = $this->getColors();
         $colorName = str_replace(['caret-'], '', $this->value);
         $color = $colors[$colorName] ?? '';
-        
+
         if ($color) {
             if ($this->opacity !== null) {
                 return "rgb({$color['rgb']} / {$this->getOpacityValue()})";
             }
+
             return $color['hex'];
         }
 
@@ -67,6 +69,7 @@ class CaretColorClass extends AbstractTailwindClass
                 return ($opacityInt === 100) ? '1' : rtrim(sprintf('%.2f', $opacityInt / 100), '0');
             }
         }
+
         return '';
     }
 
@@ -77,12 +80,14 @@ class CaretColorClass extends AbstractTailwindClass
         }
 
         $validValues = array_merge(array_keys($this->getColors()), ['inherit', 'current', 'transparent']);
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         return preg_match('/^(#[0-9A-Fa-f]{3,8}|rgb\(.*\)|rgba\(.*\)|hsl\(.*\)|hsla\(.*\))$/', $value);
     }
 
@@ -92,14 +97,15 @@ class CaretColorClass extends AbstractTailwindClass
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
             $opacity = null;
-            
+
             if (strpos($value, '/') !== false) {
-                list($color, $opacity) = explode('/', $value);
+                [$color, $opacity] = explode('/', $value);
                 $value = $color;
             }
-            
+
             return new self($value, $isArbitrary, $opacity);
         }
+
         return null;
     }
 }

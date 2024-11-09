@@ -17,7 +17,7 @@ class MinHeightClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -82,7 +82,7 @@ class MinHeightClass extends AbstractTailwindClass
 
         // Check for valid CSS length units or percentage
         $validUnits = ['px', 'em', 'rem', '%', 'vh', 'vw', 'vmin', 'vmax', 'ex', 'ch', 'cm', 'mm', 'in', 'pt', 'pc', 'svh', 'lvh', 'dvh'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')$/';
 
         if (preg_match($pattern, $value)) {
             return true;
@@ -102,9 +102,10 @@ class MinHeightClass extends AbstractTailwindClass
         if (preg_match('/^min-h-((?:\[.+\]|\d+\/\d+|.+))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -112,10 +113,10 @@ class MinHeightClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters, but keep commas unescaped
     //     $value = preg_replace('/([^a-zA-Z0-9,._-])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

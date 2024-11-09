@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Typography;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Typography\TextDecorationThicknessClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class TextDecorationThicknessTest extends TestCase
 {

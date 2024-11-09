@@ -2,8 +2,8 @@
 
 namespace Raakkan\PhpTailwind\Tests\FlexGrid;
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\FlexGrid\GridRowClass;
 
 class GridRowTest extends TestCase
@@ -32,11 +32,11 @@ class GridRowTest extends TestCase
             ['grid-rows-10', '.grid-rows-10{grid-template-rows:repeat(10,minmax(0,1fr));}'],
             ['grid-rows-11', '.grid-rows-11{grid-template-rows:repeat(11,minmax(0,1fr));}'],
             ['grid-rows-12', '.grid-rows-12{grid-template-rows:repeat(12,minmax(0,1fr));}'],
-            
+
             // Special values
             ['grid-rows-none', '.grid-rows-none{grid-template-rows:none;}'],
             ['grid-rows-subgrid', '.grid-rows-subgrid{grid-template-rows:subgrid;}'],
-            
+
             // Arbitrary values
             ['grid-rows-[13]', '.grid-rows-\[13\]{grid-template-rows:13;}'],
             ['grid-rows-[200px]', '.grid-rows-\[200px\]{grid-template-rows:200px;}'],
@@ -84,13 +84,13 @@ class GridRowTest extends TestCase
         $this->assertNotEmpty($gridRowClass->toCss());
 
         // Test with special characters
-        $specialChars = "grid-rows-[!@#$%^&*()]";
+        $specialChars = 'grid-rows-[!@#$%^&*()]';
         $gridRowClass = GridRowClass::parse($specialChars);
         $this->assertInstanceOf(GridRowClass::class, $gridRowClass);
         $this->assertEmpty($gridRowClass->toCss());
 
         // Test with empty arbitrary value
-        $emptyArbitrary = "grid-rows-[]";
+        $emptyArbitrary = 'grid-rows-[]';
         $gridRowClass = GridRowClass::parse($emptyArbitrary);
         $this->assertInstanceOf(GridRowClass::class, $gridRowClass);
         $this->assertEmpty($gridRowClass->toCss());

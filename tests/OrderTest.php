@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\FlexGrid\OrderClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class OrderTest extends TestCase
 {
@@ -32,12 +32,12 @@ class OrderTest extends TestCase
             ['order-10', '.order-10{order:10;}'],
             ['order-11', '.order-11{order:11;}'],
             ['order-12', '.order-12{order:12;}'],
-            
+
             // Special values
             ['order-first', '.order-first{order:-9999;}'],
             ['order-last', '.order-last{order:9999;}'],
             ['order-none', '.order-none{order:0;}'],
-            
+
             // Arbitrary values
             ['order-[13]', '.order-\[13\]{order:13;}'],
             ['order-[-1]', '.order-\[-1\]{order:-1;}'],

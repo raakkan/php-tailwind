@@ -2,8 +2,8 @@
 
 namespace Raakkan\PhpTailwind\Tests\FlexGrid;
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\FlexGrid\GridAutoColumnsClass;
 
 class GridAutoColumnsTest extends TestCase
@@ -24,7 +24,7 @@ class GridAutoColumnsTest extends TestCase
             ['auto-cols-min', '.auto-cols-min{grid-auto-columns:min-content;}'],
             ['auto-cols-max', '.auto-cols-max{grid-auto-columns:max-content;}'],
             ['auto-cols-fr', '.auto-cols-fr{grid-auto-columns:minmax(0, 1fr);}'],
-            
+
             // Arbitrary values
             ['auto-cols-[200px]', '.auto-cols-\[200px\]{grid-auto-columns:200px;}'],
             ['auto-cols-[2fr]', '.auto-cols-\[2fr\]{grid-auto-columns:2fr;}'],
@@ -75,13 +75,13 @@ class GridAutoColumnsTest extends TestCase
         $this->assertNotEmpty($gridAutoColumnsClass->toCss());
 
         // Test with special characters
-        $specialChars = "auto-cols-[calc(100%_-_20px)]";
+        $specialChars = 'auto-cols-[calc(100%_-_20px)]';
         $gridAutoColumnsClass = GridAutoColumnsClass::parse($specialChars);
         $this->assertInstanceOf(GridAutoColumnsClass::class, $gridAutoColumnsClass);
         $this->assertNotEmpty($gridAutoColumnsClass->toCss());
 
         // Test with complex minmax expression
-        $complexMinmax = "auto-cols-[minmax(max(50px,_20%),_1fr)]";
+        $complexMinmax = 'auto-cols-[minmax(max(50px,_20%),_1fr)]';
         $gridAutoColumnsClass = GridAutoColumnsClass::parse($complexMinmax);
         $this->assertInstanceOf(GridAutoColumnsClass::class, $gridAutoColumnsClass);
         $this->assertNotEmpty($gridAutoColumnsClass->toCss());

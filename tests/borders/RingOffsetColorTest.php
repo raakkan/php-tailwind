@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Borders;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Borders\RingOffsetColorClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class RingOffsetColorTest extends TestCase
 {
@@ -19,13 +19,13 @@ class RingOffsetColorTest extends TestCase
     public static function standardRingOffsetColorProvider(): array
     {
         return [
-            ['ring-offset-red-500', ".ring-offset-red-500 {--tw-ring-offset-color: #ef4444;}"],
-            ['ring-offset-blue-300', ".ring-offset-blue-300 {--tw-ring-offset-color: #93c5fd;}"],
-            ['ring-offset-green-700', ".ring-offset-green-700 {--tw-ring-offset-color: #15803d;}"],
-            ['ring-offset-indigo-500', ".ring-offset-indigo-500 {--tw-ring-offset-color: #6366f1;}"],
-            ['ring-offset-black', ".ring-offset-black {--tw-ring-offset-color: #000000;}"],
-            ['ring-offset-white', ".ring-offset-white {--tw-ring-offset-color: #ffffff;}"],
-            ['ring-offset-slate-700', ".ring-offset-slate-700 {--tw-ring-offset-color: #334155;}"],
+            ['ring-offset-red-500', '.ring-offset-red-500 {--tw-ring-offset-color: #ef4444;}'],
+            ['ring-offset-blue-300', '.ring-offset-blue-300 {--tw-ring-offset-color: #93c5fd;}'],
+            ['ring-offset-green-700', '.ring-offset-green-700 {--tw-ring-offset-color: #15803d;}'],
+            ['ring-offset-indigo-500', '.ring-offset-indigo-500 {--tw-ring-offset-color: #6366f1;}'],
+            ['ring-offset-black', '.ring-offset-black {--tw-ring-offset-color: #000000;}'],
+            ['ring-offset-white', '.ring-offset-white {--tw-ring-offset-color: #ffffff;}'],
+            ['ring-offset-slate-700', '.ring-offset-slate-700 {--tw-ring-offset-color: #334155;}'],
         ];
     }
 
@@ -59,11 +59,11 @@ class RingOffsetColorTest extends TestCase
     public static function arbitraryValueProvider(): array
     {
         return [
-            ['ring-offset-[#1da1f2]', ".ring-offset-\\[\\#1da1f2\\] {--tw-ring-offset-color: #1da1f2;}"],
-            ['ring-offset-[#50d71e]', ".ring-offset-\\[\\#50d71e\\] {--tw-ring-offset-color: #50d71e;}"],
-            ['ring-offset-[rgb(255,0,0)]', ".ring-offset-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-ring-offset-color: rgb(255,0,0);}"],
-            ['ring-offset-[hsl(200,100%,50%)]', ".ring-offset-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {--tw-ring-offset-color: hsl(200,100%,50%);}"],
-            ['ring-offset-[rgba(255,0,0,0.5)]', ".ring-offset-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-ring-offset-color: rgba(255,0,0,0.5);}"],
+            ['ring-offset-[#1da1f2]', '.ring-offset-\\[\\#1da1f2\\] {--tw-ring-offset-color: #1da1f2;}'],
+            ['ring-offset-[#50d71e]', '.ring-offset-\\[\\#50d71e\\] {--tw-ring-offset-color: #50d71e;}'],
+            ['ring-offset-[rgb(255,0,0)]', '.ring-offset-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-ring-offset-color: rgb(255,0,0);}'],
+            ['ring-offset-[hsl(200,100%,50%)]', '.ring-offset-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {--tw-ring-offset-color: hsl(200,100%,50%);}'],
+            ['ring-offset-[rgba(255,0,0,0.5)]', '.ring-offset-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-ring-offset-color: rgba(255,0,0,0.5);}'],
         ];
     }
 
@@ -78,9 +78,9 @@ class RingOffsetColorTest extends TestCase
     public static function specialColorProvider(): array
     {
         return [
-            ['ring-offset-inherit', ".ring-offset-inherit {--tw-ring-offset-color: inherit;}"],
-            ['ring-offset-current', ".ring-offset-current {--tw-ring-offset-color: currentColor;}"],
-            ['ring-offset-transparent', ".ring-offset-transparent {--tw-ring-offset-color: transparent;}"],
+            ['ring-offset-inherit', '.ring-offset-inherit {--tw-ring-offset-color: inherit;}'],
+            ['ring-offset-current', '.ring-offset-current {--tw-ring-offset-color: currentColor;}'],
+            ['ring-offset-transparent', '.ring-offset-transparent {--tw-ring-offset-color: transparent;}'],
         ];
     }
 
@@ -113,14 +113,14 @@ class RingOffsetColorTest extends TestCase
     public static function edgeCaseProvider(): array
     {
         return [
-            ['ring-offset-[#f00]', ".ring-offset-\\[\\#f00\\] {--tw-ring-offset-color: #f00;}"],
-            ['ring-offset-[#ff0000]', ".ring-offset-\\[\\#ff0000\\] {--tw-ring-offset-color: #ff0000;}"],
-            ['ring-offset-[rgb(255,0,0)]', ".ring-offset-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-ring-offset-color: rgb(255,0,0);}"],
-            ['ring-offset-[rgba(255,0,0,0.5)]', ".ring-offset-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-ring-offset-color: rgba(255,0,0,0.5);}"],
-            ['ring-offset-[hsl(0,100%,50%)]', ".ring-offset-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {--tw-ring-offset-color: hsl(0,100%,50%);}"],
-            ['ring-offset-[hsla(0,100%,50%,0.5)]', ".ring-offset-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {--tw-ring-offset-color: hsla(0,100%,50%,0.5);}"],
-            ['ring-offset-slate-50', ".ring-offset-slate-50 {--tw-ring-offset-color: #f8fafc;}"],
-            ['ring-offset-rose-950', ".ring-offset-rose-950 {--tw-ring-offset-color: #4c0519;}"],
+            ['ring-offset-[#f00]', '.ring-offset-\\[\\#f00\\] {--tw-ring-offset-color: #f00;}'],
+            ['ring-offset-[#ff0000]', '.ring-offset-\\[\\#ff0000\\] {--tw-ring-offset-color: #ff0000;}'],
+            ['ring-offset-[rgb(255,0,0)]', '.ring-offset-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-ring-offset-color: rgb(255,0,0);}'],
+            ['ring-offset-[rgba(255,0,0,0.5)]', '.ring-offset-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-ring-offset-color: rgba(255,0,0,0.5);}'],
+            ['ring-offset-[hsl(0,100%,50%)]', '.ring-offset-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {--tw-ring-offset-color: hsl(0,100%,50%);}'],
+            ['ring-offset-[hsla(0,100%,50%,0.5)]', '.ring-offset-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {--tw-ring-offset-color: hsla(0,100%,50%,0.5);}'],
+            ['ring-offset-slate-50', '.ring-offset-slate-50 {--tw-ring-offset-color: #f8fafc;}'],
+            ['ring-offset-rose-950', '.ring-offset-rose-950 {--tw-ring-offset-color: #4c0519;}'],
         ];
     }
 }

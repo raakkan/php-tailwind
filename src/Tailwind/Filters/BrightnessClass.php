@@ -16,13 +16,13 @@ class BrightnessClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $brightnessValue = $this->getBrightnessValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         return ".brightness-{$classValue}{--tw-brightness:brightness({$brightnessValue});filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}";
     }
 
@@ -52,6 +52,7 @@ class BrightnessClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '50', '75', '90', '95', '100', '105', '110', '125', '150', '200'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -63,8 +64,10 @@ class BrightnessClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

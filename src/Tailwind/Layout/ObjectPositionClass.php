@@ -22,7 +22,7 @@ class ObjectPositionClass extends AbstractTailwindClass
 
         $predefinedPositions = [
             'left-top', 'top', 'right-bottom', 'center', 'left', 'right', 'bottom',
-            'top-right', 'top-left', 'bottom-right', 'bottom-left'
+            'top-right', 'top-left', 'bottom-right', 'bottom-left',
         ];
 
         if (in_array(substr($class, 7), $predefinedPositions)) {
@@ -37,9 +37,11 @@ class ObjectPositionClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             $innerValue = substr($this->value, 1, -1);
             if ($this->isValidArbitraryValue($innerValue)) {
-                $escapedSelector = '\[' . $this->escapeArbitraryValue($this->value) . '\]';
+                $escapedSelector = '\['.$this->escapeArbitraryValue($this->value).'\]';
+
                 return sprintf('.object-%s{object-position:%s;}', $escapedSelector, str_replace('_', ' ', $innerValue));
             }
+
             return '';
         }
 
@@ -81,7 +83,7 @@ class ObjectPositionClass extends AbstractTailwindClass
                 continue;
             }
 
-            if (preg_match('/^-?\d*\.?\d+(' . implode('|', $units) . ')?$/', $part)) {
+            if (preg_match('/^-?\d*\.?\d+('.implode('|', $units).')?$/', $part)) {
                 continue;
             }
 

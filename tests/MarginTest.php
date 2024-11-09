@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Spacing\MarginClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class MarginTest extends TestCase
 {

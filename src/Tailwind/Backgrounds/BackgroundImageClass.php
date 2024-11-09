@@ -16,7 +16,7 @@ class BackgroundImageClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -57,6 +57,7 @@ class BackgroundImageClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getBgImages());
+
         return in_array($this->value, $validValues);
     }
 
@@ -65,6 +66,7 @@ class BackgroundImageClass extends AbstractTailwindClass
         $value = trim($this->value, '[]');
         // Allow url(), linear-gradient(), radial-gradient(), etc.
         $pattern = '/^(url\([^)]+\)|linear-gradient\([^)]+\)|radial-gradient\([^)]+\)|repeating-linear-gradient\([^)]+\)|repeating-radial-gradient\([^)]+\)|conic-gradient\([^)]+\))$/';
+
         return preg_match($pattern, $value) === 1;
     }
 
@@ -73,9 +75,10 @@ class BackgroundImageClass extends AbstractTailwindClass
         if (preg_match('/^bg-((?:\[.+\]|none|gradient-to-[trblTRBL]{1,2}))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -83,10 +86,10 @@ class BackgroundImageClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9\s%_-])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

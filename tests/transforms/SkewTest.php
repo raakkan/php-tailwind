@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Transforms;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Transforms\SkewClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class SkewTest extends TestCase
 {

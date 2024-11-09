@@ -17,7 +17,7 @@ class FontWeightClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             if (StaticClass::parse('font-'.$this->value)) {
                 return StaticClass::parse('font-'.$this->value)->toCss();
             } else {
@@ -62,12 +62,14 @@ class FontWeightClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getFontWeights());
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow special characters and functions
         return preg_match('/^(\d+(\.\d+)?(!important)?|calc\(.+\))$/', $value);
     }
@@ -77,9 +79,10 @@ class FontWeightClass extends AbstractTailwindClass
         if (preg_match('/^font-((?:\[.+\]|thin|extralight|light|normal|medium|semibold|bold|extrabold|black))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -87,10 +90,10 @@ class FontWeightClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class BackgroundColorClass extends AbstractTailwindClass
 {
     private $isArbitrary;
+
     private $opacity;
 
     public function __construct(string $value, bool $isArbitrary = false, ?string $opacity = null)
@@ -18,24 +19,24 @@ class BackgroundColorClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         $colorValue = $this->getColorValue();
-        
+
         $css = ".bg-{$classValue}";
         if ($this->opacity !== null) {
             $css .= "\\/{$this->opacity}";
         }
-        $css .= " {";
-        
+        $css .= ' {';
+
         if ($this->opacity === null) {
-            $css .= "--tw-bg-opacity: 1;";
+            $css .= '--tw-bg-opacity: 1;';
         }
         $css .= "background-color: {$colorValue};}";
-        
+
         return $css;
     }
 
@@ -52,11 +53,12 @@ class BackgroundColorClass extends AbstractTailwindClass
 
         $colors = $this->getColors();
         $color = $colors[$this->value] ?? '';
-        
+
         if ($color) {
             if ($this->opacity !== null) {
                 return "rgb({$color['rgb']} / {$this->getOpacityValue()})";
             }
+
             return "rgb({$color['rgb']} / var(--tw-bg-opacity))";
         }
 
@@ -71,6 +73,7 @@ class BackgroundColorClass extends AbstractTailwindClass
                 return ($opacityInt === 100) ? '1' : rtrim(sprintf('%.2f', $opacityInt / 100), '0');
             }
         }
+
         return '';
     }
 
@@ -81,12 +84,14 @@ class BackgroundColorClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getColors());
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow any valid CSS color value
         return preg_match('/^(#[0-9A-Fa-f]{3,8}|rgb\(.*\)|rgba\(.*\)|hsl\(.*\)|hsla\(.*\))$/', $value);
     }
@@ -97,14 +102,15 @@ class BackgroundColorClass extends AbstractTailwindClass
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
             $opacity = null;
-            
+
             if (strpos($value, '/') !== false) {
-                list($color, $opacity) = explode('/', $value);
+                [$color, $opacity] = explode('/', $value);
                 $value = $color;
             }
-            
+
             return new self($value, $isArbitrary, $opacity);
         }
+
         return null;
     }
 }

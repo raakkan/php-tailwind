@@ -8,7 +8,9 @@ use Raakkan\PhpTailwind\Tailwind\Spacing\SpacingValueCalculator;
 class ScrollMarginClass extends AbstractTailwindClass
 {
     private $direction;
+
     private $isNegative;
+
     private $isArbitrary;
 
     public function __construct(string $value, string $direction = '', bool $isNegative = false, bool $isArbitrary = false)
@@ -21,15 +23,15 @@ class ScrollMarginClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $value = SpacingValueCalculator::calculate($this->value, $this->isNegative);
-        
+
         $prefix = $this->isNegative ? '-' : '';
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : str_replace(['/', '.'], ['\/', '\.'], $this->value);
-        
+
         switch ($this->direction) {
             case 'x':
                 return ".{$prefix}scroll-mx-{$classValue}{scroll-margin-left:{$value};scroll-margin-right:{$value};}";
@@ -64,7 +66,7 @@ class ScrollMarginClass extends AbstractTailwindClass
         if (preg_match('/^(\d+)\/(\d+)$/', $this->value, $matches)) {
             $numerator = intval($matches[1]);
             $denominator = intval($matches[2]);
-            
+
             return $denominator !== 0; // Allow any fraction as long as denominator is not zero
         }
 
@@ -72,7 +74,7 @@ class ScrollMarginClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             return $this->isValidArbitraryValue();
         }
-        
+
         return false;
     }
 
@@ -83,7 +85,7 @@ class ScrollMarginClass extends AbstractTailwindClass
 
         // Check for valid CSS length units
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh', 'vmin', 'vmax', 'ex', 'ch', 'cm', 'mm', 'in', 'pt', 'pc'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')?$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')?$/';
 
         if (preg_match($pattern, $value)) {
             return true;
@@ -103,9 +105,10 @@ class ScrollMarginClass extends AbstractTailwindClass
         if (preg_match('/^(-?)(scroll-m)(x|y|t|r|b|l|e|s)?-((?:\[.+\]|\d+\/\d+|.+))$/', $class, $matches)) {
             [, $negative, , $direction, $value] = $matches;
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $direction ?: '', $negative === '-', $isArbitrary);
         }
+
         return null;
     }
 }

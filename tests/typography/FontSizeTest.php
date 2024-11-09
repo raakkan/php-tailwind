@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Typography;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Typography\FontSizeClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class FontSizeTest extends TestCase
 {

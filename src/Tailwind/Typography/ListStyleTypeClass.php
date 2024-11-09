@@ -16,7 +16,7 @@ class ListStyleTypeClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -51,12 +51,14 @@ class ListStyleTypeClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getListStyleTypes());
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow any valid CSS list-style-type value
         return preg_match('/^[a-zA-Z-]+$/', $value);
     }
@@ -66,9 +68,10 @@ class ListStyleTypeClass extends AbstractTailwindClass
         if (preg_match('/^list-((?:\[.+\]|none|disc|decimal))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -76,10 +79,10 @@ class ListStyleTypeClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9-])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

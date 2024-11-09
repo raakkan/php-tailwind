@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class ContentClass extends AbstractTailwindClass
 {
     private $isArbitrary;
+
     private $pseudoElement;
 
     public function __construct(string $value, string $pseudoElement, bool $isArbitrary = false)
@@ -18,7 +19,7 @@ class ContentClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -27,13 +28,13 @@ class ContentClass extends AbstractTailwindClass
 
         $css = ".content-{$classValue} {";
         $css .= "--tw-content: {$contentValue};";
-        $css .= "content: var(--tw-content);";
-        $css .= "}";
+        $css .= 'content: var(--tw-content);';
+        $css .= '}';
 
         $css .= ".{$this->pseudoElement}\\:content-{$classValue}::{$this->pseudoElement} {";
         $css .= "--tw-content: {$contentValue};";
-        $css .= "content: var(--tw-content);";
-        $css .= "}";
+        $css .= 'content: var(--tw-content);';
+        $css .= '}';
 
         return $css;
     }
@@ -62,6 +63,7 @@ class ContentClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getContentValues());
+
         return in_array($this->value, $validValues);
     }
 
@@ -77,9 +79,10 @@ class ContentClass extends AbstractTailwindClass
             $pseudoElement = $matches[1];
             $value = $matches[2];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $pseudoElement, $isArbitrary);
         }
+
         return null;
     }
 
@@ -87,15 +90,15 @@ class ContentClass extends AbstractTailwindClass
     {
         // Remove square brackets
         $value = trim($value, '[]');
-        
+
         // Convert Unicode characters to their hex representation
-        $value = preg_replace_callback('/[\x{80}-\x{10FFFF}]/u', function($match) {
+        $value = preg_replace_callback('/[\x{80}-\x{10FFFF}]/u', function ($match) {
             return sprintf('\\%X', mb_ord($match[0]));
         }, $value);
-        
+
         // Escape special characters
         $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
+
         return $value;
     }
 }

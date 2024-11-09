@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\PseudoClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class PseudoClassTest extends TestCase
 {
@@ -19,12 +19,12 @@ class PseudoClassTest extends TestCase
     public static function pseudoClassProvider(): array
     {
         return [
-            ['hover:bg-blue-500', ".hover\\:bg-blue-500:hover{--tw-bg-opacity: 1;background-color: rgb(59 130 246 / var(--tw-bg-opacity));}"],
-            ['focus:text-red-700', ".focus\\:text-red-700:focus{--tw-text-opacity: 1;color: rgb(185 28 28 / var(--tw-text-opacity));}"],
-            ['active:scale-95', ".active\\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));}"],
-            ['hover:rounded-lg', ".hover\\:rounded-lg:hover{border-radius:0.5rem;}"],
-            ['focus:border-2', ".focus\\:border-2:focus{border-width:2px;}"],
-            ['active:opacity-75', ".active\\:opacity-75:active{opacity:0.75;}"],
+            ['hover:bg-blue-500', '.hover\\:bg-blue-500:hover{--tw-bg-opacity: 1;background-color: rgb(59 130 246 / var(--tw-bg-opacity));}'],
+            ['focus:text-red-700', '.focus\\:text-red-700:focus{--tw-text-opacity: 1;color: rgb(185 28 28 / var(--tw-text-opacity));}'],
+            ['active:scale-95', '.active\\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));}'],
+            ['hover:rounded-lg', '.hover\\:rounded-lg:hover{border-radius:0.5rem;}'],
+            ['focus:border-2', '.focus\\:border-2:focus{border-width:2px;}'],
+            ['active:opacity-75', '.active\\:opacity-75:active{opacity:0.75;}'],
             ['focus:ring-[#FF7F00]', ".focus\\:ring-\[\\#FF7F00\]:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(255 127 0 / var(--tw-ring-opacity));}"],
         ];
     }

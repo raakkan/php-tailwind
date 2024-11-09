@@ -16,13 +16,13 @@ class BlurClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $blurValue = $this->getBlurValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         return ".blur-{$classValue}{--tw-blur:blur({$blurValue});filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}";
     }
 
@@ -49,6 +49,7 @@ class BlurClass extends AbstractTailwindClass
         }
 
         $validValues = ['none', 'sm', 'DEFAULT', 'md', 'lg', 'xl', '2xl', '3xl'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -65,8 +66,10 @@ class BlurClass extends AbstractTailwindClass
             } elseif ($value === '') {
                 $value = 'DEFAULT';
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

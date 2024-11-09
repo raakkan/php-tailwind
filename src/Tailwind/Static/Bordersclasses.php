@@ -22,7 +22,7 @@ class BordersClasses
             'outline-none' => '.outline-none{outline: 2px solid transparent;outline-offset: 2px;}',
             'outline-dashed' => '.outline-dashed{outline-style:dashed;}',
             'outline-dotted' => '.outline-dotted{outline-style:dotted;}',
-            'outline-double' => '.outline-double{outline-style:double;}'
+            'outline-double' => '.outline-double{outline-style:double;}',
         ];
     }
 }

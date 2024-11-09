@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class BackdropHueRotateClass extends AbstractTailwindClass
 {
     private $isArbitrary;
+
     private $isNegative;
 
     public function __construct(string $value, bool $isArbitrary = false, bool $isNegative = false)
@@ -18,19 +19,19 @@ class BackdropHueRotateClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $hueRotateValue = $this->getHueRotateValue();
         $classValue = $this->value;
-        if ($this->isNegative && !$this->isArbitrary) {
+        if ($this->isNegative && ! $this->isArbitrary) {
             $classValue = "-{$this->value}";
         }
         if ($this->isArbitrary) {
             $classValue = "\\[{$this->escapeArbitraryValue($this->value)}\\]";
         }
-        
+
         return ".backdrop-hue-rotate-{$classValue}{--tw-backdrop-hue-rotate:hue-rotate({$hueRotateValue});-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);}";
     }
 
@@ -46,6 +47,7 @@ class BackdropHueRotateClass extends AbstractTailwindClass
         ];
 
         $value = $this->isArbitrary ? $this->value : ($hueRotates[$this->value] ?? '0deg');
+
         return $this->isNegative ? "-{$value}" : $value;
     }
 
@@ -56,6 +58,7 @@ class BackdropHueRotateClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '15', '30', '60', '90', '180'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -72,8 +75,10 @@ class BackdropHueRotateClass extends AbstractTailwindClass
                     $isNegative = false; // Reset isNegative as it's now part of the value
                 }
             }
+
             return new self($value, $isArbitrary, $isNegative);
         }
+
         return null;
     }
 }

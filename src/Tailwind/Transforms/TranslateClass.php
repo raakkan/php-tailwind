@@ -7,7 +7,9 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class TranslateClass extends AbstractTailwindClass
 {
     private $isArbitrary;
+
     private $axis;
+
     private $isNegative;
 
     public function __construct(string $value, string $axis = '', bool $isArbitrary = false, bool $isNegative = false)
@@ -20,16 +22,16 @@ class TranslateClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $translateValue = $this->getTranslateValue();
         $property = $this->axis === '-x' ? '--tw-translate-x' : '--tw-translate-y';
-        
+
         $selector = $this->buildSelector();
         $css = "{$selector}{{$property}:{$translateValue};";
-        $css .= "transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));}";
+        $css .= 'transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));}';
 
         return $css;
     }
@@ -37,6 +39,7 @@ class TranslateClass extends AbstractTailwindClass
     private function getTranslateValue(): string
     {
         $value = $this->isArbitrary ? $this->value : $this->getFixedValue();
+
         return $this->isNegative ? "-{$value}" : $value;
     }
 
@@ -101,6 +104,7 @@ class TranslateClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             return ".{$prefix}translate{$this->axis}-[{$this->value}]";
         }
+
         return ".{$prefix}translate{$this->axis}-{$this->value}";
     }
 
@@ -114,6 +118,7 @@ class TranslateClass extends AbstractTailwindClass
             array_keys($this->getFixedValues()),
             ['1/2', '1/3', '2/3', '1/4', '2/4', '3/4', 'full']
         );
+
         return in_array($this->value, $validValues);
     }
 
@@ -126,17 +131,18 @@ class TranslateClass extends AbstractTailwindClass
     public static function parse(string $class): ?self
     {
         if (preg_match('/^(-)?translate(-[xy])?-(\[.*?\]|\S+)$/', $class, $matches)) {
-            $isNegative = !empty($matches[1]);
+            $isNegative = ! empty($matches[1]);
             $axis = $matches[2] ?? '';
             $value = $matches[3];
             $isArbitrary = strpos($value, '[') !== false;
-            
+
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
-            
+
             return new self($value, $axis, $isArbitrary, $isNegative);
         }
+
         return null;
     }
 }

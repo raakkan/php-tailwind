@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Transitions;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\TransitionAnimation\TransitionDurationClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class TransitionDurationTest extends TestCase
 {

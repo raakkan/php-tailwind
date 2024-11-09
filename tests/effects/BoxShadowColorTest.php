@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Effects;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Effects\BoxShadowColorClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class BoxShadowColorTest extends TestCase
 {
@@ -19,13 +19,13 @@ class BoxShadowColorTest extends TestCase
     public static function standardColorProvider(): array
     {
         return [
-            ['shadow-red-500', ".shadow-red-500 {--tw-shadow-color: #ef4444; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-blue-300', ".shadow-blue-300 {--tw-shadow-color: #93c5fd; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-green-700', ".shadow-green-700 {--tw-shadow-color: #15803d; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-indigo-500', ".shadow-indigo-500 {--tw-shadow-color: #6366f1; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-black', ".shadow-black {--tw-shadow-color: #000000; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-white', ".shadow-white {--tw-shadow-color: #ffffff; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-slate-700', ".shadow-slate-700 {--tw-shadow-color: #334155; --tw-shadow: var(--tw-shadow-colored);}"],
+            ['shadow-red-500', '.shadow-red-500 {--tw-shadow-color: #ef4444; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-blue-300', '.shadow-blue-300 {--tw-shadow-color: #93c5fd; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-green-700', '.shadow-green-700 {--tw-shadow-color: #15803d; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-indigo-500', '.shadow-indigo-500 {--tw-shadow-color: #6366f1; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-black', '.shadow-black {--tw-shadow-color: #000000; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-white', '.shadow-white {--tw-shadow-color: #ffffff; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-slate-700', '.shadow-slate-700 {--tw-shadow-color: #334155; --tw-shadow: var(--tw-shadow-colored);}'],
         ];
     }
 
@@ -59,11 +59,11 @@ class BoxShadowColorTest extends TestCase
     public static function arbitraryValueProvider(): array
     {
         return [
-            ['shadow-[#1da1f2]', ".shadow-\\[\\#1da1f2\\] {--tw-shadow-color: #1da1f2; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-[#50d71e]', ".shadow-\\[\\#50d71e\\] {--tw-shadow-color: #50d71e; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-[rgb(255,0,0)]', ".shadow-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-shadow-color: rgb(255,0,0); --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-[hsl(200,100%,50%)]', ".shadow-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {--tw-shadow-color: hsl(200,100%,50%); --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-[rgba(255,0,0,0.5)]', ".shadow-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-shadow-color: rgba(255,0,0,0.5); --tw-shadow: var(--tw-shadow-colored);}"],
+            ['shadow-[#1da1f2]', '.shadow-\\[\\#1da1f2\\] {--tw-shadow-color: #1da1f2; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-[#50d71e]', '.shadow-\\[\\#50d71e\\] {--tw-shadow-color: #50d71e; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-[rgb(255,0,0)]', '.shadow-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-shadow-color: rgb(255,0,0); --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-[hsl(200,100%,50%)]', '.shadow-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {--tw-shadow-color: hsl(200,100%,50%); --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-[rgba(255,0,0,0.5)]', '.shadow-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-shadow-color: rgba(255,0,0,0.5); --tw-shadow: var(--tw-shadow-colored);}'],
         ];
     }
 
@@ -78,9 +78,9 @@ class BoxShadowColorTest extends TestCase
     public static function specialColorProvider(): array
     {
         return [
-            ['shadow-inherit', ".shadow-inherit {--tw-shadow-color: inherit; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-current', ".shadow-current {--tw-shadow-color: currentColor; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-transparent', ".shadow-transparent {--tw-shadow-color: transparent; --tw-shadow: var(--tw-shadow-colored);}"],
+            ['shadow-inherit', '.shadow-inherit {--tw-shadow-color: inherit; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-current', '.shadow-current {--tw-shadow-color: currentColor; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-transparent', '.shadow-transparent {--tw-shadow-color: transparent; --tw-shadow: var(--tw-shadow-colored);}'],
         ];
     }
 
@@ -113,14 +113,14 @@ class BoxShadowColorTest extends TestCase
     public static function edgeCaseProvider(): array
     {
         return [
-            ['shadow-[#f00]', ".shadow-\\[\\#f00\\] {--tw-shadow-color: #f00; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-[#ff0000]', ".shadow-\\[\\#ff0000\\] {--tw-shadow-color: #ff0000; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-[rgb(255,0,0)]', ".shadow-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-shadow-color: rgb(255,0,0); --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-[rgba(255,0,0,0.5)]', ".shadow-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-shadow-color: rgba(255,0,0,0.5); --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-[hsl(0,100%,50%)]', ".shadow-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {--tw-shadow-color: hsl(0,100%,50%); --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-[hsla(0,100%,50%,0.5)]', ".shadow-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {--tw-shadow-color: hsla(0,100%,50%,0.5); --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-slate-50', ".shadow-slate-50 {--tw-shadow-color: #f8fafc; --tw-shadow: var(--tw-shadow-colored);}"],
-            ['shadow-rose-950', ".shadow-rose-950 {--tw-shadow-color: #4c0519; --tw-shadow: var(--tw-shadow-colored);}"],
+            ['shadow-[#f00]', '.shadow-\\[\\#f00\\] {--tw-shadow-color: #f00; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-[#ff0000]', '.shadow-\\[\\#ff0000\\] {--tw-shadow-color: #ff0000; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-[rgb(255,0,0)]', '.shadow-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-shadow-color: rgb(255,0,0); --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-[rgba(255,0,0,0.5)]', '.shadow-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-shadow-color: rgba(255,0,0,0.5); --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-[hsl(0,100%,50%)]', '.shadow-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {--tw-shadow-color: hsl(0,100%,50%); --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-[hsla(0,100%,50%,0.5)]', '.shadow-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {--tw-shadow-color: hsla(0,100%,50%,0.5); --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-slate-50', '.shadow-slate-50 {--tw-shadow-color: #f8fafc; --tw-shadow: var(--tw-shadow-colored);}'],
+            ['shadow-rose-950', '.shadow-rose-950 {--tw-shadow-color: #4c0519; --tw-shadow: var(--tw-shadow-colored);}'],
         ];
     }
 }

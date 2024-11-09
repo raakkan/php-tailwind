@@ -16,7 +16,7 @@ class TextDecorationColorClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -47,12 +47,14 @@ class TextDecorationColorClass extends AbstractTailwindClass
         }
 
         $validValues = array_merge(array_keys($this->getColors()), ['inherit', 'current', 'transparent']);
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow hex colors, rgb, rgba, hsl, hsla
         return preg_match('/^(#[0-9A-Fa-f]{3,8}|rgb\(.*\)|rgba\(.*\)|hsl\(.*\)|hsla\(.*\))$/', $value);
     }
@@ -62,9 +64,10 @@ class TextDecorationColorClass extends AbstractTailwindClass
         if (preg_match('/^decoration-((?:\[.+\]|inherit|current|transparent|black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-(?:50|100|200|300|400|500|600|700|800|900|950))?)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -72,10 +75,10 @@ class TextDecorationColorClass extends AbstractTailwindClass
     {
         // Remove square brackets
         $value = trim($value, '[]');
-        
+
         // Escape special characters
         $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
+
         return $value;
     }
 }

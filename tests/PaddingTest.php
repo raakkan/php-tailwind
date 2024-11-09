@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Spacing\PaddingClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class PaddingTest extends TestCase
 {

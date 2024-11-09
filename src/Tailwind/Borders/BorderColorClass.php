@@ -7,7 +7,9 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class BorderColorClass extends AbstractTailwindClass
 {
     private $side;
+
     private $isArbitrary;
+
     private $opacity;
 
     public function __construct(string $value, ?string $side = null, bool $isArbitrary = false, ?string $opacity = null)
@@ -20,22 +22,23 @@ class BorderColorClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
-        $prefix = $this->side ? "border-{$this->side}" : "border";
+        $prefix = $this->side ? "border-{$this->side}" : 'border';
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         $colorValue = $this->getColorValue();
-        
+
         $opacityValue = $this->opacity !== null ? $this->opacity : '1';
         $escapedOpacity = str_replace('.', '\\', $opacityValue);
-        
-        $css = ".{$prefix}-{$classValue}" . ($this->opacity !== null ? "\\/{$escapedOpacity}" : "") . "{";
-        
+
+        $css = ".{$prefix}-{$classValue}".($this->opacity !== null ? "\\/{$escapedOpacity}" : '').'{';
+
         $css .= $this->getSideClass($colorValue);
 
-        $css .= "}";
+        $css .= '}';
+
         return $css;
     }
 
@@ -44,8 +47,9 @@ class BorderColorClass extends AbstractTailwindClass
         $specialColors = ['inherit', 'current', 'transparent'];
         if (in_array($this->value, $specialColors)) {
             if ($this->value === 'current') {
-                return "border-color:currentColor;";
+                return 'border-color:currentColor;';
             }
+
             return "border-color:{$this->value};";
         }
 
@@ -82,25 +86,28 @@ class BorderColorClass extends AbstractTailwindClass
             $value = trim($this->value, '[]');
 
             if (preg_match('/^#([A-Fa-f0-9]{3}){1,2}$/', $value)) {
-                
+
                 if (strlen($value) === 4) {
-                    $value = '#' . $value[1] . $value[1] . $value[2] . $value[2] . $value[3] . $value[3];
+                    $value = '#'.$value[1].$value[1].$value[2].$value[2].$value[3].$value[3];
                 }
-                
-                $rgb = sscanf($value, "#%02x%02x%02x");
+
+                $rgb = sscanf($value, '#%02x%02x%02x');
                 $rgb = implode(' ', $rgb);
+
                 return "rgb($rgb / var(--tw-border-opacity))";
             }
             // Check for RGB or HSL color values
             if (preg_match('/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/', $value, $matches)) {
                 $rgb = "{$matches[1]} {$matches[2]} {$matches[3]}";
+
                 return "rgb($rgb / var(--tw-border-opacity))";
             }
-            
+
             if (preg_match('/^hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)$/', $value, $matches)) {
                 $h = $matches[1];
                 $s = $matches[2];
                 $l = $matches[3];
+
                 return "hsl($h $s% $l% / var(--tw-border-opacity))";
             }
 
@@ -112,15 +119,17 @@ class BorderColorClass extends AbstractTailwindClass
             if ($this->value === 'current') {
                 return 'currentColor';
             }
+
             return $this->value;
         }
 
         $colors = $this->getColors();
         $colorName = str_replace(['border-'], '', $this->value);
         $color = $colors[$colorName] ?? '';
-        
+
         if ($color) {
             $opacity = $this->getOpacityValue();
+
             return "rgb({$color['rgb']} / {$opacity})";
         }
 
@@ -135,6 +144,7 @@ class BorderColorClass extends AbstractTailwindClass
                 return ($opacityInt === 100) ? '1' : rtrim(sprintf('%.2f', $opacityInt / 100), '0');
             }
         }
+
         return 'var(--tw-border-opacity)';
     }
 
@@ -145,12 +155,14 @@ class BorderColorClass extends AbstractTailwindClass
         }
 
         $validValues = array_merge(array_keys($this->getColors()), ['inherit', 'current', 'transparent']);
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow any valid CSS color value
         return preg_match('/^(#[0-9A-Fa-f]{3,8}|rgb\(.*\)|rgba\(.*\)|hsl\(.*\)|hsla\(.*\))$/', $value);
     }
@@ -162,14 +174,15 @@ class BorderColorClass extends AbstractTailwindClass
             $value = $matches[2];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
             $opacity = null;
-            
+
             if (strpos($value, '/') !== false) {
-                list($color, $opacity) = explode('/', $value);
+                [$color, $opacity] = explode('/', $value);
                 $value = $color;
             }
-            
+
             return new self($value, $side, $isArbitrary, $opacity);
         }
+
         return null;
     }
 }

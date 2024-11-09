@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\SVG;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\SVG\StrokeWidthClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class StrokeWidthTest extends TestCase
 {

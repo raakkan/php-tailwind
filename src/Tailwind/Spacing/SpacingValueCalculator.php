@@ -52,7 +52,7 @@ class SpacingValueCalculator
         elseif (strpos($value, '/') !== false) {
             [$numerator, $denominator] = explode('/', $value);
             $percentage = (floatval($numerator) / floatval($denominator)) * 100;
-            $calculatedValue = round($percentage, 6) . '%';
+            $calculatedValue = round($percentage, 6).'%';
         }
         // Handle arbitrary values
         elseif (preg_match('/^\[(.+)\]$/', $value, $matches)) {
@@ -64,9 +64,8 @@ class SpacingValueCalculator
         }
         // Handle numeric values (using Tailwind's 0.25rem scale)
         elseif (is_numeric($value)) {
-            $calculatedValue = (floatval($value) * 0.25) . 'rem';
-        }
-        else {
+            $calculatedValue = (floatval($value) * 0.25).'rem';
+        } else {
             // If we can't calculate, return the original value
             $calculatedValue = $value;
         }

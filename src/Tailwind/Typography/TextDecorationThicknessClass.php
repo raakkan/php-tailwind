@@ -16,7 +16,7 @@ class TextDecorationThicknessClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -55,12 +55,14 @@ class TextDecorationThicknessClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getThicknessValues());
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow lengths and percentages
         return preg_match('/^(\d+(\.\d+)?(px|em|rem|%)|0)$/', $value);
     }
@@ -70,9 +72,10 @@ class TextDecorationThicknessClass extends AbstractTailwindClass
         if (preg_match('/^decoration-((?:\[.+\]|auto|from-font|0|1|2|4|8))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -80,10 +83,10 @@ class TextDecorationThicknessClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

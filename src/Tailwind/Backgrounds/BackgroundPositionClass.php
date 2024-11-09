@@ -16,7 +16,7 @@ class BackgroundPositionClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -57,6 +57,7 @@ class BackgroundPositionClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getBgPositions());
+
         return in_array($this->value, $validValues);
     }
 
@@ -66,6 +67,7 @@ class BackgroundPositionClass extends AbstractTailwindClass
         $value = str_replace('_', ' ', $value);
         // Allow percentage, pixel values, rem values, and keywords
         $pattern = '/^((\d+(%|px|rem)?|top|bottom|left|right|center|calc\([^)]+\)|var\([^)]+\))(\s+(\d+(%|px|rem)?|top|bottom|left|right|center|calc\([^)]+\)|var\([^)]+\)))?)$/';
+
         return preg_match($pattern, $value) === 1;
     }
 
@@ -74,9 +76,10 @@ class BackgroundPositionClass extends AbstractTailwindClass
         if (preg_match('/^bg-((?:\[.+\]|bottom|center|left|left-bottom|left-top|right|right-bottom|right-top|top))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -84,10 +87,10 @@ class BackgroundPositionClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9\s%_-])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

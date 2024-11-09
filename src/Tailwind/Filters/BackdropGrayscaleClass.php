@@ -16,7 +16,7 @@ class BackdropGrayscaleClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -25,7 +25,7 @@ class BackdropGrayscaleClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             $classValue = "-\\[{$this->escapeArbitraryValue($this->value)}\\]";
         }
-        
+
         return ".backdrop-grayscale{$classValue}{--tw-backdrop-grayscale:grayscale({$grayscaleValue});-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);}";
     }
 
@@ -46,6 +46,7 @@ class BackdropGrayscaleClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', ''];
+
         return in_array($this->value, $validValues);
     }
 
@@ -57,8 +58,10 @@ class BackdropGrayscaleClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

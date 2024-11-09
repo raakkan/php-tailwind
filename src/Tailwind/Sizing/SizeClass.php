@@ -17,7 +17,7 @@ class SizeClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -46,16 +46,16 @@ class SizeClass extends AbstractTailwindClass
 
         // Handle fractional values
         if (preg_match('/^(\d+)\/(\d+)$/', $value, $matches)) {
-            $numerator = (int)$matches[1];
-            $denominator = (int)$matches[2];
+            $numerator = (int) $matches[1];
+            $denominator = (int) $matches[2];
             $percentage = ($numerator / $denominator) * 100;
 
             // Use more precise percentages for specific fractions
             if (in_array($value, ['1/3', '2/3', '1/6', '2/6', '4/6', '5/6'])) {
-                return number_format($percentage, 6, '.', '') . '%';
+                return number_format($percentage, 6, '.', '').'%';
             }
 
-            return round($percentage) . '%';
+            return round($percentage).'%';
         }
 
         return SpacingValueCalculator::calculate($value);
@@ -102,7 +102,7 @@ class SizeClass extends AbstractTailwindClass
 
         // Check for valid CSS length units or percentage
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh', 'vmin', 'vmax', 'ex', 'ch', 'cm', 'mm', 'in', 'pt', 'pc', 'svw', 'lvw', 'dvw'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')$/';
 
         if (preg_match($pattern, $value)) {
             return true;
@@ -122,9 +122,10 @@ class SizeClass extends AbstractTailwindClass
         if (preg_match('/^size-((?:\[.+\]|\d+\/\d+|.+))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -132,10 +133,10 @@ class SizeClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters, but keep commas unescaped
     //     $value = preg_replace('/([^a-zA-Z0-9,._-])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

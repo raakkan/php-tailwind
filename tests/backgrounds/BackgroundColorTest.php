@@ -2,10 +2,10 @@
 
 namespace Raakkan\PhpTailwind\Tests\Backgrounds;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Backgrounds\BackgroundColorClass;
-use PHPUnit\Framework\Attributes\DataProvider;
- 
+
 //TODO : bg-[#FF9933] dark:bg-[#E67300] this classes not applayed in html elament test ok
 class BackgroundColorTest extends TestCase
 {
@@ -20,13 +20,13 @@ class BackgroundColorTest extends TestCase
     public static function standardColorProvider(): array
     {
         return [
-            ['bg-red-500', ".bg-red-500 {--tw-bg-opacity: 1;background-color: rgb(239 68 68 / var(--tw-bg-opacity));}"],
-            ['bg-blue-300', ".bg-blue-300 {--tw-bg-opacity: 1;background-color: rgb(147 197 253 / var(--tw-bg-opacity));}"],
-            ['bg-green-700', ".bg-green-700 {--tw-bg-opacity: 1;background-color: rgb(21 128 61 / var(--tw-bg-opacity));}"],
-            ['bg-indigo-500', ".bg-indigo-500 {--tw-bg-opacity: 1;background-color: rgb(99 102 241 / var(--tw-bg-opacity));}"],
-            ['bg-black', ".bg-black {--tw-bg-opacity: 1;background-color: rgb(0 0 0 / var(--tw-bg-opacity));}"],
-            ['bg-white', ".bg-white {--tw-bg-opacity: 1;background-color: rgb(255 255 255 / var(--tw-bg-opacity));}"],
-            ['bg-slate-700', ".bg-slate-700 {--tw-bg-opacity: 1;background-color: rgb(51 65 85 / var(--tw-bg-opacity));}"],
+            ['bg-red-500', '.bg-red-500 {--tw-bg-opacity: 1;background-color: rgb(239 68 68 / var(--tw-bg-opacity));}'],
+            ['bg-blue-300', '.bg-blue-300 {--tw-bg-opacity: 1;background-color: rgb(147 197 253 / var(--tw-bg-opacity));}'],
+            ['bg-green-700', '.bg-green-700 {--tw-bg-opacity: 1;background-color: rgb(21 128 61 / var(--tw-bg-opacity));}'],
+            ['bg-indigo-500', '.bg-indigo-500 {--tw-bg-opacity: 1;background-color: rgb(99 102 241 / var(--tw-bg-opacity));}'],
+            ['bg-black', '.bg-black {--tw-bg-opacity: 1;background-color: rgb(0 0 0 / var(--tw-bg-opacity));}'],
+            ['bg-white', '.bg-white {--tw-bg-opacity: 1;background-color: rgb(255 255 255 / var(--tw-bg-opacity));}'],
+            ['bg-slate-700', '.bg-slate-700 {--tw-bg-opacity: 1;background-color: rgb(51 65 85 / var(--tw-bg-opacity));}'],
         ];
     }
 
@@ -60,12 +60,12 @@ class BackgroundColorTest extends TestCase
     public static function arbitraryValueProvider(): array
     {
         return [
-            ['bg-[#FF9933]', ".bg-\\[\\#FF9933\\] {--tw-bg-opacity: 1;background-color: #FF9933;}"],
-            ['bg-[#1da1f2]', ".bg-\\[\\#1da1f2\\] {--tw-bg-opacity: 1;background-color: #1da1f2;}"],
-            ['bg-[#50d71e]', ".bg-\\[\\#50d71e\\] {--tw-bg-opacity: 1;background-color: #50d71e;}"],
-            ['bg-[rgb(255,0,0)]', ".bg-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-bg-opacity: 1;background-color: rgb(255,0,0);}"],
-            ['bg-[hsl(200,100%,50%)]', ".bg-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {--tw-bg-opacity: 1;background-color: hsl(200,100%,50%);}"],
-            ['bg-[rgba(255,0,0,0.5)]', ".bg-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-bg-opacity: 1;background-color: rgba(255,0,0,0.5);}"],
+            ['bg-[#FF9933]', '.bg-\\[\\#FF9933\\] {--tw-bg-opacity: 1;background-color: #FF9933;}'],
+            ['bg-[#1da1f2]', '.bg-\\[\\#1da1f2\\] {--tw-bg-opacity: 1;background-color: #1da1f2;}'],
+            ['bg-[#50d71e]', '.bg-\\[\\#50d71e\\] {--tw-bg-opacity: 1;background-color: #50d71e;}'],
+            ['bg-[rgb(255,0,0)]', '.bg-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-bg-opacity: 1;background-color: rgb(255,0,0);}'],
+            ['bg-[hsl(200,100%,50%)]', '.bg-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {--tw-bg-opacity: 1;background-color: hsl(200,100%,50%);}'],
+            ['bg-[rgba(255,0,0,0.5)]', '.bg-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-bg-opacity: 1;background-color: rgba(255,0,0,0.5);}'],
         ];
     }
 
@@ -113,14 +113,14 @@ class BackgroundColorTest extends TestCase
     public static function edgeCaseProvider(): array
     {
         return [
-            ['bg-[#f00]', ".bg-\\[\\#f00\\] {--tw-bg-opacity: 1;background-color: #f00;}"],
-            ['bg-[#ff0000]', ".bg-\\[\\#ff0000\\] {--tw-bg-opacity: 1;background-color: #ff0000;}"],
-            ['bg-[rgb(255,0,0)]', ".bg-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-bg-opacity: 1;background-color: rgb(255,0,0);}"],
-            ['bg-[rgba(255,0,0,0.5)]', ".bg-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-bg-opacity: 1;background-color: rgba(255,0,0,0.5);}"],
-            ['bg-[hsl(0,100%,50%)]', ".bg-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {--tw-bg-opacity: 1;background-color: hsl(0,100%,50%);}"],
-            ['bg-[hsla(0,100%,50%,0.5)]', ".bg-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {--tw-bg-opacity: 1;background-color: hsla(0,100%,50%,0.5);}"],
-            ['bg-slate-50', ".bg-slate-50 {--tw-bg-opacity: 1;background-color: rgb(248 250 252 / var(--tw-bg-opacity));}"],
-            ['bg-rose-950', ".bg-rose-950 {--tw-bg-opacity: 1;background-color: rgb(76 5 25 / var(--tw-bg-opacity));}"],
+            ['bg-[#f00]', '.bg-\\[\\#f00\\] {--tw-bg-opacity: 1;background-color: #f00;}'],
+            ['bg-[#ff0000]', '.bg-\\[\\#ff0000\\] {--tw-bg-opacity: 1;background-color: #ff0000;}'],
+            ['bg-[rgb(255,0,0)]', '.bg-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {--tw-bg-opacity: 1;background-color: rgb(255,0,0);}'],
+            ['bg-[rgba(255,0,0,0.5)]', '.bg-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {--tw-bg-opacity: 1;background-color: rgba(255,0,0,0.5);}'],
+            ['bg-[hsl(0,100%,50%)]', '.bg-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {--tw-bg-opacity: 1;background-color: hsl(0,100%,50%);}'],
+            ['bg-[hsla(0,100%,50%,0.5)]', '.bg-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {--tw-bg-opacity: 1;background-color: hsla(0,100%,50%,0.5);}'],
+            ['bg-slate-50', '.bg-slate-50 {--tw-bg-opacity: 1;background-color: rgb(248 250 252 / var(--tw-bg-opacity));}'],
+            ['bg-rose-950', '.bg-rose-950 {--tw-bg-opacity: 1;background-color: rgb(76 5 25 / var(--tw-bg-opacity));}'],
         ];
     }
 }

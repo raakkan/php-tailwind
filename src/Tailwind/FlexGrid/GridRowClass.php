@@ -16,10 +16,10 @@ class GridRowClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {   
+        if (! $this->isValidValue()) {
             return '';
         }
-        
+
         $classValue = $this->value;
 
         if ($this->isArbitrary) {
@@ -29,7 +29,7 @@ class GridRowClass extends AbstractTailwindClass
         }
 
         $cssValue = $this->calculateValue();
-        
+
         return ".grid-rows-{$escapedClassValue}{grid-template-rows:{$cssValue};}";
     }
 
@@ -44,6 +44,7 @@ class GridRowClass extends AbstractTailwindClass
                 if ($this->isArbitrary) {
                     return $this->decodeArbitraryValue(trim($this->value, '[]'));
                 }
+
                 return "repeat({$this->value},minmax(0,1fr))";
         }
     }
@@ -52,20 +53,22 @@ class GridRowClass extends AbstractTailwindClass
     {
         $value = trim($value, '[]');
         $value = str_replace([',', ')', '('], ['\\2c ', '\\)', '\\('], $value);
-        return '\[' . $value . '\]';
+
+        return '\['.$value.'\]';
     }
 
     private function decodeArbitraryValue(string $value): string
     {
         $value = str_replace('\\2c', ',', $value);
         $value = str_replace('_', ' ', $value);
+
         return $value;
     }
 
     private function isValidValue(): bool
     {
         $validValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'none', 'subgrid'];
-        
+
         if (in_array($this->value, $validValues)) {
             return true;
         }
@@ -73,7 +76,7 @@ class GridRowClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             return $this->isValidArbitraryValue($this->value);
         }
-        
+
         return false;
     }
 
@@ -81,7 +84,7 @@ class GridRowClass extends AbstractTailwindClass
     {
         $value = trim($value, '[]');
         $value = trim($value);  // Remove leading and trailing spaces
-        
+
         if (empty($value)) {
             return false;
         }
@@ -114,8 +117,10 @@ class GridRowClass extends AbstractTailwindClass
         if (preg_match('/^grid-rows-(.+)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

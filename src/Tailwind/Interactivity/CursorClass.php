@@ -16,13 +16,13 @@ class CursorClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         $cursorValue = $this->getCursorValue();
-        
+
         return ".cursor-{$classValue}{cursor:{$cursorValue};}";
     }
 
@@ -86,6 +86,7 @@ class CursorClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getCursorValues());
+
         return in_array($this->value, $validValues);
     }
 
@@ -97,8 +98,10 @@ class CursorClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

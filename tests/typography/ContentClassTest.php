@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Typography;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Typography\ContentClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class ContentClassTest extends TestCase
 {
@@ -28,7 +28,7 @@ class ContentClassTest extends TestCase
             // Arbitrary values
             ['before:content-[Hello]', ".content-\[Hello\] {--tw-content: Hello;content: var(--tw-content);}.before\:content-\[Hello\]::before {--tw-content: Hello;content: var(--tw-content);}"],
             ['after:content-[World]', ".content-\[World\] {--tw-content: World;content: var(--tw-content);}.after\:content-\[World\]::after {--tw-content: World;content: var(--tw-content);}"],
-            
+
             // Unicode characters
             // ["after:content-['_↗']", ".content-\[\'_\2197\'\] {--tw-content: '_↗';content: var(--tw-content);}.after\:content-\[\'_\2197\'\]::after {--tw-content: '_↗';content: var(--tw-content);}"],
             // ["before:content-['→']", ".content-\[\'\\2192\'\] {--tw-content: '→';content: var(--tw-content);}.before\:content-\[\'\\2192\'\]::before {--tw-content: '→';content: var(--tw-content);}"],

@@ -16,21 +16,22 @@ class DivideColorClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $classValue = $this->isArbitrary() ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         $colorValue = $this->getColorValue();
-        
+
         $opacityValue = $this->opacity !== null ? $this->opacity : '1';
         $escapedOpacity = str_replace('.', '\\', $opacityValue);
-        
-        $css = ".divide-{$classValue}" . ($this->opacity !== null ? "\\/{$escapedOpacity}" : "") . " > :not([hidden]) ~ :not([hidden]){";
-        
+
+        $css = ".divide-{$classValue}".($this->opacity !== null ? "\\/{$escapedOpacity}" : '').' > :not([hidden]) ~ :not([hidden]){';
+
         $css .= $this->getDivideColorClass($colorValue);
 
-        $css .= "}";
+        $css .= '}';
+
         return $css;
     }
 
@@ -39,8 +40,9 @@ class DivideColorClass extends AbstractTailwindClass
         $specialColors = ['inherit', 'current', 'transparent'];
         if (in_array($this->value, $specialColors)) {
             if ($this->value === 'current') {
-                return "border-color:currentColor;";
+                return 'border-color:currentColor;';
             }
+
             return "border-color:{$this->value};";
         }
 
@@ -58,23 +60,26 @@ class DivideColorClass extends AbstractTailwindClass
 
             if (preg_match('/^#([A-Fa-f0-9]{3}){1,2}$/', $value)) {
                 if (strlen($value) === 4) {
-                    $value = '#' . $value[1] . $value[1] . $value[2] . $value[2] . $value[3] . $value[3];
+                    $value = '#'.$value[1].$value[1].$value[2].$value[2].$value[3].$value[3];
                 }
-                
-                $rgb = sscanf($value, "#%02x%02x%02x");
+
+                $rgb = sscanf($value, '#%02x%02x%02x');
                 $rgb = implode(' ', $rgb);
+
                 return "rgb($rgb / var(--tw-divide-opacity))";
             }
-            
+
             if (preg_match('/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/', $value, $matches)) {
                 $rgb = "{$matches[1]} {$matches[2]} {$matches[3]}";
+
                 return "rgb($rgb / var(--tw-divide-opacity))";
             }
-            
+
             if (preg_match('/^hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)$/', $value, $matches)) {
                 $h = $matches[1];
                 $s = $matches[2];
                 $l = $matches[3];
+
                 return "hsl($h $s% $l% / var(--tw-divide-opacity))";
             }
 
@@ -86,15 +91,17 @@ class DivideColorClass extends AbstractTailwindClass
             if ($this->value === 'current') {
                 return 'currentColor';
             }
+
             return $this->value;
         }
 
         $colors = $this->getColors();
         $colorName = str_replace(['divide-'], '', $this->value);
         $color = $colors[$colorName] ?? '';
-        
+
         if ($color) {
             $opacity = $this->getOpacityValue();
+
             return "rgb({$color['rgb']} / {$opacity})";
         }
 
@@ -109,6 +116,7 @@ class DivideColorClass extends AbstractTailwindClass
                 return ($opacityInt === 100) ? '1' : rtrim(sprintf('%.2f', $opacityInt / 100), '0');
             }
         }
+
         return 'var(--tw-divide-opacity)';
     }
 
@@ -119,12 +127,14 @@ class DivideColorClass extends AbstractTailwindClass
         }
 
         $validValues = array_merge(array_keys($this->getColors()), ['inherit', 'current', 'transparent']);
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow any valid CSS color value
         return preg_match('/^(#[0-9A-Fa-f]{3,8}|rgb\(.*\)|rgba\(.*\)|hsl\(.*\)|hsla\(.*\))$/', $value);
     }
@@ -139,14 +149,15 @@ class DivideColorClass extends AbstractTailwindClass
         if (preg_match('/^divide-((?:\[.+\]|inherit|current|transparent|black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?(?:\/[0-9.]+)?)$/', $class, $matches)) {
             $value = $matches[1];
             $opacity = null;
-            
+
             if (strpos($value, '/') !== false) {
-                list($color, $opacity) = explode('/', $value);
+                [$color, $opacity] = explode('/', $value);
                 $value = $color;
             }
-            
+
             return new self($value, $opacity);
         }
+
         return null;
     }
 }

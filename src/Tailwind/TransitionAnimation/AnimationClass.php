@@ -16,17 +16,17 @@ class AnimationClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $animationValue = $this->getAnimationValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         $css = ".animate-{$classValue}{animation:{$animationValue};}";
-        
+
         // Add keyframes for predefined animations
-        if (!$this->isArbitrary) {
+        if (! $this->isArbitrary) {
             $css .= $this->getKeyframes();
         }
 
@@ -70,6 +70,7 @@ class AnimationClass extends AbstractTailwindClass
         }
 
         $validValues = ['none', 'spin', 'ping', 'pulse', 'bounce'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -81,8 +82,10 @@ class AnimationClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 

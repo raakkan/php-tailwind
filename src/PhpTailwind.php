@@ -1,24 +1,34 @@
 <?php
 
 namespace Raakkan\PhpTailwind;
+
 class PhpTailwind
 {
-    use Concerns\HasPreflight;
-    use Concerns\HasHtmlFiles;
     use Concerns\HasBladeFiles;
+    use Concerns\HasHtmlFiles;
+    use Concerns\HasPreflight;
+
     private $parser;
+
     private $minifier;
+
     private $minifiedCss;
+
     private $css;
+
     protected $initialClasses;
+
     protected $parsedClasses;
+
     protected $missingClasses;
+
     protected $invalidCssClasses;
+
     public function __construct($initialClasses = '')
     {
-        $this->parser = new TailwindParser();
-        $this->minifier = new Minify();
-        if (!empty($initialClasses)) {
+        $this->parser = new TailwindParser;
+        $this->minifier = new Minify;
+        if (! empty($initialClasses)) {
             $this->initialClasses = $initialClasses;
             $this->parse($initialClasses);
         } else {
@@ -34,7 +44,7 @@ class PhpTailwind
         return new self($initialClasses);
     }
 
-    public function parse(string | array | null $classes = null)
+    public function parse(string|array|null $classes = null)
     {
         if (is_string($classes)) {
             $classes = explode(' ', $classes);
@@ -45,6 +55,7 @@ class PhpTailwind
         $this->parsedClasses = $result['css'];
         $this->missingClasses = $result['missingClasses'];
         $this->invalidCssClasses = $result['invalidCssClasses'];
+
         return $this;
     }
 
@@ -52,9 +63,10 @@ class PhpTailwind
     {
         $css = $this->parsedClasses;
         if ($this->isPreflight()) {
-            $css = $this->preflightStyle() . $css;
+            $css = $this->preflightStyle().$css;
         }
         $this->minifiedCss = $this->minifier->add($css)->minify();
+
         return $this;
     }
 
@@ -66,10 +78,10 @@ class PhpTailwind
         } else {
             $css = $this->parsedClasses;
             if ($this->isPreflight()) {
-                $css = $this->preflightStyle() . $css;
+                $css = $this->preflightStyle().$css;
             }
         }
-        
+
         return $css;
     }
 

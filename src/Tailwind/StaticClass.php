@@ -1,15 +1,16 @@
 <?php
 
 namespace Raakkan\PhpTailwind\Tailwind;
+
 use Raakkan\PhpTailwind\AbstractTailwindClass;
-use Raakkan\PhpTailwind\Tailwind\Static\LayoutClasses;
-use Raakkan\PhpTailwind\Tailwind\Static\TablesClasses;
+use Raakkan\PhpTailwind\Tailwind\Static\BackgroundsClasses;
 use Raakkan\PhpTailwind\Tailwind\Static\BordersClasses;
 use Raakkan\PhpTailwind\Tailwind\Static\EffectsClasses;
 use Raakkan\PhpTailwind\Tailwind\Static\FlexGridClasses;
-use Raakkan\PhpTailwind\Tailwind\Static\TypographyClasses;
-use Raakkan\PhpTailwind\Tailwind\Static\BackgroundsClasses;
 use Raakkan\PhpTailwind\Tailwind\Static\InteractivityClasses;
+use Raakkan\PhpTailwind\Tailwind\Static\LayoutClasses;
+use Raakkan\PhpTailwind\Tailwind\Static\TablesClasses;
+use Raakkan\PhpTailwind\Tailwind\Static\TypographyClasses;
 
 class StaticClass extends AbstractTailwindClass
 {
@@ -27,6 +28,7 @@ class StaticClass extends AbstractTailwindClass
     public function toCss(): string
     {
         $classes = $this->getClasses();
+
         return $classes[$this->value] ?? '';
     }
 
@@ -42,7 +44,7 @@ class StaticClass extends AbstractTailwindClass
 
     public static function parse($class): ?self
     {
-        
+
         $classes = [];
         foreach (static::$static_classes as $static_class) {
             $classes = array_merge($classes, $static_class::getClasses());
@@ -51,11 +53,11 @@ class StaticClass extends AbstractTailwindClass
         $classes = array_unique($classes);
         $other_classes = static::getOtherClasses();
         $classes = array_merge($classes, $other_classes);
-      
-        if(array_key_exists($class, $classes)) {
+
+        if (array_key_exists($class, $classes)) {
             return new self($class);
         }
-        
+
         return null;
     }
 
@@ -66,7 +68,7 @@ class StaticClass extends AbstractTailwindClass
             'not-sr-only' => '.not-sr-only{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal;}',
             'forced-color-adjust-auto' => '.forced-color-adjust-auto{forced-color-adjust: auto;}',
             'forced-color-adjust-none' => '.forced-color-adjust-none{forced-color-adjust: none;}',
-            'transform' => '.transform{transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));}'
+            'transform' => '.transform{transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));}',
         ];
     }
 }

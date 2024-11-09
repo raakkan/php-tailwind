@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\DarkModeClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class DarkModeTest extends TestCase
 {
@@ -49,7 +49,7 @@ class DarkModeTest extends TestCase
     //     $expected = '.dark\:text-white:where(.dark, .dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}'
     //               . '.dark\:bg-black:where(.dark, .dark *){--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity))}'
     //               . '.dark\:p-4:where(.dark, .dark *){padding:1rem}';
-        
+
     //     $darkModeClass = DarkModeClass::parse($input);
     //     $this->assertInstanceOf(DarkModeClass::class, $darkModeClass);
     //     $this->assertSame($expected, $darkModeClass->toCss());
@@ -60,7 +60,7 @@ class DarkModeTest extends TestCase
     //     $input = 'text-black dark:text-white bg-white dark:bg-black';
     //     $expected = '.dark\:text-white:where(.dark, .dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}'
     //               . '.dark\:bg-black:where(.dark, .dark *){--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity))}';
-        
+
     //     $darkModeClass = DarkModeClass::parse($input);
     //     $this->assertInstanceOf(DarkModeClass::class, $darkModeClass);
     //     $this->assertSame($expected, $darkModeClass->toCss());

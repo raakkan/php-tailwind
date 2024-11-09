@@ -16,7 +16,7 @@ class BackgroundSizeClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -51,6 +51,7 @@ class BackgroundSizeClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getBgSizes());
+
         return in_array($this->value, $validValues);
     }
 
@@ -60,6 +61,7 @@ class BackgroundSizeClass extends AbstractTailwindClass
         $value = str_replace('_', ' ', $value);
         // Allow percentage, pixel values, rem values, and keywords
         $pattern = '/^(auto|cover|contain|(\d+(%|px|rem|vw|vh)?(\s+\d+(%|px|rem|vw|vh)?)?)|calc\([^)]+\)|var\([^)]+\))$/';
+
         return preg_match($pattern, $value) === 1;
     }
 
@@ -68,9 +70,10 @@ class BackgroundSizeClass extends AbstractTailwindClass
         if (preg_match('/^bg-((?:\[.+\]|auto|cover|contain))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -78,10 +81,10 @@ class BackgroundSizeClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9\s%_-])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

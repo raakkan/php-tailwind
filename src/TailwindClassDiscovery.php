@@ -7,7 +7,7 @@ class TailwindClassDiscovery
     public static function discoverClasses(): array
     {
         $classTypes = [];
-        $tailwindDir = __DIR__ . '/Tailwind';
+        $tailwindDir = __DIR__.'/Tailwind';
 
         self::discoverFromSubdirectories($tailwindDir, $classTypes);
         self::discoverFromRootDirectory($tailwindDir, $classTypes);
@@ -35,7 +35,7 @@ class TailwindClassDiscovery
 
     private static function discoverFromRootDirectory(string $tailwindDir, array &$classTypes): void
     {
-        $tailwindClasses = glob($tailwindDir . '/*.php');
+        $tailwindClasses = glob($tailwindDir.'/*.php');
         foreach ($tailwindClasses as $filePath) {
             $className = self::extractClassNameFromFile($filePath);
             if ($className && self::isValidTailwindClass($className)) {
@@ -49,18 +49,20 @@ class TailwindClassDiscovery
         $content = file_get_contents($filePath);
         if (preg_match('/namespace\s+(.*?);/', $content, $namespaceMatches) &&
             preg_match('/class\s+(\w+)/', $content, $classMatches)) {
-            return $namespaceMatches[1] . '\\' . $classMatches[1];
+            return $namespaceMatches[1].'\\'.$classMatches[1];
         }
+
         return null;
     }
 
     private static function isValidTailwindClass(string $className): bool
     {
-        if (!class_exists($className)) {
+        if (! class_exists($className)) {
             return false;
         }
 
         $reflectionClass = new \ReflectionClass($className);
+
         return $reflectionClass->isSubclassOf(AbstractTailwindClass::class);
     }
 }

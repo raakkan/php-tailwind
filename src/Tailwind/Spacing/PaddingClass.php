@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class PaddingClass extends AbstractTailwindClass
 {
     private $direction;
+
     private $isArbitrary;
 
     public function __construct(string $value, string $direction = '', bool $isArbitrary = false)
@@ -18,13 +19,13 @@ class PaddingClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $value = SpacingValueCalculator::calculate($this->value);
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : str_replace(['/', '.'], ['\/', '\.'], $this->value);
-        
+
         switch ($this->direction) {
             case 'x':
                 return ".px-{$classValue}{padding-left:{$value};padding-right:{$value};}";
@@ -59,6 +60,7 @@ class PaddingClass extends AbstractTailwindClass
         if (preg_match('/^(\d+)\/(\d+)$/', $this->value, $matches)) {
             $numerator = intval($matches[1]);
             $denominator = intval($matches[2]);
+
             return $denominator !== 0; // Allow any fraction as long as denominator is not zero
         }
 
@@ -77,7 +79,7 @@ class PaddingClass extends AbstractTailwindClass
 
         // Check for valid CSS length units
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh', 'vmin', 'vmax', 'ex', 'ch', 'cm', 'mm', 'in', 'pt', 'pc'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')?$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')?$/';
 
         if (preg_match($pattern, $value)) {
             return true;
@@ -98,8 +100,10 @@ class PaddingClass extends AbstractTailwindClass
             $direction = $matches[1] ?? '';
             $value = $matches[2];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
+
             return new self($value, $direction, $isArbitrary);
         }
+
         return null;
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\FlexGrid\FlexClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class FlexTest extends TestCase
 {
@@ -24,7 +24,7 @@ class FlexTest extends TestCase
             ['flex-auto', '.flex-auto{flex:1 1 auto;}'],
             ['flex-initial', '.flex-initial{flex:0 1 auto;}'],
             ['flex-none', '.flex-none{flex:none;}'],
-            
+
             // Arbitrary values
             ['flex-[2]', '.flex-\[2\]{flex:2;}'],
             ['flex-[2_2_0%]', '.flex-\[2_2_0\%\]{flex:2 2 0%;}'],

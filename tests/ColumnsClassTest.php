@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Layout\ColumnsClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class ColumnsClassTest extends TestCase
 {

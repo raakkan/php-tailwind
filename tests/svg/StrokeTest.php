@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\SVG;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\SVG\StrokeClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class StrokeTest extends TestCase
 {
@@ -19,15 +19,15 @@ class StrokeTest extends TestCase
     public static function standardStrokeColorProvider(): array
     {
         return [
-            ['stroke-red-500', ".stroke-red-500 {stroke: #ef4444;}"],
-            ['stroke-blue-300', ".stroke-blue-300 {stroke: #93c5fd;}"],
-            ['stroke-green-700', ".stroke-green-700 {stroke: #15803d;}"],
-            ['stroke-indigo-500', ".stroke-indigo-500 {stroke: #6366f1;}"],
-            ['stroke-black', ".stroke-black {stroke: #000000;}"],
-            ['stroke-white', ".stroke-white {stroke: #ffffff;}"],
-            ['stroke-slate-700', ".stroke-slate-700 {stroke: #334155;}"],
-            ['stroke-slate-50', ".stroke-slate-50 {stroke: #f8fafc;}"],
-            ['stroke-rose-950', ".stroke-rose-950 {stroke: #4c0519;}"],
+            ['stroke-red-500', '.stroke-red-500 {stroke: #ef4444;}'],
+            ['stroke-blue-300', '.stroke-blue-300 {stroke: #93c5fd;}'],
+            ['stroke-green-700', '.stroke-green-700 {stroke: #15803d;}'],
+            ['stroke-indigo-500', '.stroke-indigo-500 {stroke: #6366f1;}'],
+            ['stroke-black', '.stroke-black {stroke: #000000;}'],
+            ['stroke-white', '.stroke-white {stroke: #ffffff;}'],
+            ['stroke-slate-700', '.stroke-slate-700 {stroke: #334155;}'],
+            ['stroke-slate-50', '.stroke-slate-50 {stroke: #f8fafc;}'],
+            ['stroke-rose-950', '.stroke-rose-950 {stroke: #4c0519;}'],
         ];
     }
 
@@ -42,11 +42,11 @@ class StrokeTest extends TestCase
     public static function arbitraryValueProvider(): array
     {
         return [
-            ['stroke-[#1da1f2]', ".stroke-\\[\\#1da1f2\\] {stroke: #1da1f2;}"],
-            ['stroke-[#50d71e]', ".stroke-\\[\\#50d71e\\] {stroke: #50d71e;}"],
-            ['stroke-[rgb(255,0,0)]', ".stroke-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {stroke: rgb(255,0,0);}"],
-            ['stroke-[hsl(200,100%,50%)]', ".stroke-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {stroke: hsl(200,100%,50%);}"],
-            ['stroke-[rgba(255,0,0,0.5)]', ".stroke-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {stroke: rgba(255,0,0,0.5);}"],
+            ['stroke-[#1da1f2]', '.stroke-\\[\\#1da1f2\\] {stroke: #1da1f2;}'],
+            ['stroke-[#50d71e]', '.stroke-\\[\\#50d71e\\] {stroke: #50d71e;}'],
+            ['stroke-[rgb(255,0,0)]', '.stroke-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {stroke: rgb(255,0,0);}'],
+            ['stroke-[hsl(200,100%,50%)]', '.stroke-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] {stroke: hsl(200,100%,50%);}'],
+            ['stroke-[rgba(255,0,0,0.5)]', '.stroke-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {stroke: rgba(255,0,0,0.5);}'],
         ];
     }
 
@@ -61,10 +61,10 @@ class StrokeTest extends TestCase
     public static function specialValueProvider(): array
     {
         return [
-            ['stroke-inherit', ".stroke-inherit {stroke: inherit;}"],
-            ['stroke-current', ".stroke-current {stroke: currentColor;}"],
-            ['stroke-transparent', ".stroke-transparent {stroke: transparent;}"],
-            ['stroke-none', ".stroke-none {stroke: none;}"],
+            ['stroke-inherit', '.stroke-inherit {stroke: inherit;}'],
+            ['stroke-current', '.stroke-current {stroke: currentColor;}'],
+            ['stroke-transparent', '.stroke-transparent {stroke: transparent;}'],
+            ['stroke-none', '.stroke-none {stroke: none;}'],
         ];
     }
 
@@ -100,12 +100,12 @@ class StrokeTest extends TestCase
     public static function edgeCaseProvider(): array
     {
         return [
-            ['stroke-[#f00]', ".stroke-\\[\\#f00\\] {stroke: #f00;}"],
-            ['stroke-[#ff0000]', ".stroke-\\[\\#ff0000\\] {stroke: #ff0000;}"],
-            ['stroke-[rgb(255,0,0)]', ".stroke-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {stroke: rgb(255,0,0);}"],
-            ['stroke-[rgba(255,0,0,0.5)]', ".stroke-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {stroke: rgba(255,0,0,0.5);}"],
-            ['stroke-[hsl(0,100%,50%)]', ".stroke-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {stroke: hsl(0,100%,50%);}"],
-            ['stroke-[hsla(0,100%,50%,0.5)]', ".stroke-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {stroke: hsla(0,100%,50%,0.5);}"],
+            ['stroke-[#f00]', '.stroke-\\[\\#f00\\] {stroke: #f00;}'],
+            ['stroke-[#ff0000]', '.stroke-\\[\\#ff0000\\] {stroke: #ff0000;}'],
+            ['stroke-[rgb(255,0,0)]', '.stroke-\\[rgb\\(255\\2c 0\\2c 0\\)\\] {stroke: rgb(255,0,0);}'],
+            ['stroke-[rgba(255,0,0,0.5)]', '.stroke-\\[rgba\\(255\\2c 0\\2c 0\\2c 0\\.5\\)\\] {stroke: rgba(255,0,0,0.5);}'],
+            ['stroke-[hsl(0,100%,50%)]', '.stroke-\\[hsl\\(0\\2c 100\\%\\2c 50\\%\\)\\] {stroke: hsl(0,100%,50%);}'],
+            ['stroke-[hsla(0,100%,50%,0.5)]', '.stroke-\\[hsla\\(0\\2c 100\\%\\2c 50\\%\\2c 0\\.5\\)\\] {stroke: hsla(0,100%,50%,0.5);}'],
         ];
     }
 }

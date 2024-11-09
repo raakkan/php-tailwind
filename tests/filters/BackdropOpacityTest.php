@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Effects;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Filters\BackdropOpacityClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class BackdropOpacityTest extends TestCase
 {

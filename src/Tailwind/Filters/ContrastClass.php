@@ -16,13 +16,13 @@ class ContrastClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $contrastValue = $this->getContrastValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         return ".contrast-{$classValue}{--tw-contrast:contrast({$contrastValue});filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}";
     }
 
@@ -48,6 +48,7 @@ class ContrastClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '50', '75', '100', '125', '150', '200'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -59,8 +60,10 @@ class ContrastClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

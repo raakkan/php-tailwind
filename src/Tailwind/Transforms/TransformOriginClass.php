@@ -16,7 +16,7 @@ class TransformOriginClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -27,7 +27,7 @@ class TransformOriginClass extends AbstractTailwindClass
             $classValue = "\\[{$this->escapeArbitraryValue($this->value)}\\]";
             $originValue = $this->formatArbitraryValue($originValue);
         }
-        
+
         return ".origin-{$classValue}{transform-origin:{$originValue};}";
     }
 
@@ -55,13 +55,14 @@ class TransformOriginClass extends AbstractTailwindClass
         }
 
         $validValues = ['center', 'top', 'top-right', 'right', 'bottom-right', 'bottom', 'bottom-left', 'left', 'top-left'];
+
         return in_array($this->value, $validValues);
     }
 
     private function formatArbitraryValue(string $value): string
     {
         // Replace underscores with spaces, except within parentheses
-        $formatted = preg_replace_callback('/\([^)]+\)|\S+/', function($match) {
+        $formatted = preg_replace_callback('/\([^)]+\)|\S+/', function ($match) {
             return str_replace('_', ' ', $match[0]);
         }, $value);
 
@@ -77,8 +78,10 @@ class TransformOriginClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

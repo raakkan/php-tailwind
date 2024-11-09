@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Backgrounds;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Backgrounds\BackgroundSizeClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class BackgroundSizeTest extends TestCase
 {
@@ -35,7 +35,7 @@ class BackgroundSizeTest extends TestCase
             ['bg-[100px_200px]', '.bg-\[100px_200px\]{background-size:100px 200px;}'],
             ['bg-[10vw_20vh]', '.bg-\[10vw_20vh\]{background-size:10vw 20vh;}'],
             ['bg-[2rem_50%]', '.bg-\[2rem_50\%\]{background-size:2rem 50%;}'],
-            
+
             // Edge cases
             ['bg-[calc(100%_-_20px)]', '.bg-\[calc\(100\%_-_20px\)\]{background-size:calc(100% - 20px);}'],
             ['bg-[var(--bg-size)]', '.bg-\[var\(--bg-size\)\]{background-size:var(--bg-size);}'],

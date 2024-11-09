@@ -5,9 +5,11 @@ namespace Raakkan\PhpTailwind\Concerns;
 trait HasPreflight
 {
     protected $preflight = false;
+
     public function includePreflight()
     {
         $this->preflight = true;
+
         return $this;
     }
 

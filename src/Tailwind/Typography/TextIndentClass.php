@@ -16,7 +16,7 @@ class TextIndentClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -83,12 +83,14 @@ class TextIndentClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getTextIndents());
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow valid CSS length values
         return preg_match('/^(-?\d*\.?\d+)(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax|%)$/', $value);
     }
@@ -98,9 +100,10 @@ class TextIndentClass extends AbstractTailwindClass
         if (preg_match('/^indent-((?:\[.+\]|0|px|0\.5|1|1\.5|2|2\.5|3|3\.5|4|5|6|7|8|9|10|11|12|14|16|20|24|28|32|36|40|44|48|52|56|60|64|72|80|96))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -108,10 +111,10 @@ class TextIndentClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

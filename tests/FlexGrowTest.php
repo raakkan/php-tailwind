@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\FlexGrid\FlexGrowClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class FlexGrowTest extends TestCase
 {
@@ -22,7 +22,7 @@ class FlexGrowTest extends TestCase
             // Standard values
             ['grow-0', '.grow-0{flex-grow:0;}'],
             ['grow', '.grow{flex-grow:1;}'],
-            
+
             // Arbitrary values
             ['grow-[2]', '.grow-\[2\]{flex-grow:2;}'],
             ['grow-[0.5]', '.grow-\[0\.5\]{flex-grow:0.5;}'],

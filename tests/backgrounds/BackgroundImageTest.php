@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Backgrounds;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Backgrounds\BackgroundImageClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class BackgroundImageTest extends TestCase
 {
@@ -37,7 +37,7 @@ class BackgroundImageTest extends TestCase
             ['bg-[repeating-linear-gradient(45deg,_#eee,_#999_10px)]', '.bg-\[repeating-linear-gradient\(45deg\2c _\#eee\2c _\#999_10px\)\]{background-image:repeating-linear-gradient(45deg, #eee, #999 10px);}'],
             ['bg-[repeating-radial-gradient(circle_at_center,_#eee,_#999_10px)]', '.bg-\[repeating-radial-gradient\(circle_at_center\2c _\#eee\2c _\#999_10px\)\]{background-image:repeating-radial-gradient(circle at center, #eee, #999 10px);}'],
             ['bg-[conic-gradient(from_45deg,_#eee,_#999)]', '.bg-\[conic-gradient\(from_45deg\2c _\#eee\2c _\#999\)\]{background-image:conic-gradient(from 45deg, #eee, #999);}'],
-            
+
             // Edge cases
             // ['bg-[url("https://example.com/image.jpg")]', '.bg-\[url\(\"https://example\.com/image\.jpg\"\)\]{background-image:url("https://example.com/image.jpg");}'],
             // ['bg-[linear-gradient(to_right,rgb(255,0,0),rgb(0,0,255))]', '.bg-\[linear-gradient\(to_right\2c rgb\(255\2c 0\2c 0\)\2c rgb\(0\2c 0\2c 255\)\)\]{background-image:linear-gradient(to right,rgb(255,0,0),rgb(0,0,255));}'],

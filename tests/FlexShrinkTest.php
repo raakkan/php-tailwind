@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\FlexGrid\FlexShrinkClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class FlexShrinkTest extends TestCase
 {
@@ -22,7 +22,7 @@ class FlexShrinkTest extends TestCase
             // Standard values
             ['shrink-0', '.shrink-0{flex-shrink:0;}'],
             ['shrink', '.shrink{flex-shrink:1;}'],
-            
+
             // Arbitrary values
             ['shrink-[2]', '.shrink-\[2\]{flex-shrink:2;}'],
             ['shrink-[0.5]', '.shrink-\[0\.5\]{flex-shrink:0.5;}'],

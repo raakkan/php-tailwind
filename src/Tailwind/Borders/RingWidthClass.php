@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class RingWidthClass extends AbstractTailwindClass
 {
     private $isArbitrary;
+
     private $isInset;
 
     public function __construct(string $value, bool $isArbitrary = false, bool $isInset = false)
@@ -18,7 +19,7 @@ class RingWidthClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -26,15 +27,15 @@ class RingWidthClass extends AbstractTailwindClass
         $ringWidth = $this->getRingWidth();
 
         $css = ".ring{$this->getClassSuffix()} {";
-        $css .= "--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);";
+        $css .= '--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);';
         $css .= "--tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc({$ringWidth} + var(--tw-ring-offset-width)) var(--tw-ring-color);";
-        $css .= "box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);";
-        
+        $css .= 'box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);';
+
         if ($this->isInset) {
-            $css .= "--tw-ring-inset: inset;";
+            $css .= '--tw-ring-inset: inset;';
         }
 
-        $css .= "}";
+        $css .= '}';
 
         return $css;
     }
@@ -44,11 +45,11 @@ class RingWidthClass extends AbstractTailwindClass
         if ($this->isInset) {
             return '-inset';
         }
-        
+
         if ($this->isArbitrary) {
             return "-\[{$this->escapeArbitraryValue($this->value)}\]";
         }
-        
+
         return $this->value === 'DEFAULT' ? '' : "-{$this->value}";
     }
 
@@ -77,12 +78,14 @@ class RingWidthClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '1', '2', '4', '8', 'DEFAULT'];
+
         return in_array($this->value, $validValues) || $this->isInset;
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         return preg_match('/^[a-zA-Z0-9-_.%()]+$/', $value) === 1;
     }
 
@@ -92,13 +95,14 @@ class RingWidthClass extends AbstractTailwindClass
             $isInset = ($matches[1] ?? '') === '-inset';
             $value = $matches[2] ?? 'DEFAULT';
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
-            
+
             return new self($value, $isArbitrary, $isInset);
         }
+
         return null;
     }
 }

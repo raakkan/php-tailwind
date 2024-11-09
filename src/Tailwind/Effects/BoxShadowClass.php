@@ -16,19 +16,19 @@ class BoxShadowClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
-        $classValue = $this->value === 'DEFAULT' ? '' : '-' . ($this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value);
+        $classValue = $this->value === 'DEFAULT' ? '' : '-'.($this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value);
         $shadowValue = $this->getShadowValue();
-        
+
         $css = ".shadow{$classValue}{";
         $css .= "--tw-shadow:{$shadowValue};";
         $css .= "--tw-shadow-colored:{$this->getColoredShadowValue($shadowValue)};";
-        $css .= "box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);";
-        $css .= "}";
-        
+        $css .= 'box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);';
+        $css .= '}';
+
         return $css;
     }
 
@@ -53,6 +53,7 @@ class BoxShadowClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             return $shadowValue;
         }
+
         return preg_replace('/rgb\([^)]+\)/', 'var(--tw-shadow-color)', $shadowValue);
     }
 
@@ -63,6 +64,7 @@ class BoxShadowClass extends AbstractTailwindClass
         }
 
         $validValues = ['sm', 'DEFAULT', 'md', 'lg', 'xl', '2xl', 'inner', 'none'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -77,8 +79,10 @@ class BoxShadowClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

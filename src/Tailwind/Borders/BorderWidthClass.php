@@ -7,6 +7,7 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class BorderWidthClass extends AbstractTailwindClass
 {
     private $isArbitrary;
+
     private $side;
 
     public function __construct(string $value, string $side = '', bool $isArbitrary = false)
@@ -18,7 +19,7 @@ class BorderWidthClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -38,7 +39,7 @@ class BorderWidthClass extends AbstractTailwindClass
         foreach ($properties as $property) {
             $css .= "{$property}:{$borderValue};";
         }
-        $css .= "}";
+        $css .= '}';
 
         return $css;
     }
@@ -101,6 +102,7 @@ class BorderWidthClass extends AbstractTailwindClass
 
         // Add empty string to valid values for 'border-{side}' cases
         $validValues = ['0', '2', '4', '8', 'DEFAULT', ''];
+
         return in_array($this->value, $validValues);
     }
 
@@ -108,7 +110,7 @@ class BorderWidthClass extends AbstractTailwindClass
     {
         $value = trim($this->value, '[]');
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')$/';
 
         return preg_match($pattern, $value) || preg_match('/^(calc|clamp|min|max)\(.*\)$/', $value);
     }
@@ -124,9 +126,10 @@ class BorderWidthClass extends AbstractTailwindClass
             $side = ltrim($matches[1] ?? '', '-');
             $value = $matches[3] ?? '';
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $side, $isArbitrary);
         }
+
         return null;
     }
 }

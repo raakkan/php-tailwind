@@ -16,13 +16,13 @@ class OpacityClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $opacityValue = $this->getOpacityValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         return ".opacity-{$classValue}{opacity:{$opacityValue};}";
     }
 
@@ -62,6 +62,7 @@ class OpacityClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '5', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90', '95', '100'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -73,8 +74,10 @@ class OpacityClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

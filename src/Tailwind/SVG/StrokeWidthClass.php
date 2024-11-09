@@ -16,7 +16,7 @@ class StrokeWidthClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -49,7 +49,7 @@ class StrokeWidthClass extends AbstractTailwindClass
 
         // Check for valid CSS length units
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh', 'vmin', 'vmax', 'ex', 'ch', 'cm', 'mm', 'in', 'pt', 'pc'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')?$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')?$/';
 
         if (preg_match($pattern, $value)) {
             return true;
@@ -73,13 +73,14 @@ class StrokeWidthClass extends AbstractTailwindClass
         if (preg_match('/^stroke-(\[.+\]|\d+)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 

@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Sizing;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Sizing\MaxHeightClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class MaxHeightTest extends TestCase
 {

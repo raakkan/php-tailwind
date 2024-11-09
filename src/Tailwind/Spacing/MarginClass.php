@@ -7,8 +7,11 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class MarginClass extends AbstractTailwindClass
 {
     private $direction;
+
     private $isNegative;
+
     private $isAuto;
+
     private $isArbitrary;
 
     public function __construct(string $value, string $direction = '', bool $isNegative = false, bool $isAuto = false, bool $isArbitrary = false)
@@ -22,7 +25,7 @@ class MarginClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -31,10 +34,10 @@ class MarginClass extends AbstractTailwindClass
         }
 
         $value = SpacingValueCalculator::calculate($this->value, $this->isNegative);
-        
+
         $prefix = $this->isNegative ? '-' : '';
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : str_replace(['/', '.'], ['\/', '\.'], $this->value);
-        
+
         switch ($this->direction) {
             case 'x':
                 return ".{$prefix}mx-{$classValue}{margin-left:{$value};margin-right:{$value};}";
@@ -61,23 +64,23 @@ class MarginClass extends AbstractTailwindClass
     {
         switch ($this->direction) {
             case 'x':
-                return ".mx-auto{margin-left:auto;margin-right:auto;}";
+                return '.mx-auto{margin-left:auto;margin-right:auto;}';
             case 'y':
-                return ".my-auto{margin-top:auto;margin-bottom:auto;}";
+                return '.my-auto{margin-top:auto;margin-bottom:auto;}';
             case 't':
-                return ".mt-auto{margin-top:auto;}";
+                return '.mt-auto{margin-top:auto;}';
             case 'r':
-                return ".mr-auto{margin-right:auto;}";
+                return '.mr-auto{margin-right:auto;}';
             case 'b':
-                return ".mb-auto{margin-bottom:auto;}";
+                return '.mb-auto{margin-bottom:auto;}';
             case 'l':
-                return ".ml-auto{margin-left:auto;}";
+                return '.ml-auto{margin-left:auto;}';
             case 'e':
-                return ".me-auto{margin-inline-end:auto;}";
+                return '.me-auto{margin-inline-end:auto;}';
             case 's':
-                return ".ms-auto{margin-inline-start:auto;}";
+                return '.ms-auto{margin-inline-start:auto;}';
             default:
-                return ".m-auto{margin:auto;}";
+                return '.m-auto{margin:auto;}';
         }
     }
 
@@ -97,7 +100,7 @@ class MarginClass extends AbstractTailwindClass
         if (preg_match('/^(\d+)\/(\d+)$/', $this->value, $matches)) {
             $numerator = intval($matches[1]);
             $denominator = intval($matches[2]);
-            
+
             return $denominator !== 0; // Allow any fraction as long as denominator is not zero
         }
 
@@ -105,7 +108,7 @@ class MarginClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             return $this->isValidArbitraryValue();
         }
-        
+
         return false;
     }
 
@@ -116,7 +119,7 @@ class MarginClass extends AbstractTailwindClass
 
         // Check for valid CSS length units
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh', 'vmin', 'vmax', 'ex', 'ch', 'cm', 'mm', 'in', 'pt', 'pc'];
-        $pattern = '/^(-?\d*\.?\d+)(' . implode('|', $validUnits) . ')?$/';
+        $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')?$/';
 
         if (preg_match($pattern, $value)) {
             return true;
@@ -137,9 +140,10 @@ class MarginClass extends AbstractTailwindClass
             [, $negative, , $direction, $value] = $matches;
             $isAuto = $value === 'auto';
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $direction ?: '', $negative === '-', $isAuto, $isArbitrary);
         }
+
         return null;
     }
 }

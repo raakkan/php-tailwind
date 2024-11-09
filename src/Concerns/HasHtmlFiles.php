@@ -11,8 +11,9 @@ trait HasHtmlFiles
     /**
      * Add one or more HTML files to be processed.
      *
-     * @param string|array $files
+     * @param  string|array  $files
      * @return $this
+     *
      * @throws InvalidArgumentException
      */
     public function addHtmlFiles($files)
@@ -20,7 +21,7 @@ trait HasHtmlFiles
         $files = is_array($files) ? $files : [$files];
 
         foreach ($files as $file) {
-            if (!file_exists($file)) {
+            if (! file_exists($file)) {
                 throw new InvalidArgumentException("File does not exist: {$file}");
             }
             $this->htmlFiles[] = $file;
@@ -41,7 +42,7 @@ trait HasHtmlFiles
         foreach ($this->htmlFiles as $file) {
             $content = file_get_contents($file);
             preg_match_all('/class=["\']([^"\']*)["\']/', $content, $matches);
-            
+
             if (isset($matches[1])) {
                 $fileClasses = implode(' ', $matches[1]);
                 $allClasses = array_merge($allClasses, explode(' ', $fileClasses));

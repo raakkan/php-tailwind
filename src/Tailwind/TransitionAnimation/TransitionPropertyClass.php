@@ -16,20 +16,20 @@ class TransitionPropertyClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $propertyValue = $this->getPropertyValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         $css = ".transition-{$classValue}{transition-property:{$propertyValue};";
-        
+
         if ($this->value !== 'none') {
-            $css .= "transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms;";
+            $css .= 'transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms;';
         }
-        
-        $css .= "}";
+
+        $css .= '}';
 
         return $css;
     }
@@ -56,6 +56,7 @@ class TransitionPropertyClass extends AbstractTailwindClass
         }
 
         $validValues = ['none', 'all', 'DEFAULT', 'colors', 'opacity', 'shadow', 'transform'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -70,8 +71,10 @@ class TransitionPropertyClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

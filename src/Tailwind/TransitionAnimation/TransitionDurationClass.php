@@ -16,7 +16,7 @@ class TransitionDurationClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -49,6 +49,7 @@ class TransitionDurationClass extends AbstractTailwindClass
         }
 
         $validValues = ['75', '100', '150', '200', '300', '500', '700', '1000'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -60,8 +61,10 @@ class TransitionDurationClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

@@ -16,7 +16,7 @@ class LineHeightClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -62,12 +62,14 @@ class LineHeightClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getLineHeights());
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow numbers, decimals, rem, em, px, and percentages
         return preg_match('/^(\d+(\.\d+)?(rem|em|px|%)?|calc\(.+\))$/', $value);
     }
@@ -77,9 +79,10 @@ class LineHeightClass extends AbstractTailwindClass
         if (preg_match('/^leading-((?:\[.+\]|3|4|5|6|7|8|9|10|none|tight|snug|normal|relaxed|loose))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -87,10 +90,10 @@ class LineHeightClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

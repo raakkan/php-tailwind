@@ -16,7 +16,7 @@ class ListStyleImageClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -50,12 +50,14 @@ class ListStyleImageClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getListStyleImages());
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow URL function and other valid CSS list-style-image values
         return preg_match('/^(url\(.+\)|none|inherit|initial|revert|unset)$/', $value);
     }
@@ -65,9 +67,10 @@ class ListStyleImageClass extends AbstractTailwindClass
         if (preg_match('/^list-image-((?:\[.+\]|none))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -75,10 +78,10 @@ class ListStyleImageClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters
     //     $value = preg_replace('/([^a-zA-Z0-9])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

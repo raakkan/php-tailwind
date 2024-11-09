@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Filters;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Filters\ContrastClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class ContrastTest extends TestCase
 {

@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Filters;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Filters\BackdropInvertClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class BackdropInvertTest extends TestCase
 {

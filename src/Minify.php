@@ -19,9 +19,6 @@ class Minify
      */
     protected $placeholders = [];
 
-    /**
-     * @param string $css
-     */
     public function __construct(string $css = '')
     {
         $this->css = $css;
@@ -30,19 +27,17 @@ class Minify
     /**
      * Add CSS content.
      *
-     * @param string $css
      * @return $this
      */
     public function add(string $css): self
     {
         $this->css .= $css;
+
         return $this;
     }
 
     /**
      * Minify the CSS.
-     *
-     * @return string
      */
     public function minify(): string
     {
@@ -75,8 +70,9 @@ class Minify
     {
         $regex = '/(\'(?:[^\'\\\]++|\\\.)*+\'|"(?:[^"\\\]++|\\\.)*+")/';
         $this->css = preg_replace_callback($regex, function ($match) {
-            $placeholder = 'STRING_' . count($this->placeholders) . '_';
+            $placeholder = 'STRING_'.count($this->placeholders).'_';
             $this->placeholders[$placeholder] = $match[0];
+
             return $placeholder;
         }, $this->css);
     }
@@ -88,8 +84,9 @@ class Minify
     {
         $regex = '/\/\*[\s\S]*?\*\//';
         $this->css = preg_replace_callback($regex, function ($match) {
-            $placeholder = 'COMMENT_' . count($this->placeholders) . '_';
+            $placeholder = 'COMMENT_'.count($this->placeholders).'_';
             $this->placeholders[$placeholder] = $match[0];
+
             return $placeholder;
         }, $this->css);
     }
@@ -164,9 +161,9 @@ class Minify
     {
         $properties = ['margin', 'padding'];
         foreach ($properties as $property) {
-            $regex = "/$property-(?:top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*" .
-                     "$property-(?:top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*" .
-                     "$property-(?:top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*" .
+            $regex = "/$property-(?:top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*".
+                     "$property-(?:top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*".
+                     "$property-(?:top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*".
                      "$property-(?:top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;/i";
             $this->css = preg_replace_callback($regex, function ($matches) use ($property) {
                 $values = array_slice($matches, 1);
@@ -176,6 +173,7 @@ class Minify
                 if ($values[0] === $values[2] && $values[1] === $values[3]) {
                     return "$property:{$values[0]} {$values[1]};";
                 }
+
                 return "$property:{$values[0]} {$values[1]} {$values[2]} {$values[3]};";
             }, $this->css);
         }
@@ -186,15 +184,16 @@ class Minify
      */
     protected function optimizeBorders(): void
     {
-        $regex = '/border-(top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*' .
-                 'border-(top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*' .
-                 'border-(top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*' .
+        $regex = '/border-(top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*'.
+                 'border-(top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*'.
+                 'border-(top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;\\s*'.
                  'border-(top|right|bottom|left)\\s*:\\s*([^;\\}]+)\\s*;/i';
         $this->css = preg_replace_callback($regex, function ($matches) {
             $values = array_slice($matches, 2, 8, true);
             if (count(array_unique($values)) === 1) {
                 return "border:{$values[$matches[1]]};";
             }
+
             return $matches[0];
         }, $this->css);
     }
@@ -205,16 +204,18 @@ class Minify
     protected function optimizeBackgrounds(): void
     {
         $properties = ['color', 'image', 'repeat', 'position', 'size'];
-        $regex = '/background-(' . implode('|', $properties) . ')\\s*:\\s*([^;\\}]+)\\s*;\\s*/i';
+        $regex = '/background-('.implode('|', $properties).')\\s*:\\s*([^;\\}]+)\\s*;\\s*/i';
         $this->css = preg_replace_callback($regex, function ($matches) use ($properties) {
             static $background = [];
             $background[$matches[1]] = $matches[2];
             if (count($background) === count($properties)) {
-                $result = "background:{$background['color']} {$background['image']} {$background['repeat']} " .
+                $result = "background:{$background['color']} {$background['image']} {$background['repeat']} ".
                           "{$background['position']}/{$background['size']};";
                 $background = [];
+
                 return $result;
             }
+
             return $matches[0];
         }, $this->css);
     }

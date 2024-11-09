@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Layout\ZIndexClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class ZIndexTest extends TestCase
 {

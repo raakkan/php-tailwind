@@ -16,10 +16,10 @@ class GridAutoColumnsClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {   
+        if (! $this->isValidValue()) {
             return '';
         }
-        
+
         $classValue = $this->value;
 
         if ($this->isArbitrary) {
@@ -29,7 +29,7 @@ class GridAutoColumnsClass extends AbstractTailwindClass
         }
 
         $cssValue = $this->calculateValue();
-        
+
         return ".auto-cols-{$escapedClassValue}{grid-auto-columns:{$cssValue};}";
     }
 
@@ -37,13 +37,14 @@ class GridAutoColumnsClass extends AbstractTailwindClass
     {
         $value = trim($value, '[]');
         $value = str_replace(['%', '(', ')', ','], ['\%', '\(', '\)', '\2c '], $value);
+
         return "\\[{$value}\\]";
     }
 
     private function isValidValue(): bool
     {
         $validValues = ['auto', 'min', 'max', 'fr'];
-        
+
         if (in_array($this->value, $validValues)) {
             return true;
         }
@@ -51,7 +52,7 @@ class GridAutoColumnsClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             return $this->isValidArbitraryValue($this->value);
         }
-        
+
         return false;
     }
 
@@ -69,8 +70,10 @@ class GridAutoColumnsClass extends AbstractTailwindClass
             default:
                 if ($this->isArbitrary) {
                     $value = trim($this->value, '[]');
+
                     return preg_replace('/\s*,\s*/', ', ', str_replace('_', ' ', $value));
                 }
+
                 return $this->value;
         }
     }
@@ -79,10 +82,10 @@ class GridAutoColumnsClass extends AbstractTailwindClass
     {
         // Remove brackets for validation
         $innerValue = trim($value, '[]');
-        
+
         // Replace underscores with spaces for validation
         $innerValue = str_replace('_', ' ', $innerValue);
-        
+
         // More permissive regex pattern
         if (preg_match('/^(auto|min-content|max-content|minmax\(.+\)|fit-content\(.+\)|\d+(\.\d+)?(px|em|rem|%|fr)|repeat\(.+\)|calc\(.+\))$/', $innerValue)) {
             return true;
@@ -96,8 +99,10 @@ class GridAutoColumnsClass extends AbstractTailwindClass
         if (preg_match('/^auto-cols-(.+)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

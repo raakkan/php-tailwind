@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\FlexGrid\GapClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class GapClassTest extends TestCase
 {
@@ -46,24 +46,24 @@ class GapClassTest extends TestCase
             ['gap-72', '.gap-72{gap:18rem;}'],
             ['gap-80', '.gap-80{gap:20rem;}'],
             ['gap-96', '.gap-96{gap:24rem;}'],
-            
+
             // X-axis
             ['gap-x-4', '.gap-x-4{column-gap:1rem;}'],
             ['gap-x-8', '.gap-x-8{column-gap:2rem;}'],
             ['gap-x-px', '.gap-x-px{column-gap:1px;}'],
-            
+
             // Y-axis
             ['gap-y-4', '.gap-y-4{row-gap:1rem;}'],
             ['gap-y-8', '.gap-y-8{row-gap:2rem;}'],
             ['gap-y-0.5', '.gap-y-0\.5{row-gap:0.125rem;}'],
-            
+
             // Arbitrary values
             ['gap-[14px]', '.gap-\[14px\]{gap:14px;}'],
             ['gap-[3.23rem]', '.gap-\[3\.23rem\]{gap:3.23rem;}'],
             ['gap-[60%]', '.gap-\[60\%\]{gap:60%;}'],
             ['gap-x-[14px]', '.gap-x-\[14px\]{column-gap:14px;}'],
             ['gap-y-[3.23rem]', '.gap-y-\[3\.23rem\]{row-gap:3.23rem;}'],
-            
+
             // Calc values
             ['gap-[calc(100%-14px)]', '.gap-\[calc\(100\%-14px\)\]{gap:calc(100%-14px);}'],
             ['gap-x-[calc(1rem+8px)]', '.gap-x-\[calc\(1rem\+8px\)\]{column-gap:calc(1rem+8px);}'],

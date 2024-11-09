@@ -16,13 +16,13 @@ class FillClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         $fillValue = $this->getFillValue();
-        
+
         return ".fill-{$classValue} {fill: {$fillValue};}";
     }
 
@@ -39,6 +39,7 @@ class FillClass extends AbstractTailwindClass
 
         $colors = $this->getColors();
         $colorName = str_replace(['fill-'], '', $this->value);
+
         return $colors[$colorName]['hex'] ?? '';
     }
 
@@ -52,12 +53,14 @@ class FillClass extends AbstractTailwindClass
             ['none', 'inherit', 'current', 'transparent'],
             array_keys($this->getColors())
         );
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         return preg_match('/^(#[0-9A-Fa-f]{3,8}|rgb\(.*\)|rgba\(.*\)|hsl\(.*\)|hsla\(.*\))$/', $value);
     }
 
@@ -66,8 +69,10 @@ class FillClass extends AbstractTailwindClass
         if (preg_match('/^fill-((?:\[.+\]|none|inherit|current|transparent|black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

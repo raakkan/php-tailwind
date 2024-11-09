@@ -16,13 +16,13 @@ class SaturateClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $saturateValue = $this->getSaturateValue();
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
-        
+
         return ".saturate-{$classValue}{--tw-saturate:saturate({$saturateValue});filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}";
     }
 
@@ -46,6 +46,7 @@ class SaturateClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '50', '100', '150', '200'];
+
         return in_array($this->value, $validValues);
     }
 
@@ -57,8 +58,10 @@ class SaturateClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

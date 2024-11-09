@@ -16,27 +16,27 @@ class OrderClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {   
+        if (! $this->isValidValue()) {
             return '';
         }
-        
+
         $classValue = $this->value;
 
         if ($this->isArbitrary) {
-            $escapedClassValue = '\[' . $this->escapeArbitraryValue($classValue) . '\]';
+            $escapedClassValue = '\['.$this->escapeArbitraryValue($classValue).'\]';
         } else {
             $escapedClassValue = preg_replace('/[\/\.]/', '\\\\$0', $classValue);
         }
 
         $cssValue = $this->calculateValue();
-        
+
         return ".order-{$escapedClassValue}{order:{$cssValue};}";
     }
 
     private function isValidValue(): bool
     {
         $validValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'first', 'last', 'none'];
-        
+
         if (in_array($this->value, $validValues)) {
             return true;
         }
@@ -44,7 +44,7 @@ class OrderClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             return $this->isValidArbitraryValue($this->value);
         }
-        
+
         return false;
     }
 
@@ -65,6 +65,7 @@ class OrderClass extends AbstractTailwindClass
     private function isValidArbitraryValue($value): bool
     {
         $value = trim($value, '[]');
+
         return is_numeric($value);
     }
 
@@ -73,8 +74,10 @@ class OrderClass extends AbstractTailwindClass
         if (preg_match('/^order-(.+)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

@@ -2,9 +2,8 @@
 
 namespace Raakkan\PhpTailwind\Tests\FlexGrid;
 
-use Raakkan\PhpTailwind\Minify;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\FlexGrid\GridColumnClass;
 
 class GridColumnTest extends TestCase
@@ -33,11 +32,11 @@ class GridColumnTest extends TestCase
             ['grid-cols-10', '.grid-cols-10{grid-template-columns:repeat(10,minmax(0,1fr));}'],
             ['grid-cols-11', '.grid-cols-11{grid-template-columns:repeat(11,minmax(0,1fr));}'],
             ['grid-cols-12', '.grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr));}'],
-            
+
             // Special values
             ['grid-cols-none', '.grid-cols-none{grid-template-columns:none;}'],
             ['grid-cols-subgrid', '.grid-cols-subgrid{grid-template-columns:subgrid;}'],
-            
+
             // Arbitrary values
             ['grid-cols-[13]', '.grid-cols-\[13\]{grid-template-columns:13;}'],
             ['grid-cols-[200px]', '.grid-cols-\[200px\]{grid-template-columns:200px;}'],

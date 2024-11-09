@@ -16,7 +16,7 @@ class FontFamilyClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             if (FontWeightClass::parse('font-'.$this->value)) {
                 return FontWeightClass::parse('font-'.$this->value)->toCss();
             } else {
@@ -28,7 +28,7 @@ class FontFamilyClass extends AbstractTailwindClass
         $cssValue = $this->calculateValue();
 
         if ($this->isArbitrary) {
-            $escapedClassValue = '\['. $this->escapeArbitraryValue($classValue) . '\]';
+            $escapedClassValue = '\['.$this->escapeArbitraryValue($classValue).'\]';
         } else {
             $escapedClassValue = $classValue;
         }
@@ -73,7 +73,7 @@ class FontFamilyClass extends AbstractTailwindClass
     private function isValidArbitraryValue($value): bool
     {
         // Allow any non-empty string for arbitrary font family values
-        return !empty($value);
+        return ! empty($value);
     }
 
     public static function parse(string $class): ?self
@@ -84,8 +84,10 @@ class FontFamilyClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = substr($value, 1, -1); // Remove brackets
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

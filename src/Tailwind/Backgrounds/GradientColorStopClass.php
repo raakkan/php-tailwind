@@ -7,7 +7,9 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class GradientColorStopClass extends AbstractTailwindClass
 {
     private $position;
+
     private $isArbitrary;
+
     private $opacity;
 
     public function __construct(string $value, string $position, bool $isArbitrary = false, ?string $opacity = null)
@@ -20,20 +22,20 @@ class GradientColorStopClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
         $prefix = $this->position;
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
         $colorValue = $this->getColorValue();
-        
+
         $css = ".{$prefix}-{$classValue}{";
-        
+
         if ($prefix === 'from') {
             $css .= "--tw-gradient-from:{$colorValue['hex']} var(--tw-gradient-from-position);";
             $css .= "--tw-gradient-to:rgb({$colorValue['rgb']} / 0) var(--tw-gradient-to-position);";
-            $css .= "--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to);";
+            $css .= '--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to);';
         } elseif ($prefix === 'via') {
             $css .= "--tw-gradient-to:rgb({$colorValue['rgb']} / 0) var(--tw-gradient-to-position);";
             $css .= "--tw-gradient-stops:var(--tw-gradient-from),{$colorValue['hex']} var(--tw-gradient-via-position),var(--tw-gradient-to);";
@@ -41,7 +43,8 @@ class GradientColorStopClass extends AbstractTailwindClass
             $css .= "--tw-gradient-to:{$colorValue['hex']} var(--tw-gradient-to-position);";
         }
 
-        $css .= "}";
+        $css .= '}';
+
         return $css;
     }
 
@@ -49,17 +52,18 @@ class GradientColorStopClass extends AbstractTailwindClass
     {
         if ($this->isArbitrary) {
             $value = trim($this->value, '[]');
-            
+
             if (preg_match('/^#([A-Fa-f0-9]{3}){1,2}$/', $value)) {
-                
+
                 if (strlen($value) === 4) {
-                    $value = '#' . $value[1] . $value[1] . $value[2] . $value[2] . $value[3] . $value[3];
+                    $value = '#'.$value[1].$value[1].$value[2].$value[2].$value[3].$value[3];
                 }
-                
-                $rgb = sscanf($value, "#%02x%02x%02x");
+
+                $rgb = sscanf($value, '#%02x%02x%02x');
+
                 return [
                     'hex' => $value,
-                    'rgb' => implode(' ', $rgb)
+                    'rgb' => implode(' ', $rgb),
                 ];
             }
         }
@@ -68,14 +72,15 @@ class GradientColorStopClass extends AbstractTailwindClass
         if (in_array($this->value, $specialColors)) {
             $hex = $this->value == 'current' ? 'currentColor' : $this->value;
             $rgb = $this->value == 'transparent' ? '0 0 0' : '255 255 255';
+
             return [
                 'hex' => $hex,
-                'rgb' => $rgb
+                'rgb' => $rgb,
             ];
         }
 
         $value = str_replace(['from-', 'to-', 'via-'], '', $this->value);
-        
+
         return $this->getColors()[$value] ?? '';
     }
 
@@ -86,12 +91,14 @@ class GradientColorStopClass extends AbstractTailwindClass
         }
 
         $validValues = array_merge(array_keys($this->getColors()), ['inherit', 'current', 'transparent']);
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         $value = trim($this->value, '[]');
+
         // Allow any valid CSS color value
         return preg_match('/^(#[0-9A-Fa-f]{3,8}|rgb\(.*\)|rgba\(.*\)|hsl\(.*\)|hsla\(.*\))$/', $value);
     }
@@ -103,14 +110,15 @@ class GradientColorStopClass extends AbstractTailwindClass
             $value = $matches[2];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
             $opacity = null;
-            
+
             if (strpos($value, '/') !== false) {
-                list($color, $opacity) = explode('/', $value);
+                [$color, $opacity] = explode('/', $value);
                 $value = $color;
             }
-            
+
             return new self($value, $position, $isArbitrary, $opacity);
         }
+
         return null;
     }
 }

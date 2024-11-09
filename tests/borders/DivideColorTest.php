@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests\Borders;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Borders\DivideColorClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class DivideColorTest extends TestCase
 {
@@ -19,14 +19,14 @@ class DivideColorTest extends TestCase
     public static function standardDivideColorProvider(): array
     {
         return [
-            ['divide-red-500', ".divide-red-500 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(239 68 68 / var(--tw-divide-opacity));}"],
-            ['divide-blue-300', ".divide-blue-300 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(147 197 253 / var(--tw-divide-opacity));}"],
-            ['divide-green-700', ".divide-green-700 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(21 128 61 / var(--tw-divide-opacity));}"],
-            ['divide-indigo-500', ".divide-indigo-500 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(99 102 241 / var(--tw-divide-opacity));}"],
-            ['divide-transparent', ".divide-transparent > :not([hidden]) ~ :not([hidden]){border-color:transparent;}"],
-            ['divide-current', ".divide-current > :not([hidden]) ~ :not([hidden]){border-color:currentColor;}"],
-            ['divide-black', ".divide-black > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(0 0 0 / var(--tw-divide-opacity));}"],
-            ['divide-white', ".divide-white > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(255 255 255 / var(--tw-divide-opacity));}"],
+            ['divide-red-500', '.divide-red-500 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(239 68 68 / var(--tw-divide-opacity));}'],
+            ['divide-blue-300', '.divide-blue-300 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(147 197 253 / var(--tw-divide-opacity));}'],
+            ['divide-green-700', '.divide-green-700 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(21 128 61 / var(--tw-divide-opacity));}'],
+            ['divide-indigo-500', '.divide-indigo-500 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(99 102 241 / var(--tw-divide-opacity));}'],
+            ['divide-transparent', '.divide-transparent > :not([hidden]) ~ :not([hidden]){border-color:transparent;}'],
+            ['divide-current', '.divide-current > :not([hidden]) ~ :not([hidden]){border-color:currentColor;}'],
+            ['divide-black', '.divide-black > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(0 0 0 / var(--tw-divide-opacity));}'],
+            ['divide-white', '.divide-white > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(255 255 255 / var(--tw-divide-opacity));}'],
         ];
     }
 
@@ -59,9 +59,9 @@ class DivideColorTest extends TestCase
     public static function arbitraryValueProvider(): array
     {
         return [
-            ['divide-[#1da1f2]', ".divide-\\[\\#1da1f2\\] > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(29 161 242 / var(--tw-divide-opacity));}"],
-            ['divide-[rgb(255,0,0)]', ".divide-\\[rgb\\(255\\2c 0\\2c 0\\)\\] > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(255 0 0 / var(--tw-divide-opacity));}"],
-            ['divide-[hsl(200,100%,50%)]', ".divide-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:hsl(200 100% 50% / var(--tw-divide-opacity));}"],
+            ['divide-[#1da1f2]', '.divide-\\[\\#1da1f2\\] > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(29 161 242 / var(--tw-divide-opacity));}'],
+            ['divide-[rgb(255,0,0)]', '.divide-\\[rgb\\(255\\2c 0\\2c 0\\)\\] > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(255 0 0 / var(--tw-divide-opacity));}'],
+            ['divide-[hsl(200,100%,50%)]', '.divide-\\[hsl\\(200\\2c 100\\%\\2c 50\\%\\)\\] > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:hsl(200 100% 50% / var(--tw-divide-opacity));}'],
             // ['divide-[#0000ff]/75', ".divide-\\[\\#0000ff\\]\/75 > :not([hidden]) ~ :not([hidden]){border-color:rgb(0 0 255 / 0.75);}"],
         ];
     }
@@ -77,9 +77,9 @@ class DivideColorTest extends TestCase
     public static function specialColorProvider(): array
     {
         return [
-            ['divide-inherit', ".divide-inherit > :not([hidden]) ~ :not([hidden]){border-color:inherit;}"],
-            ['divide-current', ".divide-current > :not([hidden]) ~ :not([hidden]){border-color:currentColor;}"],
-            ['divide-transparent', ".divide-transparent > :not([hidden]) ~ :not([hidden]){border-color:transparent;}"],
+            ['divide-inherit', '.divide-inherit > :not([hidden]) ~ :not([hidden]){border-color:inherit;}'],
+            ['divide-current', '.divide-current > :not([hidden]) ~ :not([hidden]){border-color:currentColor;}'],
+            ['divide-transparent', '.divide-transparent > :not([hidden]) ~ :not([hidden]){border-color:transparent;}'],
         ];
     }
 

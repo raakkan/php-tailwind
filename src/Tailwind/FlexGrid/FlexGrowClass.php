@@ -16,37 +16,41 @@ class FlexGrowClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {   
+        if (! $this->isValidValue()) {
             return '';
         }
-        
+
         $classValue = $this->value;
         $cssValue = $this->calculateValue();
 
         if ($this->isArbitrary) {
             $escapedClassValue = str_replace('/', '\/', $this->escapeArbitraryValue($classValue));
+
             return ".grow-\[{$escapedClassValue}\]{flex-grow:{$cssValue};}";
         } else {
-            return $classValue === '' ? ".grow{flex-grow:1;}" : ".grow-{$classValue}{flex-grow:{$cssValue};}";
+            return $classValue === '' ? '.grow{flex-grow:1;}' : ".grow-{$classValue}{flex-grow:{$cssValue};}";
         }
     }
 
     private function isValidValue(): bool
     {
-        if ($this->value === '') return true; // For 'grow'
+        if ($this->value === '') {
+            return true;
+        } // For 'grow'
         $validValues = ['0'];
-        
+
         if (in_array($this->value, $validValues)) {
             return true;
         }
 
         if ($this->isArbitrary) {
             $trimmedValue = trim($this->value, '[]');
-            return is_numeric($trimmedValue) 
-                || preg_match('/^\d+\/\d+$/', $trimmedValue) 
+
+            return is_numeric($trimmedValue)
+                || preg_match('/^\d+\/\d+$/', $trimmedValue)
                 || strpos($trimmedValue, 'calc(') === 0;
         }
-        
+
         return false;
     }
 
@@ -67,8 +71,10 @@ class FlexGrowClass extends AbstractTailwindClass
         if (preg_match('/^grow-(.+)$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

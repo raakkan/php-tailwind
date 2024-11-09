@@ -16,7 +16,7 @@ class GrayscaleClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -25,7 +25,7 @@ class GrayscaleClass extends AbstractTailwindClass
         if ($this->isArbitrary) {
             $classValue = "-\\[{$this->escapeArbitraryValue($this->value)}\\]";
         }
-        
+
         return ".grayscale{$classValue}{--tw-grayscale:grayscale({$grayscaleValue});filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}";
     }
 
@@ -46,6 +46,7 @@ class GrayscaleClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', ''];
+
         return in_array($this->value, $validValues);
     }
 
@@ -57,8 +58,10 @@ class GrayscaleClass extends AbstractTailwindClass
             if ($isArbitrary) {
                 $value = trim($value, '[]');
             }
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 }

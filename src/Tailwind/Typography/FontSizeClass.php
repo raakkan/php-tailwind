@@ -16,8 +16,8 @@ class FontSizeClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
-            if(TextColorClass::parse('text-'.$this->value)) {
+        if (! $this->isValidValue()) {
+            if (TextColorClass::parse('text-'.$this->value)) {
                 return TextColorClass::parse('text-'.$this->value)->toCss();
             } else {
                 return '';
@@ -77,6 +77,7 @@ class FontSizeClass extends AbstractTailwindClass
         }
 
         $validValues = array_keys($this->getFontSizes());
+
         return in_array($this->value, $validValues);
     }
 
@@ -100,9 +101,10 @@ class FontSizeClass extends AbstractTailwindClass
         if (preg_match('/^text-((?:\[.+\]|xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl))$/', $class, $matches)) {
             $value = $matches[1];
             $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            
+
             return new self($value, $isArbitrary);
         }
+
         return null;
     }
 
@@ -110,10 +112,10 @@ class FontSizeClass extends AbstractTailwindClass
     // {
     //     // Remove square brackets
     //     $value = trim($value, '[]');
-        
+
     //     // Escape special characters, but keep commas unescaped
     //     $value = preg_replace('/([^a-zA-Z0-9,._()-])/', '\\\\$1', $value);
-        
+
     //     return $value;
     // }
 }

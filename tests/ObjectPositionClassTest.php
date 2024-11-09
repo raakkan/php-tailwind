@@ -2,9 +2,9 @@
 
 namespace Raakkan\PhpTailwind\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Raakkan\PhpTailwind\Tailwind\Layout\ObjectPositionClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class ObjectPositionClassTest extends TestCase
 {
