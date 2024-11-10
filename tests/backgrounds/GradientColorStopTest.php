@@ -22,6 +22,8 @@ class GradientColorStopTest extends TestCase
             ['from-red-500', '.from-red-500{--tw-gradient-from:#ef4444 var(--tw-gradient-from-position);--tw-gradient-to:rgb(239 68 68 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to);}'],
             ['via-blue-300', '.via-blue-300{--tw-gradient-to:rgb(147 197 253 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#93c5fd var(--tw-gradient-via-position),var(--tw-gradient-to);}'],
             ['to-green-700', '.to-green-700{--tw-gradient-to:#15803d var(--tw-gradient-to-position);}'],
+            ['from-orange-500', '.from-orange-500{--tw-gradient-from:#f97316 var(--tw-gradient-from-position);--tw-gradient-to:rgb(249 115 22 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to);}'],
+            ['to-orange-400', '.to-orange-400{--tw-gradient-to:#fb923c var(--tw-gradient-to-position);}'],
         ];
     }
 

@@ -27,6 +27,7 @@ class BackgroundColorTest extends TestCase
             ['bg-black', '.bg-black {--tw-bg-opacity: 1;background-color: rgb(0 0 0 / var(--tw-bg-opacity));}'],
             ['bg-white', '.bg-white {--tw-bg-opacity: 1;background-color: rgb(255 255 255 / var(--tw-bg-opacity));}'],
             ['bg-slate-700', '.bg-slate-700 {--tw-bg-opacity: 1;background-color: rgb(51 65 85 / var(--tw-bg-opacity));}'],
+            ['bg-orange-50', '.bg-orange-50 {--tw-bg-opacity: 1;background-color: rgb(255 247 237 / var(--tw-bg-opacity));}'],
         ];
     }
 
