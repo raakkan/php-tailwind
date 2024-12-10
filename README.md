@@ -1,4 +1,4 @@
-![Only Laravel](cover.jpg)
+![Only Laravel](cover.png)
 
 # Only Laravel
 
