@@ -3,6 +3,8 @@
     "description": "tailwind css in php",
     "type": "library",
     "license": "mit",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Raakkan\\PhpTailwind\\": "src/"
