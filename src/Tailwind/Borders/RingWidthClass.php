@@ -91,16 +91,25 @@ class RingWidthClass extends AbstractTailwindClass
 
     public static function parse(string $class): ?self
     {
-        if (preg_match('/^ring(-inset|-(.+))?$/', $class, $matches)) {
-            $isInset = ($matches[1] ?? '') === '-inset';
-            $value = $matches[2] ?? 'DEFAULT';
-            $isArbitrary = preg_match('/^\[.+\]$/', $value);
+        // Match exact 'ring' class first
+        if ($class === 'ring') {
+            return new self('DEFAULT', false, false);
+        }
 
-            if ($isArbitrary) {
-                $value = trim($value, '[]');
-            }
+        // Match 'ring-inset'
+        if ($class === 'ring-inset') {
+            return new self('DEFAULT', false, true);
+        }
 
-            return new self($value, $isArbitrary, $isInset);
+        // Match standard ring widths: ring-{0|1|2|4|8}
+        if (preg_match('/^ring-(?:(0|1|2|4|8))$/', $class, $matches)) {
+            return new self($matches[1], false, false);
+        }
+
+        // Match arbitrary ring width: ring-[10px]
+        if (preg_match('/^ring-(\[.+\])$/', $class, $matches)) {
+            $value = trim($matches[1], '[]');
+            return new self($value, true, false);
         }
 
         return null;

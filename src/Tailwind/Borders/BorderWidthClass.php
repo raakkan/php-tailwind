@@ -117,17 +117,23 @@ class BorderWidthClass extends AbstractTailwindClass
 
     public static function parse(string $class): ?self
     {
+        // Match exact 'border' class first
         if ($class === 'border') {
             return new self('DEFAULT', '', false);
         }
 
-        // Update the regex to handle 'border-{side}' cases
-        if (preg_match('/^border(-[trblxyes])?(-(.+))?$/', $class, $matches)) {
+        // Match border width patterns: border-{side?}-{0|2|4|8}
+        if (preg_match('/^border(-[trblxyes])?(?:-(?:0|2|4|8))?$/', $class, $matches)) {
             $side = ltrim($matches[1] ?? '', '-');
-            $value = $matches[3] ?? '';
-            $isArbitrary = preg_match('/^\[.+\]$/', $value);
+            $value = $matches[2] ?? '';
+            return new self($value, $side, false);
+        }
 
-            return new self($value, $side, $isArbitrary);
+        // Match arbitrary border width: border-[10px]
+        if (preg_match('/^border(?:-[trblxyes])?-(\[.+\])$/', $class, $matches)) {
+            $side = ltrim($matches[1] ?? '', '-');
+            $value = $matches[1];
+            return new self($value, $side, true);
         }
 
         return null;

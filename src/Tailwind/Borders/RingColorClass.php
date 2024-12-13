@@ -134,14 +134,21 @@ class RingColorClass extends AbstractTailwindClass
 
     public static function parse(string $class): ?self
     {
-        if (preg_match('/^ring-((?:\[.+\]|inherit|current|transparent|black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?(?:\/[0-9.]+)?)$/', $class, $matches)) {
-            $value = $matches[1];
-            $isArbitrary = preg_match('/^\[.+\]$/', $value);
-            $opacity = null;
+        // Match ring color patterns with optional opacity
+        $pattern = '/^ring-(' . 
+            '(?:\[#[0-9A-Fa-f]{3,8}\])|' .  // Arbitrary hex colors
+            '(?:\[(?:rgb|hsl)a?\([^]]+\)\])|' .  // Arbitrary rgb/hsl colors
+            '(?:inherit|current|transparent)|' .  // Special values
+            '(?:(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?))' .  // Named colors
+            '(?:\/([0-9.]+))?$/'; // Optional opacity
 
-            if (strpos($value, '/') !== false) {
-                [$color, $opacity] = explode('/', $value);
-                $value = $color;
+        if (preg_match($pattern, $class, $matches)) {
+            $value = $matches[1];
+            $opacity = $matches[2] ?? null;
+            $isArbitrary = str_starts_with($value, '[');
+
+            if ($isArbitrary) {
+                $value = trim($value, '[]');
             }
 
             return new self($value, $isArbitrary, $opacity);
