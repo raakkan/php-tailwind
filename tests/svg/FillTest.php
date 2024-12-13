@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\SVG\FillClass;
 class FillTest extends TestCase
 {
     #[DataProvider('standardFillColorProvider')]
-    public function testStandardFillColors(string $input, string $expected): void
+    public function test_standard_fill_colors(string $input, string $expected): void
     {
         $fillClass = FillClass::parse($input);
         $this->assertInstanceOf(FillClass::class, $fillClass);
@@ -32,7 +32,7 @@ class FillTest extends TestCase
     }
 
     #[DataProvider('arbitraryValueProvider')]
-    public function testArbitraryValues(string $input, string $expected): void
+    public function test_arbitrary_values(string $input, string $expected): void
     {
         $fillClass = FillClass::parse($input);
         $this->assertInstanceOf(FillClass::class, $fillClass);
@@ -51,7 +51,7 @@ class FillTest extends TestCase
     }
 
     #[DataProvider('specialValueProvider')]
-    public function testSpecialValues(string $input, string $expected): void
+    public function test_special_values(string $input, string $expected): void
     {
         $fillClass = FillClass::parse($input);
         $this->assertInstanceOf(FillClass::class, $fillClass);
@@ -69,7 +69,7 @@ class FillTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $fillClass = FillClass::parse($input);
         $this->assertNull($fillClass);
@@ -89,7 +89,7 @@ class FillTest extends TestCase
     }
 
     #[DataProvider('edgeCaseProvider')]
-    public function testEdgeCases(string $input, string $expected): void
+    public function test_edge_cases(string $input, string $expected): void
     {
         $fillClass = FillClass::parse($input);
         $this->assertInstanceOf(FillClass::class, $fillClass);

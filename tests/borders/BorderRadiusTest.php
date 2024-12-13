@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Borders\BorderRadiusClass;
 class BorderRadiusTest extends TestCase
 {
     #[DataProvider('borderRadiusClassProvider')]
-    public function testBorderRadiusClass(string $input, string $expected): void
+    public function test_border_radius_class(string $input, string $expected): void
     {
         $borderRadiusClass = BorderRadiusClass::parse($input);
         $this->assertInstanceOf(BorderRadiusClass::class, $borderRadiusClass);
@@ -50,7 +50,7 @@ class BorderRadiusTest extends TestCase
     }
 
     #[DataProvider('arbitraryBorderRadiusClassProvider')]
-    public function testArbitraryBorderRadiusClass(string $input, string $expected): void
+    public function test_arbitrary_border_radius_class(string $input, string $expected): void
     {
         $borderRadiusClass = BorderRadiusClass::parse($input);
         $this->assertInstanceOf(BorderRadiusClass::class, $borderRadiusClass);
@@ -68,12 +68,12 @@ class BorderRadiusTest extends TestCase
         ];
     }
 
-    public function testInvalidBorderRadiusClass(): void
+    public function test_invalid_border_radius_class(): void
     {
         $this->assertNull(BorderRadiusClass::parse('invalid-class'));
     }
 
-    public function testBorderRadiusClassWithInvalidValue(): void
+    public function test_border_radius_class_with_invalid_value(): void
     {
         $borderRadiusClass = BorderRadiusClass::parse('rounded-invalid');
         $this->assertInstanceOf(BorderRadiusClass::class, $borderRadiusClass);

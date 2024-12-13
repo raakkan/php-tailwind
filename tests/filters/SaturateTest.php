@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\SaturateClass;
 class SaturateTest extends TestCase
 {
     #[DataProvider('standardSaturateProvider')]
-    public function testStandardSaturate(string $input, string $expected): void
+    public function test_standard_saturate(string $input, string $expected): void
     {
         $saturateClass = SaturateClass::parse($input);
         $this->assertInstanceOf(SaturateClass::class, $saturateClass);
@@ -28,7 +28,7 @@ class SaturateTest extends TestCase
     }
 
     #[DataProvider('arbitrarySaturateProvider')]
-    public function testArbitrarySaturate(string $input, string $expected): void
+    public function test_arbitrary_saturate(string $input, string $expected): void
     {
         $saturateClass = SaturateClass::parse($input);
         $this->assertInstanceOf(SaturateClass::class, $saturateClass);
@@ -45,7 +45,7 @@ class SaturateTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $saturateClass = SaturateClass::parse($input);
         $this->assertNull($saturateClass);
@@ -65,7 +65,7 @@ class SaturateTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default saturate (100%)
         $defaultSaturate = SaturateClass::parse('saturate-100');

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Interactivity\ScrollMarginClass;
 class ScrollMarginTest extends TestCase
 {
     #[DataProvider('scrollMarginClassProvider')]
-    public function testScrollMarginClass(string $input, string $expected): void
+    public function test_scroll_margin_class(string $input, string $expected): void
     {
         $scrollMarginClass = ScrollMarginClass::parse($input);
         $this->assertInstanceOf(ScrollMarginClass::class, $scrollMarginClass);
@@ -45,12 +45,12 @@ class ScrollMarginTest extends TestCase
         ];
     }
 
-    public function testInvalidScrollMarginClass(): void
+    public function test_invalid_scroll_margin_class(): void
     {
         $this->assertNull(ScrollMarginClass::parse('invalid-class'));
     }
 
-    public function testScrollMarginClassWithInvalidValue(): void
+    public function test_scroll_margin_class_with_invalid_value(): void
     {
         $scrollMarginClass = ScrollMarginClass::parse('scroll-m-invalid');
         $this->assertInstanceOf(ScrollMarginClass::class, $scrollMarginClass);
@@ -58,7 +58,7 @@ class ScrollMarginTest extends TestCase
     }
 
     #[DataProvider('inlineScrollMarginClassProvider')]
-    public function testInlineScrollMarginClasses(string $input, string $expected): void
+    public function test_inline_scroll_margin_classes(string $input, string $expected): void
     {
         $scrollMarginClass = ScrollMarginClass::parse($input);
         $this->assertInstanceOf(ScrollMarginClass::class, $scrollMarginClass);
@@ -76,7 +76,7 @@ class ScrollMarginTest extends TestCase
     }
 
     #[DataProvider('arbitraryScrollMarginClassProvider')]
-    public function testArbitraryScrollMarginClass(string $input, string $expected): void
+    public function test_arbitrary_scroll_margin_class(string $input, string $expected): void
     {
         $scrollMarginClass = ScrollMarginClass::parse($input);
         $this->assertInstanceOf(ScrollMarginClass::class, $scrollMarginClass);
@@ -100,7 +100,7 @@ class ScrollMarginTest extends TestCase
     }
 
     #[DataProvider('fractionScrollMarginClassProvider')]
-    public function testFractionScrollMarginClass(string $input, string $expected): void
+    public function test_fraction_scroll_margin_class(string $input, string $expected): void
     {
         $scrollMarginClass = ScrollMarginClass::parse($input);
         $this->assertInstanceOf(ScrollMarginClass::class, $scrollMarginClass);
@@ -123,7 +123,7 @@ class ScrollMarginTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryScrollMarginClassProvider')]
-    public function testInvalidArbitraryScrollMarginClass(string $input): void
+    public function test_invalid_arbitrary_scroll_margin_class(string $input): void
     {
         $scrollMarginClass = ScrollMarginClass::parse($input);
         $this->assertInstanceOf(ScrollMarginClass::class, $scrollMarginClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Transforms\SkewClass;
 class SkewTest extends TestCase
 {
     #[DataProvider('standardSkewProvider')]
-    public function testStandardSkew(string $input, string $expected): void
+    public function test_standard_skew(string $input, string $expected): void
     {
         $skewClass = SkewClass::parse($input);
         $this->assertInstanceOf(SkewClass::class, $skewClass);
@@ -35,7 +35,7 @@ class SkewTest extends TestCase
     }
 
     #[DataProvider('negativeSkewProvider')]
-    public function testNegativeSkew(string $input, string $expected): void
+    public function test_negative_skew(string $input, string $expected): void
     {
         $skewClass = SkewClass::parse($input);
         $this->assertInstanceOf(SkewClass::class, $skewClass);
@@ -59,7 +59,7 @@ class SkewTest extends TestCase
     }
 
     #[DataProvider('arbitrarySkewProvider')]
-    public function testArbitrarySkew(string $input, string $expected): void
+    public function test_arbitrary_skew(string $input, string $expected): void
     {
         $skewClass = SkewClass::parse($input);
         $this->assertInstanceOf(SkewClass::class, $skewClass);
@@ -77,7 +77,7 @@ class SkewTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $skewClass = SkewClass::parse($input);
         $this->assertNull($skewClass);
@@ -99,7 +99,7 @@ class SkewTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default skew (0deg)
         $defaultSkew = SkewClass::parse('skew-x-0');

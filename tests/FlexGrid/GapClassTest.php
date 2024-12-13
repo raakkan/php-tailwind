@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\FlexGrid\GapClass;
 class GapClassTest extends TestCase
 {
     #[DataProvider('gapClassProvider')]
-    public function testGapClass(string $input, string $expected): void
+    public function test_gap_class(string $input, string $expected): void
     {
         $gapClass = GapClass::parse($input);
         $this->assertInstanceOf(GapClass::class, $gapClass);
@@ -71,12 +71,12 @@ class GapClassTest extends TestCase
         ];
     }
 
-    public function testInvalidGapClass(): void
+    public function test_invalid_gap_class(): void
     {
         $this->assertNull(GapClass::parse('invalid-class'));
     }
 
-    public function testGapClassWithInvalidValue(): void
+    public function test_gap_class_with_invalid_value(): void
     {
         $gapClass = GapClass::parse('gap-invalid');
         $this->assertInstanceOf(GapClass::class, $gapClass);
@@ -84,7 +84,7 @@ class GapClassTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryValuesProvider')]
-    public function testInvalidArbitraryValues(string $input): void
+    public function test_invalid_arbitrary_values(string $input): void
     {
         $gapClass = GapClass::parse($input);
         $this->assertInstanceOf(GapClass::class, $gapClass);
@@ -103,7 +103,7 @@ class GapClassTest extends TestCase
     }
 
     #[DataProvider('validCalcValuesProvider')]
-    public function testValidCalcValues(string $input, string $expected): void
+    public function test_valid_calc_values(string $input, string $expected): void
     {
         $gapClass = GapClass::parse($input);
         $this->assertInstanceOf(GapClass::class, $gapClass);

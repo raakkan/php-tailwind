@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Backgrounds\GradientColorStopClass;
 class GradientColorStopTest extends TestCase
 {
     #[DataProvider('standardColorStopProvider')]
-    public function testStandardColorStops(string $input, string $expected): void
+    public function test_standard_color_stops(string $input, string $expected): void
     {
         $colorStopClass = GradientColorStopClass::parse($input);
         $this->assertInstanceOf(GradientColorStopClass::class, $colorStopClass);
@@ -28,7 +28,7 @@ class GradientColorStopTest extends TestCase
     }
 
     #[DataProvider('arbitraryColorStopProvider')]
-    public function testArbitraryColorStops(string $input, string $expected): void
+    public function test_arbitrary_color_stops(string $input, string $expected): void
     {
         $colorStopClass = GradientColorStopClass::parse($input);
         $this->assertInstanceOf(GradientColorStopClass::class, $colorStopClass);
@@ -45,7 +45,7 @@ class GradientColorStopTest extends TestCase
     }
 
     #[DataProvider('specialColorStopProvider')]
-    public function testSpecialColorStops(string $input, string $expected): void
+    public function test_special_color_stops(string $input, string $expected): void
     {
         $colorStopClass = GradientColorStopClass::parse($input);
         $this->assertInstanceOf(GradientColorStopClass::class, $colorStopClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\PseudoClass;
 class PseudoClassTest extends TestCase
 {
     #[DataProvider('pseudoClassProvider')]
-    public function testPseudoClass(string $input, string $expected): void
+    public function test_pseudo_class(string $input, string $expected): void
     {
         $pseudoClass = PseudoClass::parse($input);
         $this->assertInstanceOf(PseudoClass::class, $pseudoClass);
@@ -46,7 +46,7 @@ class PseudoClassTest extends TestCase
     //     ];
     // }
 
-    public function testPseudoClassGetters(): void
+    public function test_pseudo_class_getters(): void
     {
         $pseudoClass = PseudoClass::parse('hover:bg-blue-500');
         $this->assertInstanceOf(PseudoClass::class, $pseudoClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Borders\BorderWidthClass;
 class BorderWidthTest extends TestCase
 {
     #[DataProvider('borderWidthClassProvider')]
-    public function testBorderWidthClass(string $input, string $expected): void
+    public function test_border_width_class(string $input, string $expected): void
     {
         $borderWidthClass = BorderWidthClass::parse($input);
         $this->assertInstanceOf(BorderWidthClass::class, $borderWidthClass);
@@ -49,7 +49,7 @@ class BorderWidthTest extends TestCase
     }
 
     #[DataProvider('arbitraryBorderWidthClassProvider')]
-    public function testArbitraryBorderWidthClass(string $input, string $expected): void
+    public function test_arbitrary_border_width_class(string $input, string $expected): void
     {
         $borderWidthClass = BorderWidthClass::parse($input);
         $this->assertInstanceOf(BorderWidthClass::class, $borderWidthClass);
@@ -69,13 +69,13 @@ class BorderWidthTest extends TestCase
         ];
     }
 
-    public function testInvalidBorderWidthClass(): void
+    public function test_invalid_border_width_class(): void
     {
         $this->assertNull(BorderWidthClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidBorderWidthValueProvider')]
-    public function testBorderWidthClassWithInvalidValue(string $input): void
+    public function test_border_width_class_with_invalid_value(string $input): void
     {
         $borderWidthClass = BorderWidthClass::parse($input);
         $this->assertInstanceOf(BorderWidthClass::class, $borderWidthClass);
@@ -96,7 +96,7 @@ class BorderWidthTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryBorderWidthClassProvider')]
-    public function testInvalidArbitraryBorderWidthClass(string $input): void
+    public function test_invalid_arbitrary_border_width_class(string $input): void
     {
         $borderWidthClass = BorderWidthClass::parse($input);
         $this->assertInstanceOf(BorderWidthClass::class, $borderWidthClass);

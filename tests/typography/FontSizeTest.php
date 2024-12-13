@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\FontSizeClass;
 class FontSizeTest extends TestCase
 {
     #[DataProvider('fontSizeClassProvider')]
-    public function testFontSizeClass(string $input, string $expected): void
+    public function test_font_size_class(string $input, string $expected): void
     {
         $fontSizeClass = FontSizeClass::parse($input);
         $this->assertInstanceOf(FontSizeClass::class, $fontSizeClass);
@@ -43,19 +43,19 @@ class FontSizeTest extends TestCase
         ];
     }
 
-    public function testInvalidFontSizeClass(): void
+    public function test_invalid_font_size_class(): void
     {
         $this->assertNull(FontSizeClass::parse('text-invalid'));
     }
 
-    public function testFontSizeClassWithInvalidValue(): void
+    public function test_font_size_class_with_invalid_value(): void
     {
         $fontSizeClass = FontSizeClass::parse('text-10xl');
         $this->assertNull($fontSizeClass);
     }
 
     #[DataProvider('invalidArbitraryFontSizeProvider')]
-    public function testInvalidArbitraryFontSize(string $input): void
+    public function test_invalid_arbitrary_font_size(string $input): void
     {
         $fontSizeClass = FontSizeClass::parse($input);
         $this->assertInstanceOf(FontSizeClass::class, $fontSizeClass);
@@ -73,7 +73,7 @@ class FontSizeTest extends TestCase
     }
 
     #[DataProvider('validArbitraryFontSizeProvider')]
-    public function testValidArbitraryFontSize(string $input, string $expected): void
+    public function test_valid_arbitrary_font_size(string $input, string $expected): void
     {
         $fontSizeClass = FontSizeClass::parse($input);
         $this->assertInstanceOf(FontSizeClass::class, $fontSizeClass);
@@ -92,14 +92,14 @@ class FontSizeTest extends TestCase
         ];
     }
 
-    public function testDefaultToBaseSize(): void
+    public function test_default_to_base_size(): void
     {
         $fontSizeClass = FontSizeClass::parse('text-unknown');
         $this->assertNull($fontSizeClass);
     }
 
     #[DataProvider('negativeArbitraryFontSizeProvider')]
-    public function testNegativeArbitraryFontSize(string $input, string $expected): void
+    public function test_negative_arbitrary_font_size(string $input, string $expected): void
     {
         $fontSizeClass = FontSizeClass::parse($input);
         $this->assertInstanceOf(FontSizeClass::class, $fontSizeClass);
@@ -116,7 +116,7 @@ class FontSizeTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryFunctionProvider')]
-    public function testInvalidArbitraryFunction(string $input): void
+    public function test_invalid_arbitrary_function(string $input): void
     {
         $fontSizeClass = FontSizeClass::parse($input);
         $this->assertInstanceOf(FontSizeClass::class, $fontSizeClass);

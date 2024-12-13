@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Backgrounds\BackgroundPositionClass;
 class BackgroundPositionTest extends TestCase
 {
     #[DataProvider('backgroundPositionClassProvider')]
-    public function testBackgroundPositionClass(string $input, string $expected): void
+    public function test_background_position_class(string $input, string $expected): void
     {
         $bgPositionClass = BackgroundPositionClass::parse($input);
         $this->assertInstanceOf(BackgroundPositionClass::class, $bgPositionClass);
@@ -50,7 +50,7 @@ class BackgroundPositionTest extends TestCase
         ];
     }
 
-    public function testInvalidBackgroundPositionClass(): void
+    public function test_invalid_background_position_class(): void
     {
         $this->assertNull(BackgroundPositionClass::parse('invalid-class'));
     }
@@ -76,7 +76,7 @@ class BackgroundPositionTest extends TestCase
     // }
 
     #[DataProvider('escapedArbitraryValueProvider')]
-    public function testEscapedArbitraryValue(string $input, string $expected): void
+    public function test_escaped_arbitrary_value(string $input, string $expected): void
     {
         $bgPositionClass = BackgroundPositionClass::parse($input);
         $this->assertInstanceOf(BackgroundPositionClass::class, $bgPositionClass);

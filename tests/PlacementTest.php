@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Layout\PlacementClass;
 class PlacementTest extends TestCase
 {
     #[DataProvider('placementClassProvider')]
-    public function testPlacementClass(string $input, string $expected): void
+    public function test_placement_class(string $input, string $expected): void
     {
         $placementClass = PlacementClass::parse($input);
         $this->assertInstanceOf(PlacementClass::class, $placementClass);
@@ -104,12 +104,12 @@ class PlacementTest extends TestCase
         ];
     }
 
-    public function testInvalidPlacementClass(): void
+    public function test_invalid_placement_class(): void
     {
         $this->assertNull(PlacementClass::parse('invalid-class'));
     }
 
-    public function testPlacementClassWithInvalidValue(): void
+    public function test_placement_class_with_invalid_value(): void
     {
         $placementClass = PlacementClass::parse('inset-invalid');
         $this->assertInstanceOf(PlacementClass::class, $placementClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Transforms\RotateClass;
 class RotateTest extends TestCase
 {
     #[DataProvider('standardRotateProvider')]
-    public function testStandardRotate(string $input, string $expected): void
+    public function test_standard_rotate(string $input, string $expected): void
     {
         $rotateClass = RotateClass::parse($input);
         $this->assertInstanceOf(RotateClass::class, $rotateClass);
@@ -32,7 +32,7 @@ class RotateTest extends TestCase
     }
 
     #[DataProvider('negativeRotateProvider')]
-    public function testNegativeRotate(string $input, string $expected): void
+    public function test_negative_rotate(string $input, string $expected): void
     {
         $rotateClass = RotateClass::parse($input);
         $this->assertInstanceOf(RotateClass::class, $rotateClass);
@@ -54,7 +54,7 @@ class RotateTest extends TestCase
     }
 
     #[DataProvider('arbitraryRotateProvider')]
-    public function testArbitraryRotate(string $input, string $expected): void
+    public function test_arbitrary_rotate(string $input, string $expected): void
     {
         $rotateClass = RotateClass::parse($input);
         $this->assertInstanceOf(RotateClass::class, $rotateClass);
@@ -72,7 +72,7 @@ class RotateTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $rotateClass = RotateClass::parse($input);
         $this->assertNull($rotateClass);
@@ -92,7 +92,7 @@ class RotateTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default rotate (0deg)
         $defaultRotate = RotateClass::parse('rotate-0');

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BackdropGrayscaleClass;
 class BackdropGrayscaleTest extends TestCase
 {
     #[DataProvider('standardBackdropGrayscaleProvider')]
-    public function testStandardBackdropGrayscale(string $input, string $expected): void
+    public function test_standard_backdrop_grayscale(string $input, string $expected): void
     {
         $backdropGrayscaleClass = BackdropGrayscaleClass::parse($input);
         $this->assertInstanceOf(BackdropGrayscaleClass::class, $backdropGrayscaleClass);
@@ -25,7 +25,7 @@ class BackdropGrayscaleTest extends TestCase
     }
 
     #[DataProvider('arbitraryBackdropGrayscaleProvider')]
-    public function testArbitraryBackdropGrayscale(string $input, string $expected): void
+    public function test_arbitrary_backdrop_grayscale(string $input, string $expected): void
     {
         $backdropGrayscaleClass = BackdropGrayscaleClass::parse($input);
         $this->assertInstanceOf(BackdropGrayscaleClass::class, $backdropGrayscaleClass);
@@ -43,7 +43,7 @@ class BackdropGrayscaleTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $backdropGrayscaleClass = BackdropGrayscaleClass::parse($input);
         $this->assertNull($backdropGrayscaleClass);
@@ -62,7 +62,7 @@ class BackdropGrayscaleTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default backdrop-grayscale (100%)
         $defaultBackdropGrayscale = BackdropGrayscaleClass::parse('backdrop-grayscale');

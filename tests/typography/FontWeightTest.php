@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\FontWeightClass;
 class FontWeightTest extends TestCase
 {
     #[DataProvider('fontWeightClassProvider')]
-    public function testFontWeightClass(string $input, string $expected): void
+    public function test_font_weight_class(string $input, string $expected): void
     {
         $fontWeightClass = FontWeightClass::parse($input);
         $this->assertInstanceOf(FontWeightClass::class, $fontWeightClass);
@@ -37,19 +37,19 @@ class FontWeightTest extends TestCase
         ];
     }
 
-    public function testInvalidFontWeightClass(): void
+    public function test_invalid_font_weight_class(): void
     {
         $this->assertNull(FontWeightClass::parse('font-invalid'));
     }
 
-    public function testFontWeightClassWithInvalidValue(): void
+    public function test_font_weight_class_with_invalid_value(): void
     {
         $fontWeightClass = FontWeightClass::parse('font-bolder');
         $this->assertNull($fontWeightClass);
     }
 
     #[DataProvider('invalidArbitraryFontWeightProvider')]
-    public function testInvalidArbitraryFontWeight(string $input): void
+    public function test_invalid_arbitrary_font_weight(string $input): void
     {
         $fontWeightClass = FontWeightClass::parse($input);
         $this->assertInstanceOf(FontWeightClass::class, $fontWeightClass);
@@ -65,7 +65,7 @@ class FontWeightTest extends TestCase
     }
 
     #[DataProvider('validArbitraryFontWeightProvider')]
-    public function testValidArbitraryFontWeight(string $input, string $expected): void
+    public function test_valid_arbitrary_font_weight(string $input, string $expected): void
     {
         $fontWeightClass = FontWeightClass::parse($input);
         $this->assertInstanceOf(FontWeightClass::class, $fontWeightClass);
@@ -83,14 +83,14 @@ class FontWeightTest extends TestCase
         ];
     }
 
-    public function testDefaultToNormalWeight(): void
+    public function test_default_to_normal_weight(): void
     {
         $fontWeightClass = FontWeightClass::parse('font-unknown');
         $this->assertNull($fontWeightClass);
     }
 
     #[DataProvider('edgeCaseArbitraryFontWeightProvider')]
-    public function testEdgeCaseArbitraryFontWeight(string $input, string $expected): void
+    public function test_edge_case_arbitrary_font_weight(string $input, string $expected): void
     {
         $fontWeightClass = FontWeightClass::parse($input);
         $this->assertInstanceOf(FontWeightClass::class, $fontWeightClass);
@@ -106,7 +106,7 @@ class FontWeightTest extends TestCase
     }
 
     #[DataProvider('specialCharactersFontWeightProvider')]
-    public function testSpecialCharactersFontWeight(string $input, string $expected): void
+    public function test_special_characters_font_weight(string $input, string $expected): void
     {
         $fontWeightClass = FontWeightClass::parse($input);
         $this->assertInstanceOf(FontWeightClass::class, $fontWeightClass);

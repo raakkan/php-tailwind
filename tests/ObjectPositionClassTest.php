@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Layout\ObjectPositionClass;
 class ObjectPositionClassTest extends TestCase
 {
     #[DataProvider('objectPositionClassProvider')]
-    public function testObjectPositionClass(string $input, string $expected): void
+    public function test_object_position_class(string $input, string $expected): void
     {
         $objectPositionClass = ObjectPositionClass::parse($input);
         $this->assertInstanceOf(ObjectPositionClass::class, $objectPositionClass);
@@ -50,12 +50,12 @@ class ObjectPositionClassTest extends TestCase
         ];
     }
 
-    public function testInvalidObjectPositionClass(): void
+    public function test_invalid_object_position_class(): void
     {
         $this->assertNull(ObjectPositionClass::parse('object-invalid'));
     }
 
-    public function testObjectPositionClassWithInvalidValue(): void
+    public function test_object_position_class_with_invalid_value(): void
     {
         $objectPositionClass = ObjectPositionClass::parse('object-[invalid]');
         $this->assertSame('', $objectPositionClass->toCss());

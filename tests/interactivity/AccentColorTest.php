@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Interactivity\AccentColorClass;
 class AccentColorTest extends TestCase
 {
     #[DataProvider('standardAccentColorProvider')]
-    public function testStandardAccentColors(string $input, string $expected): void
+    public function test_standard_accent_colors(string $input, string $expected): void
     {
         $accentColorClass = AccentColorClass::parse($input);
         $this->assertInstanceOf(AccentColorClass::class, $accentColorClass);
@@ -30,7 +30,7 @@ class AccentColorTest extends TestCase
     }
 
     #[DataProvider('opacityProvider')]
-    public function testOpacity(string $input, string $expected): void
+    public function test_opacity(string $input, string $expected): void
     {
         $accentColorClass = AccentColorClass::parse($input);
         $this->assertInstanceOf(AccentColorClass::class, $accentColorClass);
@@ -49,7 +49,7 @@ class AccentColorTest extends TestCase
     }
 
     #[DataProvider('arbitraryValueProvider')]
-    public function testArbitraryValues(string $input, string $expected): void
+    public function test_arbitrary_values(string $input, string $expected): void
     {
         $accentColorClass = AccentColorClass::parse($input);
         $this->assertInstanceOf(AccentColorClass::class, $accentColorClass);
@@ -68,7 +68,7 @@ class AccentColorTest extends TestCase
     }
 
     #[DataProvider('specialColorProvider')]
-    public function testSpecialColors(string $input, string $expected): void
+    public function test_special_colors(string $input, string $expected): void
     {
         $accentColorClass = AccentColorClass::parse($input);
         $this->assertInstanceOf(AccentColorClass::class, $accentColorClass);
@@ -86,7 +86,7 @@ class AccentColorTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $accentColorClass = AccentColorClass::parse($input);
         $this->assertNull($accentColorClass);
@@ -104,7 +104,7 @@ class AccentColorTest extends TestCase
     }
 
     #[DataProvider('edgeCaseProvider')]
-    public function testEdgeCases(string $input, string $expected): void
+    public function test_edge_cases(string $input, string $expected): void
     {
         $accentColorClass = AccentColorClass::parse($input);
         $this->assertInstanceOf(AccentColorClass::class, $accentColorClass);

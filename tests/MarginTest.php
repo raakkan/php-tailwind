@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Spacing\MarginClass;
 class MarginTest extends TestCase
 {
     #[DataProvider('marginClassProvider')]
-    public function testMarginClass(string $input, string $expected): void
+    public function test_margin_class(string $input, string $expected): void
     {
         $marginClass = MarginClass::parse($input);
         $this->assertInstanceOf(MarginClass::class, $marginClass);
@@ -45,12 +45,12 @@ class MarginTest extends TestCase
         ];
     }
 
-    public function testInvalidMarginClass(): void
+    public function test_invalid_margin_class(): void
     {
         $this->assertNull(MarginClass::parse('invalid-class'));
     }
 
-    public function testMarginClassWithInvalidValue(): void
+    public function test_margin_class_with_invalid_value(): void
     {
         $marginClass = MarginClass::parse('m-invalid');
         $this->assertInstanceOf(MarginClass::class, $marginClass);
@@ -58,7 +58,7 @@ class MarginTest extends TestCase
     }
 
     #[DataProvider('autoMarginClassProvider')]
-    public function testAutoMarginClass(string $input, string $expected): void
+    public function test_auto_margin_class(string $input, string $expected): void
     {
         $marginClass = MarginClass::parse($input);
         $this->assertInstanceOf(MarginClass::class, $marginClass);
@@ -79,7 +79,7 @@ class MarginTest extends TestCase
     }
 
     #[DataProvider('inlineMarginClassProvider')]
-    public function testInlineMarginClasses(string $input, string $expected): void
+    public function test_inline_margin_classes(string $input, string $expected): void
     {
         $marginClass = MarginClass::parse($input);
         $this->assertInstanceOf(MarginClass::class, $marginClass);
@@ -99,7 +99,7 @@ class MarginTest extends TestCase
     }
 
     #[DataProvider('arbitraryMarginClassProvider')]
-    public function testArbitraryMarginClass(string $input, string $expected): void
+    public function test_arbitrary_margin_class(string $input, string $expected): void
     {
         $marginClass = MarginClass::parse($input);
         $this->assertInstanceOf(MarginClass::class, $marginClass);

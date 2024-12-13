@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\TransitionAnimation\AnimationClass;
 class AnimationTest extends TestCase
 {
     #[DataProvider('standardAnimationProvider')]
-    public function testStandardAnimations(string $input, string $expected): void
+    public function test_standard_animations(string $input, string $expected): void
     {
         $animationClass = AnimationClass::parse($input);
         $this->assertInstanceOf(AnimationClass::class, $animationClass);
@@ -28,7 +28,7 @@ class AnimationTest extends TestCase
     }
 
     #[DataProvider('arbitraryAnimationProvider')]
-    public function testArbitraryAnimations(string $input, string $expected): void
+    public function test_arbitrary_animations(string $input, string $expected): void
     {
         $animationClass = AnimationClass::parse($input);
         $this->assertInstanceOf(AnimationClass::class, $animationClass);
@@ -45,7 +45,7 @@ class AnimationTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $animationClass = AnimationClass::parse($input);
         $this->assertNull($animationClass);
@@ -63,7 +63,7 @@ class AnimationTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test case sensitivity
         $uppercaseAnimation = AnimationClass::parse('ANIMATE-SPIN');
@@ -84,7 +84,7 @@ class AnimationTest extends TestCase
         $this->assertSame('.animate-\[custom\@keyframe_0\.5s_ease-in-out\]{animation:custom@keyframe 0.5s ease-in-out;}', $specialCharsArbitrary->toCss());
     }
 
-    public function testKeyframesGeneration(): void
+    public function test_keyframes_generation(): void
     {
         $spinAnimation = AnimationClass::parse('animate-spin');
         $this->assertStringContainsString('@keyframes spin{to{transform:rotate(360deg);}}', $spinAnimation->toCss());

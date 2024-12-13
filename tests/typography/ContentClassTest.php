@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\ContentClass;
 class ContentClassTest extends TestCase
 {
     #[DataProvider('contentClassProvider')]
-    public function testContentClass(string $input, string $expected): void
+    public function test_content_class(string $input, string $expected): void
     {
         $contentClass = ContentClass::parse($input);
         $this->assertInstanceOf(ContentClass::class, $contentClass);
@@ -40,7 +40,7 @@ class ContentClassTest extends TestCase
         ];
     }
 
-    public function testInvalidContentClass(): void
+    public function test_invalid_content_class(): void
     {
         $this->assertNull(ContentClass::parse('content-none'));
         $this->assertNull(ContentClass::parse('before:font-bold'));
@@ -80,7 +80,7 @@ class ContentClassTest extends TestCase
     //     ];
     // }
 
-    public function testPseudoElementConsistency(): void
+    public function test_pseudo_element_consistency(): void
     {
         $beforeClass = ContentClass::parse('before:content-[Test]');
         $afterClass = ContentClass::parse('after:content-[Test]');

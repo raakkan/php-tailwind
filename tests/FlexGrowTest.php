@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\FlexGrid\FlexGrowClass;
 class FlexGrowTest extends TestCase
 {
     #[DataProvider('flexGrowClassProvider')]
-    public function testFlexGrowClass(string $input, string $expected): void
+    public function test_flex_grow_class(string $input, string $expected): void
     {
         $flexGrowClass = FlexGrowClass::parse($input);
         $this->assertInstanceOf(FlexGrowClass::class, $flexGrowClass);
@@ -30,13 +30,13 @@ class FlexGrowTest extends TestCase
         ];
     }
 
-    public function testInvalidFlexGrowClass(): void
+    public function test_invalid_flex_grow_class(): void
     {
         $this->assertNull(FlexGrowClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidFlexGrowValuesProvider')]
-    public function testFlexGrowClassWithInvalidValue(string $input): void
+    public function test_flex_grow_class_with_invalid_value(string $input): void
     {
         $flexGrowClass = FlexGrowClass::parse($input);
         $this->assertInstanceOf(FlexGrowClass::class, $flexGrowClass);
@@ -55,7 +55,7 @@ class FlexGrowTest extends TestCase
     }
 
     #[DataProvider('escapingTestProvider')]
-    public function testProperEscaping(string $input, string $expected): void
+    public function test_proper_escaping(string $input, string $expected): void
     {
         $flexGrowClass = FlexGrowClass::parse($input);
         $this->assertInstanceOf(FlexGrowClass::class, $flexGrowClass);

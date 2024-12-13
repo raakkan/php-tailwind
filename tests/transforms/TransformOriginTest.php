@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Transforms\TransformOriginClass;
 class TransformOriginTest extends TestCase
 {
     #[DataProvider('standardOriginProvider')]
-    public function testStandardOrigin(string $input, string $expected): void
+    public function test_standard_origin(string $input, string $expected): void
     {
         $originClass = TransformOriginClass::parse($input);
         $this->assertInstanceOf(TransformOriginClass::class, $originClass);
@@ -32,7 +32,7 @@ class TransformOriginTest extends TestCase
     }
 
     #[DataProvider('arbitraryOriginProvider')]
-    public function testArbitraryOrigin(string $input, string $expected): void
+    public function test_arbitrary_origin(string $input, string $expected): void
     {
         $originClass = TransformOriginClass::parse($input);
         $this->assertInstanceOf(TransformOriginClass::class, $originClass);
@@ -52,7 +52,7 @@ class TransformOriginTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $originClass = TransformOriginClass::parse($input);
         $this->assertNull($originClass);
@@ -72,7 +72,7 @@ class TransformOriginTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test case sensitivity
         $upperCaseOrigin = TransformOriginClass::parse('origin-TOP-RIGHT');

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\TextDecorationColorClass;
 class TextDecorationColorTest extends TestCase
 {
     #[DataProvider('standardColorProvider')]
-    public function testStandardColors(string $input, string $expected): void
+    public function test_standard_colors(string $input, string $expected): void
     {
         $textDecorationColorClass = TextDecorationColorClass::parse($input);
         $this->assertInstanceOf(TextDecorationColorClass::class, $textDecorationColorClass);
@@ -32,7 +32,7 @@ class TextDecorationColorTest extends TestCase
     }
 
     #[DataProvider('arbitraryColorProvider')]
-    public function testArbitraryColors(string $input, string $expected): void
+    public function test_arbitrary_colors(string $input, string $expected): void
     {
         $textDecorationColorClass = TextDecorationColorClass::parse($input);
         $this->assertInstanceOf(TextDecorationColorClass::class, $textDecorationColorClass);
@@ -50,7 +50,7 @@ class TextDecorationColorTest extends TestCase
     }
 
     #[DataProvider('invalidColorProvider')]
-    public function testInvalidColors(string $input): void
+    public function test_invalid_colors(string $input): void
     {
         $textDecorationColorClass = TextDecorationColorClass::parse($input);
         $this->assertNull($textDecorationColorClass);
@@ -67,7 +67,7 @@ class TextDecorationColorTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test with color at the edge of the spectrum
         $edgeColor = TextDecorationColorClass::parse('decoration-slate-950');
@@ -98,7 +98,7 @@ class TextDecorationColorTest extends TestCase
         $this->assertSame('.decoration-\[hsla\(100\,50\%\,50\%\,0\.5\)\]{text-decoration-color:hsla(100,50%,50%,0.5);}', $hsla->toCss());
     }
 
-    public function testSpecialCases(): void
+    public function test_special_cases(): void
     {
         // Test 'inherit' value
         $inherit = TextDecorationColorClass::parse('decoration-inherit');

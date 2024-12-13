@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Borders\DivideWidthClass;
 class DivideWidthTest extends TestCase
 {
     #[DataProvider('divideWidthClassProvider')]
-    public function testDivideWidthClass(string $input, string $expected): void
+    public function test_divide_width_class(string $input, string $expected): void
     {
         $divideWidthClass = DivideWidthClass::parse($input);
         $this->assertInstanceOf(DivideWidthClass::class, $divideWidthClass);
@@ -38,7 +38,7 @@ class DivideWidthTest extends TestCase
     }
 
     #[DataProvider('arbitraryDivideWidthClassProvider')]
-    public function testArbitraryDivideWidthClass(string $input, string $expected): void
+    public function test_arbitrary_divide_width_class(string $input, string $expected): void
     {
         $divideWidthClass = DivideWidthClass::parse($input);
         $this->assertInstanceOf(DivideWidthClass::class, $divideWidthClass);
@@ -56,13 +56,13 @@ class DivideWidthTest extends TestCase
         ];
     }
 
-    public function testInvalidDivideWidthClass(): void
+    public function test_invalid_divide_width_class(): void
     {
         $this->assertNull(DivideWidthClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidDivideWidthValueProvider')]
-    public function testDivideWidthClassWithInvalidValue(string $input): void
+    public function test_divide_width_class_with_invalid_value(string $input): void
     {
         $divideWidthClass = DivideWidthClass::parse($input);
         $this->assertInstanceOf(DivideWidthClass::class, $divideWidthClass);
@@ -82,7 +82,7 @@ class DivideWidthTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryDivideWidthClassProvider')]
-    public function testInvalidArbitraryDivideWidthClass(string $input): void
+    public function test_invalid_arbitrary_divide_width_class(string $input): void
     {
         $divideWidthClass = DivideWidthClass::parse($input);
         $this->assertInstanceOf(DivideWidthClass::class, $divideWidthClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Spacing\PaddingClass;
 class PaddingTest extends TestCase
 {
     #[DataProvider('paddingClassProvider')]
-    public function testPaddingClass(string $input, string $expected): void
+    public function test_padding_class(string $input, string $expected): void
     {
         $paddingClass = PaddingClass::parse($input);
         $this->assertInstanceOf(PaddingClass::class, $paddingClass);
@@ -38,12 +38,12 @@ class PaddingTest extends TestCase
         ];
     }
 
-    public function testInvalidPaddingClass(): void
+    public function test_invalid_padding_class(): void
     {
         $this->assertNull(PaddingClass::parse('invalid-class'));
     }
 
-    public function testPaddingClassWithInvalidValue(): void
+    public function test_padding_class_with_invalid_value(): void
     {
         $paddingClass = PaddingClass::parse('p-invalid');
         $this->assertInstanceOf(PaddingClass::class, $paddingClass);
@@ -51,7 +51,7 @@ class PaddingTest extends TestCase
     }
 
     #[DataProvider('negativePaddingClassProvider')]
-    public function testNegativePaddingClass(string $input): void
+    public function test_negative_padding_class(string $input): void
     {
         $this->assertNull(PaddingClass::parse($input));
     }
@@ -70,7 +70,7 @@ class PaddingTest extends TestCase
     }
 
     #[DataProvider('inlinePaddingClassProvider')]
-    public function testInlinePaddingClasses(string $input, string $expected): void
+    public function test_inline_padding_classes(string $input, string $expected): void
     {
         $paddingClass = PaddingClass::parse($input);
         $this->assertInstanceOf(PaddingClass::class, $paddingClass);
@@ -86,7 +86,7 @@ class PaddingTest extends TestCase
     }
 
     #[DataProvider('arbitraryPaddingClassProvider')]
-    public function testArbitraryPaddingClass(string $input, string $expected): void
+    public function test_arbitrary_padding_class(string $input, string $expected): void
     {
         $paddingClass = PaddingClass::parse($input);
         $this->assertInstanceOf(PaddingClass::class, $paddingClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\SVG\StrokeWidthClass;
 class StrokeWidthTest extends TestCase
 {
     #[DataProvider('strokeWidthClassProvider')]
-    public function testStrokeWidthClass(string $input, string $expected): void
+    public function test_stroke_width_class(string $input, string $expected): void
     {
         $strokeWidthClass = StrokeWidthClass::parse($input);
         $this->assertInstanceOf(StrokeWidthClass::class, $strokeWidthClass);
@@ -30,13 +30,13 @@ class StrokeWidthTest extends TestCase
         ];
     }
 
-    public function testInvalidStrokeWidthClass(): void
+    public function test_invalid_stroke_width_class(): void
     {
         $this->assertNull(StrokeWidthClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidStrokeWidthValueProvider')]
-    public function testStrokeWidthClassWithInvalidValue(string $input): void
+    public function test_stroke_width_class_with_invalid_value(string $input): void
     {
         $strokeWidthClass = StrokeWidthClass::parse($input);
         $this->assertInstanceOf(StrokeWidthClass::class, $strokeWidthClass);
@@ -56,7 +56,7 @@ class StrokeWidthTest extends TestCase
     }
 
     #[DataProvider('arbitraryStrokeWidthClassProvider')]
-    public function testArbitraryStrokeWidthClass(string $input, string $expected): void
+    public function test_arbitrary_stroke_width_class(string $input, string $expected): void
     {
         $strokeWidthClass = StrokeWidthClass::parse($input);
         $this->assertInstanceOf(StrokeWidthClass::class, $strokeWidthClass);
@@ -77,7 +77,7 @@ class StrokeWidthTest extends TestCase
     }
 
     #[DataProvider('edgeCaseStrokeWidthClassProvider')]
-    public function testEdgeCaseStrokeWidthClass(string $input, string $expected): void
+    public function test_edge_case_stroke_width_class(string $input, string $expected): void
     {
         $strokeWidthClass = StrokeWidthClass::parse($input);
         $this->assertInstanceOf(StrokeWidthClass::class, $strokeWidthClass);

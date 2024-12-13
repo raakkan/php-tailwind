@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\TransitionAnimation\TransitionTimingFunctionCla
 class TransitionTimingFunctionTest extends TestCase
 {
     #[DataProvider('standardTimingFunctionProvider')]
-    public function testStandardTimingFunctions(string $input, string $expected): void
+    public function test_standard_timing_functions(string $input, string $expected): void
     {
         $timingFunctionClass = TransitionTimingFunctionClass::parse($input);
         $this->assertInstanceOf(TransitionTimingFunctionClass::class, $timingFunctionClass);
@@ -27,7 +27,7 @@ class TransitionTimingFunctionTest extends TestCase
     }
 
     #[DataProvider('arbitraryTimingFunctionProvider')]
-    public function testArbitraryTimingFunctions(string $input, string $expected): void
+    public function test_arbitrary_timing_functions(string $input, string $expected): void
     {
         $timingFunctionClass = TransitionTimingFunctionClass::parse($input);
         $this->assertInstanceOf(TransitionTimingFunctionClass::class, $timingFunctionClass);
@@ -44,7 +44,7 @@ class TransitionTimingFunctionTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $timingFunctionClass = TransitionTimingFunctionClass::parse($input);
         $this->assertNull($timingFunctionClass);
@@ -68,7 +68,7 @@ class TransitionTimingFunctionTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test case sensitivity
         $uppercaseEase = TransitionTimingFunctionClass::parse('EASE-LINEAR');

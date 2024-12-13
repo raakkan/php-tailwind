@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\VerticalAlignClass;
 class VerticalAlignTest extends TestCase
 {
     #[DataProvider('standardVerticalAlignProvider')]
-    public function testStandardVerticalAlignClass(string $input, string $expected): void
+    public function test_standard_vertical_align_class(string $input, string $expected): void
     {
         $verticalAlignClass = VerticalAlignClass::parse($input);
         $this->assertInstanceOf(VerticalAlignClass::class, $verticalAlignClass);
@@ -31,7 +31,7 @@ class VerticalAlignTest extends TestCase
     }
 
     #[DataProvider('arbitraryVerticalAlignProvider')]
-    public function testArbitraryVerticalAlignClass(string $input, string $expected): void
+    public function test_arbitrary_vertical_align_class(string $input, string $expected): void
     {
         $verticalAlignClass = VerticalAlignClass::parse($input);
         $this->assertInstanceOf(VerticalAlignClass::class, $verticalAlignClass);
@@ -50,7 +50,7 @@ class VerticalAlignTest extends TestCase
     }
 
     #[DataProvider('invalidVerticalAlignProvider')]
-    public function testInvalidVerticalAlignClass(string $input): void
+    public function test_invalid_vertical_align_class(string $input): void
     {
         $verticalAlignClass = VerticalAlignClass::parse($input);
         $this->assertNull($verticalAlignClass);
@@ -68,7 +68,7 @@ class VerticalAlignTest extends TestCase
     }
 
     #[DataProvider('edgeCaseVerticalAlignProvider')]
-    public function testEdgeCaseVerticalAlignClass(string $input, string $expected): void
+    public function test_edge_case_vertical_align_class(string $input, string $expected): void
     {
         $verticalAlignClass = VerticalAlignClass::parse($input);
         $this->assertInstanceOf(VerticalAlignClass::class, $verticalAlignClass);
@@ -87,7 +87,7 @@ class VerticalAlignTest extends TestCase
     }
 
     #[DataProvider('specialCharactersVerticalAlignProvider')]
-    public function testSpecialCharactersVerticalAlignClass(string $input, string $expected): void
+    public function test_special_characters_vertical_align_class(string $input, string $expected): void
     {
         $verticalAlignClass = VerticalAlignClass::parse($input);
         $this->assertInstanceOf(VerticalAlignClass::class, $verticalAlignClass);

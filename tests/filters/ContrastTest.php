@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\ContrastClass;
 class ContrastTest extends TestCase
 {
     #[DataProvider('standardContrastProvider')]
-    public function testStandardContrast(string $input, string $expected): void
+    public function test_standard_contrast(string $input, string $expected): void
     {
         $contrastClass = ContrastClass::parse($input);
         $this->assertInstanceOf(ContrastClass::class, $contrastClass);
@@ -30,7 +30,7 @@ class ContrastTest extends TestCase
     }
 
     #[DataProvider('arbitraryContrastProvider')]
-    public function testArbitraryContrast(string $input, string $expected): void
+    public function test_arbitrary_contrast(string $input, string $expected): void
     {
         $contrastClass = ContrastClass::parse($input);
         $this->assertInstanceOf(ContrastClass::class, $contrastClass);
@@ -48,7 +48,7 @@ class ContrastTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $contrastClass = ContrastClass::parse($input);
         $this->assertNull($contrastClass);
@@ -67,7 +67,7 @@ class ContrastTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the smallest predefined contrast
         $smallestContrast = ContrastClass::parse('contrast-0');

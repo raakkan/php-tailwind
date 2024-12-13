@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Spacing\SpaceClass;
 class SpaceTest extends TestCase
 {
     #[DataProvider('spaceClassProvider')]
-    public function testSpaceClass(string $input, string $expected): void
+    public function test_space_class(string $input, string $expected): void
     {
         $spaceClass = SpaceClass::parse($input);
         $this->assertInstanceOf(SpaceClass::class, $spaceClass);
@@ -36,12 +36,12 @@ class SpaceTest extends TestCase
         ];
     }
 
-    public function testInvalidSpaceClass(): void
+    public function test_invalid_space_class(): void
     {
         $this->assertNull(SpaceClass::parse('invalid-class'));
     }
 
-    public function testSpaceClassWithInvalidValue(): void
+    public function test_space_class_with_invalid_value(): void
     {
         $spaceClass = SpaceClass::parse('space-x-invalid');
         $this->assertInstanceOf(SpaceClass::class, $spaceClass);
@@ -53,7 +53,7 @@ class SpaceTest extends TestCase
     }
 
     #[DataProvider('negativeSpaceClassProvider')]
-    public function testNegativeSpaceClass(string $input, string $expected): void
+    public function test_negative_space_class(string $input, string $expected): void
     {
         $spaceClass = SpaceClass::parse($input);
         $this->assertInstanceOf(SpaceClass::class, $spaceClass);
@@ -71,7 +71,7 @@ class SpaceTest extends TestCase
     }
 
     #[DataProvider('arbitrarySpaceClassProvider')]
-    public function testArbitrarySpaceClass(string $input, string $expected): void
+    public function test_arbitrary_space_class(string $input, string $expected): void
     {
         $spaceClass = SpaceClass::parse($input);
         $this->assertInstanceOf(SpaceClass::class, $spaceClass);

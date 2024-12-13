@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Sizing\MinHeightClass;
 class MinHeightTest extends TestCase
 {
     #[DataProvider('minHeightClassProvider')]
-    public function testMinHeightClass(string $input, string $expected): void
+    public function test_min_height_class(string $input, string $expected): void
     {
         $minHeightClass = MinHeightClass::parse($input);
         $this->assertInstanceOf(MinHeightClass::class, $minHeightClass);
@@ -76,12 +76,12 @@ class MinHeightTest extends TestCase
         ];
     }
 
-    public function testInvalidMinHeightClass(): void
+    public function test_invalid_min_height_class(): void
     {
         $this->assertNull(MinHeightClass::parse('invalid-class'));
     }
 
-    public function testMinHeightClassWithInvalidValue(): void
+    public function test_min_height_class_with_invalid_value(): void
     {
         $minHeightClass = MinHeightClass::parse('min-h-invalid');
         $this->assertInstanceOf(MinHeightClass::class, $minHeightClass);
@@ -89,7 +89,7 @@ class MinHeightTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryMinHeightProvider')]
-    public function testInvalidArbitraryMinHeight(string $input): void
+    public function test_invalid_arbitrary_min_height(string $input): void
     {
         $minHeightClass = MinHeightClass::parse($input);
         $this->assertInstanceOf(MinHeightClass::class, $minHeightClass);
@@ -109,7 +109,7 @@ class MinHeightTest extends TestCase
     }
 
     #[DataProvider('validArbitraryMinHeightProvider')]
-    public function testValidArbitraryMinHeight(string $input, string $expected): void
+    public function test_valid_arbitrary_min_height(string $input, string $expected): void
     {
         $minHeightClass = MinHeightClass::parse($input);
         $this->assertInstanceOf(MinHeightClass::class, $minHeightClass);
@@ -130,7 +130,7 @@ class MinHeightTest extends TestCase
     }
 
     #[DataProvider('viewportUnitsProvider')]
-    public function testViewportUnits(string $input, string $expected): void
+    public function test_viewport_units(string $input, string $expected): void
     {
         $minHeightClass = MinHeightClass::parse($input);
         $this->assertInstanceOf(MinHeightClass::class, $minHeightClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Backgrounds\BackgroundImageClass;
 class BackgroundImageTest extends TestCase
 {
     #[DataProvider('backgroundImageClassProvider')]
-    public function testBackgroundImageClass(string $input, string $expected): void
+    public function test_background_image_class(string $input, string $expected): void
     {
         $bgImageClass = BackgroundImageClass::parse($input);
         $this->assertInstanceOf(BackgroundImageClass::class, $bgImageClass);
@@ -45,7 +45,7 @@ class BackgroundImageTest extends TestCase
         ];
     }
 
-    public function testInvalidBackgroundImageClass(): void
+    public function test_invalid_background_image_class(): void
     {
         $this->assertNull(BackgroundImageClass::parse('invalid-class'));
     }
@@ -75,7 +75,7 @@ class BackgroundImageTest extends TestCase
     // }
 
     #[DataProvider('escapedArbitraryValueProvider')]
-    public function testEscapedArbitraryValue(string $input, string $expected): void
+    public function test_escaped_arbitrary_value(string $input, string $expected): void
     {
         $bgImageClass = BackgroundImageClass::parse($input);
         $this->assertInstanceOf(BackgroundImageClass::class, $bgImageClass);

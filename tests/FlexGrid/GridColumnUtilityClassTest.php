@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\FlexGrid\GridColumnUtilityClass;
 class GridColumnUtilityClassTest extends TestCase
 {
     #[DataProvider('gridColumnClassProvider')]
-    public function testGridColumnUtilityClass(string $input, string $expected): void
+    public function test_grid_column_utility_class(string $input, string $expected): void
     {
         $gridColumnClass = GridColumnUtilityClass::parse($input);
         $this->assertInstanceOf(GridColumnUtilityClass::class, $gridColumnClass);
@@ -45,12 +45,12 @@ class GridColumnUtilityClassTest extends TestCase
         ];
     }
 
-    public function testInvalidGridColumnClass(): void
+    public function test_invalid_grid_column_class(): void
     {
         $this->assertNull(GridColumnUtilityClass::parse('col-invalid'));
     }
 
-    public function testGridColumnClassWithInvalidValue(): void
+    public function test_grid_column_class_with_invalid_value(): void
     {
         $gridColumnClass = new GridColumnUtilityClass('invalid');
         $this->assertSame('', $gridColumnClass->toCss());
@@ -72,7 +72,7 @@ class GridColumnUtilityClassTest extends TestCase
     // }
 
     #[DataProvider('outOfRangeValuesProvider')]
-    public function testOutOfRangeValues(string $input): void
+    public function test_out_of_range_values(string $input): void
     {
         $gridColumnClass = GridColumnUtilityClass::parse($input);
         $this->assertInstanceOf(GridColumnUtilityClass::class, $gridColumnClass);
@@ -91,7 +91,7 @@ class GridColumnUtilityClassTest extends TestCase
         ];
     }
 
-    public function testArbitraryValueEscaping(): void
+    public function test_arbitrary_value_escaping(): void
     {
         $input = 'col-[2,3]';
         $expected = '.col-\[2\2c 3\]{grid-column:2,3;}';

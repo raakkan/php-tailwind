@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\FlexGrid\GridRowClass;
 class GridRowTest extends TestCase
 {
     #[DataProvider('gridRowClassProvider')]
-    public function testGridRowClass(string $input, string $expected): void
+    public function test_grid_row_class(string $input, string $expected): void
     {
         $gridRowClass = GridRowClass::parse($input);
         $this->assertInstanceOf(GridRowClass::class, $gridRowClass);
@@ -46,12 +46,12 @@ class GridRowTest extends TestCase
         ];
     }
 
-    public function testInvalidGridRowClass(): void
+    public function test_invalid_grid_row_class(): void
     {
         $this->assertNull(GridRowClass::parse('invalid-class'));
     }
 
-    public function testGridRowClassWithInvalidValue(): void
+    public function test_grid_row_class_with_invalid_value(): void
     {
         $gridRowClass = GridRowClass::parse('grid-rows-invalid');
         $this->assertInstanceOf(GridRowClass::class, $gridRowClass);
@@ -59,7 +59,7 @@ class GridRowTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryValuesProvider')]
-    public function testInvalidArbitraryValues(string $input): void
+    public function test_invalid_arbitrary_values(string $input): void
     {
         $gridRowClass = GridRowClass::parse($input);
         $this->assertInstanceOf(GridRowClass::class, $gridRowClass);
@@ -75,7 +75,7 @@ class GridRowTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test with very large numbers
         $largeNumber = str_repeat('9', 100);

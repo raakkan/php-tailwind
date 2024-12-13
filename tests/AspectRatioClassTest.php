@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Layout\AspectRatioClass;
 class AspectRatioClassTest extends TestCase
 {
     #[DataProvider('aspectRatioClassProvider')]
-    public function testAspectRatioClass(string $input, string $expected): void
+    public function test_aspect_ratio_class(string $input, string $expected): void
     {
         $aspectRatioClass = AspectRatioClass::parse($input);
         $this->assertInstanceOf(AspectRatioClass::class, $aspectRatioClass);
@@ -29,18 +29,18 @@ class AspectRatioClassTest extends TestCase
         ];
     }
 
-    public function testInvalidAspectRatioClass(): void
+    public function test_invalid_aspect_ratio_class(): void
     {
         $this->assertNull(AspectRatioClass::parse('aspect-invalid'));
     }
 
-    public function testAspectRatioClassWithInvalidValue(): void
+    public function test_aspect_ratio_class_with_invalid_value(): void
     {
         $aspectRatioClass = new AspectRatioClass('invalid');
         $this->assertSame('', $aspectRatioClass->toCss());
     }
 
-    public function testArbitraryAspectRatioValidation(): void
+    public function test_arbitrary_aspect_ratio_validation(): void
     {
         $this->assertInstanceOf(AspectRatioClass::class, AspectRatioClass::parse('aspect-[1.5]'));
         $this->assertInstanceOf(AspectRatioClass::class, AspectRatioClass::parse('aspect-[3/2]'));

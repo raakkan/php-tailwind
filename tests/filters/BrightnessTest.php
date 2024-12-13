@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BrightnessClass;
 class BrightnessTest extends TestCase
 {
     #[DataProvider('standardBrightnessProvider')]
-    public function testStandardBrightness(string $input, string $expected): void
+    public function test_standard_brightness(string $input, string $expected): void
     {
         $brightnessClass = BrightnessClass::parse($input);
         $this->assertInstanceOf(BrightnessClass::class, $brightnessClass);
@@ -34,7 +34,7 @@ class BrightnessTest extends TestCase
     }
 
     #[DataProvider('arbitraryBrightnessProvider')]
-    public function testArbitraryBrightness(string $input, string $expected): void
+    public function test_arbitrary_brightness(string $input, string $expected): void
     {
         $brightnessClass = BrightnessClass::parse($input);
         $this->assertInstanceOf(BrightnessClass::class, $brightnessClass);
@@ -52,7 +52,7 @@ class BrightnessTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $brightnessClass = BrightnessClass::parse($input);
         $this->assertNull($brightnessClass);
@@ -72,7 +72,7 @@ class BrightnessTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the smallest predefined brightness
         $smallestBrightness = BrightnessClass::parse('brightness-0');

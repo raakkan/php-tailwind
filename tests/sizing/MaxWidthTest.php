@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Sizing\MaxWidthClass;
 class MaxWidthTest extends TestCase
 {
     #[DataProvider('maxWidthClassProvider')]
-    public function testMaxWidthClass(string $input, string $expected): void
+    public function test_max_width_class(string $input, string $expected): void
     {
         $maxWidthClass = MaxWidthClass::parse($input);
         $this->assertInstanceOf(MaxWidthClass::class, $maxWidthClass);
@@ -95,12 +95,12 @@ class MaxWidthTest extends TestCase
         ];
     }
 
-    public function testInvalidMaxWidthClass(): void
+    public function test_invalid_max_width_class(): void
     {
         $this->assertNull(MaxWidthClass::parse('invalid-class'));
     }
 
-    public function testMaxWidthClassWithInvalidValue(): void
+    public function test_max_width_class_with_invalid_value(): void
     {
         $maxWidthClass = MaxWidthClass::parse('max-w-invalid');
         $this->assertInstanceOf(MaxWidthClass::class, $maxWidthClass);
@@ -108,7 +108,7 @@ class MaxWidthTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryMaxWidthProvider')]
-    public function testInvalidArbitraryMaxWidth(string $input): void
+    public function test_invalid_arbitrary_max_width(string $input): void
     {
         $maxWidthClass = MaxWidthClass::parse($input);
         $this->assertInstanceOf(MaxWidthClass::class, $maxWidthClass);
@@ -128,7 +128,7 @@ class MaxWidthTest extends TestCase
     }
 
     #[DataProvider('validArbitraryMaxWidthProvider')]
-    public function testValidArbitraryMaxWidth(string $input, string $expected): void
+    public function test_valid_arbitrary_max_width(string $input, string $expected): void
     {
         $maxWidthClass = MaxWidthClass::parse($input);
         $this->assertInstanceOf(MaxWidthClass::class, $maxWidthClass);

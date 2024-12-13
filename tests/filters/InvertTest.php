@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\InvertClass;
 class InvertTest extends TestCase
 {
     #[DataProvider('standardInvertProvider')]
-    public function testStandardInvert(string $input, string $expected): void
+    public function test_standard_invert(string $input, string $expected): void
     {
         $invertClass = InvertClass::parse($input);
         $this->assertInstanceOf(InvertClass::class, $invertClass);
@@ -25,7 +25,7 @@ class InvertTest extends TestCase
     }
 
     #[DataProvider('arbitraryInvertProvider')]
-    public function testArbitraryInvert(string $input, string $expected): void
+    public function test_arbitrary_invert(string $input, string $expected): void
     {
         $invertClass = InvertClass::parse($input);
         $this->assertInstanceOf(InvertClass::class, $invertClass);
@@ -43,7 +43,7 @@ class InvertTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $invertClass = InvertClass::parse($input);
         $this->assertNull($invertClass);
@@ -62,7 +62,7 @@ class InvertTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the smallest predefined invert
         $smallestInvert = InvertClass::parse('invert-0');

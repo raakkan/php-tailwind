@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\TransitionAnimation\TransitionDurationClass;
 class TransitionDurationTest extends TestCase
 {
     #[DataProvider('standardDurationProvider')]
-    public function testStandardDurations(string $input, string $expected): void
+    public function test_standard_durations(string $input, string $expected): void
     {
         $durationClass = TransitionDurationClass::parse($input);
         $this->assertInstanceOf(TransitionDurationClass::class, $durationClass);
@@ -31,7 +31,7 @@ class TransitionDurationTest extends TestCase
     }
 
     #[DataProvider('arbitraryDurationProvider')]
-    public function testArbitraryDurations(string $input, string $expected): void
+    public function test_arbitrary_durations(string $input, string $expected): void
     {
         $durationClass = TransitionDurationClass::parse($input);
         $this->assertInstanceOf(TransitionDurationClass::class, $durationClass);
@@ -49,7 +49,7 @@ class TransitionDurationTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $durationClass = TransitionDurationClass::parse($input);
         $this->assertNull($durationClass);
@@ -67,7 +67,7 @@ class TransitionDurationTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test case sensitivity
         $uppercaseDuration = TransitionDurationClass::parse('DURATION-75');

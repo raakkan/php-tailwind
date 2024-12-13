@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\GrayscaleClass;
 class GrayscaleTest extends TestCase
 {
     #[DataProvider('standardGrayscaleProvider')]
-    public function testStandardGrayscale(string $input, string $expected): void
+    public function test_standard_grayscale(string $input, string $expected): void
     {
         $grayscaleClass = GrayscaleClass::parse($input);
         $this->assertInstanceOf(GrayscaleClass::class, $grayscaleClass);
@@ -25,7 +25,7 @@ class GrayscaleTest extends TestCase
     }
 
     #[DataProvider('arbitraryGrayscaleProvider')]
-    public function testArbitraryGrayscale(string $input, string $expected): void
+    public function test_arbitrary_grayscale(string $input, string $expected): void
     {
         $grayscaleClass = GrayscaleClass::parse($input);
         $this->assertInstanceOf(GrayscaleClass::class, $grayscaleClass);
@@ -43,7 +43,7 @@ class GrayscaleTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $grayscaleClass = GrayscaleClass::parse($input);
         $this->assertNull($grayscaleClass);
@@ -62,7 +62,7 @@ class GrayscaleTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default grayscale (100%)
         $defaultGrayscale = GrayscaleClass::parse('grayscale');

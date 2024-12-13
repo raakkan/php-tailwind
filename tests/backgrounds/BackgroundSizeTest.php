@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Backgrounds\BackgroundSizeClass;
 class BackgroundSizeTest extends TestCase
 {
     #[DataProvider('backgroundSizeClassProvider')]
-    public function testBackgroundSizeClass(string $input, string $expected): void
+    public function test_background_size_class(string $input, string $expected): void
     {
         $bgSizeClass = BackgroundSizeClass::parse($input);
         $this->assertInstanceOf(BackgroundSizeClass::class, $bgSizeClass);
@@ -42,7 +42,7 @@ class BackgroundSizeTest extends TestCase
         ];
     }
 
-    public function testInvalidBackgroundSizeClass(): void
+    public function test_invalid_background_size_class(): void
     {
         $this->assertNull(BackgroundSizeClass::parse('invalid-class'));
     }
@@ -68,7 +68,7 @@ class BackgroundSizeTest extends TestCase
     // }
 
     #[DataProvider('escapedArbitraryValueProvider')]
-    public function testEscapedArbitraryValue(string $input, string $expected): void
+    public function test_escaped_arbitrary_value(string $input, string $expected): void
     {
         $bgSizeClass = BackgroundSizeClass::parse($input);
         $this->assertInstanceOf(BackgroundSizeClass::class, $bgSizeClass);

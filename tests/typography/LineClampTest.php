@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\LineClampClass;
 class LineClampTest extends TestCase
 {
     #[DataProvider('lineClampClassProvider')]
-    public function testLineClampClass(string $input, string $expected): void
+    public function test_line_clamp_class(string $input, string $expected): void
     {
         $lineClampClass = LineClampClass::parse($input);
         $this->assertInstanceOf(LineClampClass::class, $lineClampClass);
@@ -34,13 +34,13 @@ class LineClampTest extends TestCase
         ];
     }
 
-    public function testInvalidLineClampClass(): void
+    public function test_invalid_line_clamp_class(): void
     {
         $this->assertNull(LineClampClass::parse('line-clamp-invalid'));
     }
 
     #[DataProvider('invalidLineClampProvider')]
-    public function testInvalidLineClamp(string $input): void
+    public function test_invalid_line_clamp(string $input): void
     {
         $lineClampClass = LineClampClass::parse($input);
         $this->assertInstanceOf(LineClampClass::class, $lineClampClass);
@@ -59,7 +59,7 @@ class LineClampTest extends TestCase
     }
 
     #[DataProvider('validArbitraryLineClampProvider')]
-    public function testValidArbitraryLineClamp(string $input, string $expected): void
+    public function test_valid_arbitrary_line_clamp(string $input, string $expected): void
     {
         $lineClampClass = LineClampClass::parse($input);
         $this->assertInstanceOf(LineClampClass::class, $lineClampClass);

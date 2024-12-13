@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Transforms\TranslateClass;
 class TranslateTest extends TestCase
 {
     #[DataProvider('translateClassProvider')]
-    public function testTranslateClass(string $input, string $expected): void
+    public function test_translate_class(string $input, string $expected): void
     {
         $translateClass = TranslateClass::parse($input);
         $this->assertInstanceOf(TranslateClass::class, $translateClass);
@@ -42,7 +42,7 @@ class TranslateTest extends TestCase
     }
 
     #[DataProvider('arbitraryTranslateClassProvider')]
-    public function testArbitraryTranslateClass(string $input, string $expected): void
+    public function test_arbitrary_translate_class(string $input, string $expected): void
     {
         $translateClass = TranslateClass::parse($input);
         $this->assertInstanceOf(TranslateClass::class, $translateClass);
@@ -60,13 +60,13 @@ class TranslateTest extends TestCase
         ];
     }
 
-    public function testInvalidTranslateClass(): void
+    public function test_invalid_translate_class(): void
     {
         $this->assertNull(TranslateClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidTranslateValueProvider')]
-    public function testTranslateClassWithInvalidValue(string $input): void
+    public function test_translate_class_with_invalid_value(string $input): void
     {
         $translateClass = TranslateClass::parse($input);
         $this->assertInstanceOf(TranslateClass::class, $translateClass);
@@ -84,7 +84,7 @@ class TranslateTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryTranslateClassProvider')]
-    public function testInvalidArbitraryTranslateClass(string $input): void
+    public function test_invalid_arbitrary_translate_class(string $input): void
     {
         $translateClass = TranslateClass::parse($input);
         $this->assertInstanceOf(TranslateClass::class, $translateClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Sizing\HeightClass;
 class HeightTest extends TestCase
 {
     #[DataProvider('heightClassProvider')]
-    public function testHeightClass(string $input, string $expected): void
+    public function test_height_class(string $input, string $expected): void
     {
         $heightClass = HeightClass::parse($input);
         $this->assertInstanceOf(HeightClass::class, $heightClass);
@@ -75,12 +75,12 @@ class HeightTest extends TestCase
         ];
     }
 
-    public function testInvalidHeightClass(): void
+    public function test_invalid_height_class(): void
     {
         $this->assertNull(HeightClass::parse('invalid-class'));
     }
 
-    public function testHeightClassWithInvalidValue(): void
+    public function test_height_class_with_invalid_value(): void
     {
         $heightClass = HeightClass::parse('h-invalid');
         $this->assertInstanceOf(HeightClass::class, $heightClass);
@@ -88,7 +88,7 @@ class HeightTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryHeightProvider')]
-    public function testInvalidArbitraryHeight(string $input): void
+    public function test_invalid_arbitrary_height(string $input): void
     {
         $heightClass = HeightClass::parse($input);
         $this->assertInstanceOf(HeightClass::class, $heightClass);
@@ -106,7 +106,7 @@ class HeightTest extends TestCase
     }
 
     #[DataProvider('validArbitraryHeightProvider')]
-    public function testValidArbitraryHeight(string $input, string $expected): void
+    public function test_valid_arbitrary_height(string $input, string $expected): void
     {
         $heightClass = HeightClass::parse($input);
         $this->assertInstanceOf(HeightClass::class, $heightClass);
@@ -128,7 +128,7 @@ class HeightTest extends TestCase
     }
 
     #[DataProvider('newViewportUnitsProvider')]
-    public function testNewViewportUnits(string $input, string $expected): void
+    public function test_new_viewport_units(string $input, string $expected): void
     {
         $heightClass = HeightClass::parse($input);
         $this->assertInstanceOf(HeightClass::class, $heightClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Borders\OutlineOffsetClass;
 class OutlineOffsetTest extends TestCase
 {
     #[DataProvider('outlineOffsetClassProvider')]
-    public function testOutlineOffsetClass(string $input, string $expected): void
+    public function test_outline_offset_class(string $input, string $expected): void
     {
         $outlineOffsetClass = OutlineOffsetClass::parse($input);
         $this->assertInstanceOf(OutlineOffsetClass::class, $outlineOffsetClass);
@@ -28,7 +28,7 @@ class OutlineOffsetTest extends TestCase
     }
 
     #[DataProvider('arbitraryOutlineOffsetClassProvider')]
-    public function testArbitraryOutlineOffsetClass(string $input, string $expected): void
+    public function test_arbitrary_outline_offset_class(string $input, string $expected): void
     {
         $outlineOffsetClass = OutlineOffsetClass::parse($input);
         $this->assertInstanceOf(OutlineOffsetClass::class, $outlineOffsetClass);
@@ -49,13 +49,13 @@ class OutlineOffsetTest extends TestCase
         ];
     }
 
-    public function testInvalidOutlineOffsetClass(): void
+    public function test_invalid_outline_offset_class(): void
     {
         $this->assertNull(OutlineOffsetClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidOutlineOffsetValueProvider')]
-    public function testOutlineOffsetClassWithInvalidValue(string $input): void
+    public function test_outline_offset_class_with_invalid_value(string $input): void
     {
         $outlineOffsetClass = OutlineOffsetClass::parse($input);
         $this->assertInstanceOf(OutlineOffsetClass::class, $outlineOffsetClass);
@@ -76,7 +76,7 @@ class OutlineOffsetTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryOutlineOffsetClassProvider')]
-    public function testInvalidArbitraryOutlineOffsetClass(string $input): void
+    public function test_invalid_arbitrary_outline_offset_class(string $input): void
     {
         $outlineOffsetClass = OutlineOffsetClass::parse($input);
         $this->assertInstanceOf(OutlineOffsetClass::class, $outlineOffsetClass);

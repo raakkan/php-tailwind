@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Sizing\MinWidthClass;
 class MinWidthTest extends TestCase
 {
     #[DataProvider('minWidthClassProvider')]
-    public function testMinWidthClass(string $input, string $expected): void
+    public function test_min_width_class(string $input, string $expected): void
     {
         $minWidthClass = MinWidthClass::parse($input);
         $this->assertInstanceOf(MinWidthClass::class, $minWidthClass);
@@ -72,12 +72,12 @@ class MinWidthTest extends TestCase
         ];
     }
 
-    public function testInvalidMinWidthClass(): void
+    public function test_invalid_min_width_class(): void
     {
         $this->assertNull(MinWidthClass::parse('invalid-class'));
     }
 
-    public function testMinWidthClassWithInvalidValue(): void
+    public function test_min_width_class_with_invalid_value(): void
     {
         $minWidthClass = MinWidthClass::parse('min-w-invalid');
         $this->assertInstanceOf(MinWidthClass::class, $minWidthClass);
@@ -85,7 +85,7 @@ class MinWidthTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryMinWidthProvider')]
-    public function testInvalidArbitraryMinWidth(string $input): void
+    public function test_invalid_arbitrary_min_width(string $input): void
     {
         $minWidthClass = MinWidthClass::parse($input);
         $this->assertInstanceOf(MinWidthClass::class, $minWidthClass);
@@ -105,7 +105,7 @@ class MinWidthTest extends TestCase
     }
 
     #[DataProvider('validArbitraryMinWidthProvider')]
-    public function testValidArbitraryMinWidth(string $input, string $expected): void
+    public function test_valid_arbitrary_min_width(string $input, string $expected): void
     {
         $minWidthClass = MinWidthClass::parse($input);
         $this->assertInstanceOf(MinWidthClass::class, $minWidthClass);

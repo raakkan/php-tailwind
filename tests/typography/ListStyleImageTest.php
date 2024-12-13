@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\ListStyleImageClass;
 class ListStyleImageTest extends TestCase
 {
     #[DataProvider('listStyleImageClassProvider')]
-    public function testListStyleImageClass(string $input, string $expected): void
+    public function test_list_style_image_class(string $input, string $expected): void
     {
         $listStyleImageClass = ListStyleImageClass::parse($input);
         $this->assertInstanceOf(ListStyleImageClass::class, $listStyleImageClass);
@@ -33,13 +33,13 @@ class ListStyleImageTest extends TestCase
         ];
     }
 
-    public function testInvalidListStyleImageClass(): void
+    public function test_invalid_list_style_image_class(): void
     {
         $this->assertNull(ListStyleImageClass::parse('list-image-invalid'));
     }
 
     #[DataProvider('invalidArbitraryListStyleImageProvider')]
-    public function testInvalidArbitraryListStyleImage(string $input): void
+    public function test_invalid_arbitrary_list_style_image(string $input): void
     {
         $listStyleImageClass = ListStyleImageClass::parse($input);
         $this->assertInstanceOf(ListStyleImageClass::class, $listStyleImageClass);
@@ -56,7 +56,7 @@ class ListStyleImageTest extends TestCase
     }
 
     #[DataProvider('specialCharactersListStyleImageProvider')]
-    public function testSpecialCharactersListStyleImage(string $input, string $expected): void
+    public function test_special_characters_list_style_image(string $input, string $expected): void
     {
         $listStyleImageClass = ListStyleImageClass::parse($input);
         $this->assertInstanceOf(ListStyleImageClass::class, $listStyleImageClass);
@@ -72,7 +72,7 @@ class ListStyleImageTest extends TestCase
         ];
     }
 
-    public function testNonListStyleImageClass(): void
+    public function test_non_list_style_image_class(): void
     {
         $this->assertNull(ListStyleImageClass::parse('font-bold'));
         $this->assertNull(ListStyleImageClass::parse('text-lg'));
@@ -111,7 +111,7 @@ class ListStyleImageTest extends TestCase
     //     $this->assertSame($lowerCase->toCss(), $mixedCase->toCss());
     // }
 
-    public function testArbitraryValueCaseSensitivity(): void
+    public function test_arbitrary_value_case_sensitivity(): void
     {
         $lowerCase = ListStyleImageClass::parse('list-image-[url(image.png)]');
         $upperCase = ListStyleImageClass::parse('list-image-[URL(IMAGE.PNG)]');

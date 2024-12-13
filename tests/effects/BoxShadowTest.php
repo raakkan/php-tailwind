@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Effects\BoxShadowClass;
 class BoxShadowTest extends TestCase
 {
     #[DataProvider('standardShadowProvider')]
-    public function testStandardShadows(string $input, string $expected): void
+    public function test_standard_shadows(string $input, string $expected): void
     {
         $boxShadowClass = BoxShadowClass::parse($input);
         $this->assertInstanceOf(BoxShadowClass::class, $boxShadowClass);
@@ -49,7 +49,7 @@ class BoxShadowTest extends TestCase
     // }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $boxShadowClass = BoxShadowClass::parse($input);
         $this->assertNull($boxShadowClass);

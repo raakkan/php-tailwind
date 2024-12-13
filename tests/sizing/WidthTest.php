@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Sizing\WidthClass;
 class WidthTest extends TestCase
 {
     #[DataProvider('widthClassProvider')]
-    public function testWidthClass(string $input, string $expected): void
+    public function test_width_class(string $input, string $expected): void
     {
         $widthClass = WidthClass::parse($input);
         $this->assertInstanceOf(WidthClass::class, $widthClass);
@@ -75,12 +75,12 @@ class WidthTest extends TestCase
         ];
     }
 
-    public function testInvalidWidthClass(): void
+    public function test_invalid_width_class(): void
     {
         $this->assertNull(WidthClass::parse('invalid-class'));
     }
 
-    public function testWidthClassWithInvalidValue(): void
+    public function test_width_class_with_invalid_value(): void
     {
         $widthClass = WidthClass::parse('w-invalid');
         $this->assertInstanceOf(WidthClass::class, $widthClass);
@@ -88,7 +88,7 @@ class WidthTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryWidthProvider')]
-    public function testInvalidArbitraryWidth(string $input): void
+    public function test_invalid_arbitrary_width(string $input): void
     {
         $widthClass = WidthClass::parse($input);
         $this->assertInstanceOf(WidthClass::class, $widthClass);
@@ -106,7 +106,7 @@ class WidthTest extends TestCase
     }
 
     #[DataProvider('validArbitraryWidthProvider')]
-    public function testValidArbitraryWidth(string $input, string $expected): void
+    public function test_valid_arbitrary_width(string $input, string $expected): void
     {
         $widthClass = WidthClass::parse($input);
         $this->assertInstanceOf(WidthClass::class, $widthClass);

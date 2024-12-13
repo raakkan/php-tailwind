@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BackdropBrightnessClass;
 class BackdropBrightnessTest extends TestCase
 {
     #[DataProvider('standardBackdropBrightnessProvider')]
-    public function testStandardBackdropBrightness(string $input, string $expected): void
+    public function test_standard_backdrop_brightness(string $input, string $expected): void
     {
         $backdropBrightnessClass = BackdropBrightnessClass::parse($input);
         $this->assertInstanceOf(BackdropBrightnessClass::class, $backdropBrightnessClass);
@@ -34,7 +34,7 @@ class BackdropBrightnessTest extends TestCase
     }
 
     #[DataProvider('arbitraryBackdropBrightnessProvider')]
-    public function testArbitraryBackdropBrightness(string $input, string $expected): void
+    public function test_arbitrary_backdrop_brightness(string $input, string $expected): void
     {
         $backdropBrightnessClass = BackdropBrightnessClass::parse($input);
         $this->assertInstanceOf(BackdropBrightnessClass::class, $backdropBrightnessClass);
@@ -52,7 +52,7 @@ class BackdropBrightnessTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $backdropBrightnessClass = BackdropBrightnessClass::parse($input);
         $this->assertNull($backdropBrightnessClass);
@@ -72,7 +72,7 @@ class BackdropBrightnessTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the smallest predefined backdrop brightness
         $smallestBrightness = BackdropBrightnessClass::parse('backdrop-brightness-0');

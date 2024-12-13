@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\TransitionAnimation\TransitionDelayClass;
 class TransitionDelayTest extends TestCase
 {
     #[DataProvider('standardDelayProvider')]
-    public function testStandardDelays(string $input, string $expected): void
+    public function test_standard_delays(string $input, string $expected): void
     {
         $delayClass = TransitionDelayClass::parse($input);
         $this->assertInstanceOf(TransitionDelayClass::class, $delayClass);
@@ -32,7 +32,7 @@ class TransitionDelayTest extends TestCase
     }
 
     #[DataProvider('arbitraryDelayProvider')]
-    public function testArbitraryDelays(string $input, string $expected): void
+    public function test_arbitrary_delays(string $input, string $expected): void
     {
         $delayClass = TransitionDelayClass::parse($input);
         $this->assertInstanceOf(TransitionDelayClass::class, $delayClass);
@@ -50,7 +50,7 @@ class TransitionDelayTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $delayClass = TransitionDelayClass::parse($input);
         $this->assertNull($delayClass);
@@ -68,7 +68,7 @@ class TransitionDelayTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test case sensitivity
         $uppercaseDelay = TransitionDelayClass::parse('DELAY-75');

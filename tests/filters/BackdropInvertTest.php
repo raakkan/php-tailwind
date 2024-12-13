@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BackdropInvertClass;
 class BackdropInvertTest extends TestCase
 {
     #[DataProvider('standardBackdropInvertProvider')]
-    public function testStandardBackdropInvert(string $input, string $expected): void
+    public function test_standard_backdrop_invert(string $input, string $expected): void
     {
         $backdropInvertClass = BackdropInvertClass::parse($input);
         $this->assertInstanceOf(BackdropInvertClass::class, $backdropInvertClass);
@@ -25,7 +25,7 @@ class BackdropInvertTest extends TestCase
     }
 
     #[DataProvider('arbitraryBackdropInvertProvider')]
-    public function testArbitraryBackdropInvert(string $input, string $expected): void
+    public function test_arbitrary_backdrop_invert(string $input, string $expected): void
     {
         $backdropInvertClass = BackdropInvertClass::parse($input);
         $this->assertInstanceOf(BackdropInvertClass::class, $backdropInvertClass);
@@ -43,7 +43,7 @@ class BackdropInvertTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $backdropInvertClass = BackdropInvertClass::parse($input);
         $this->assertNull($backdropInvertClass);
@@ -62,7 +62,7 @@ class BackdropInvertTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default backdrop-invert (100%)
         $defaultInvert = BackdropInvertClass::parse('backdrop-invert');

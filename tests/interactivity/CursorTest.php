@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Interactivity\CursorClass;
 class CursorTest extends TestCase
 {
     #[DataProvider('standardCursorProvider')]
-    public function testStandardCursors(string $input, string $expected): void
+    public function test_standard_cursors(string $input, string $expected): void
     {
         $cursorClass = CursorClass::parse($input);
         $this->assertInstanceOf(CursorClass::class, $cursorClass);
@@ -59,7 +59,7 @@ class CursorTest extends TestCase
     }
 
     #[DataProvider('arbitraryValueProvider')]
-    public function testArbitraryValues(string $input, string $expected): void
+    public function test_arbitrary_values(string $input, string $expected): void
     {
         $cursorClass = CursorClass::parse($input);
         $this->assertInstanceOf(CursorClass::class, $cursorClass);
@@ -77,7 +77,7 @@ class CursorTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $cursorClass = CursorClass::parse($input);
         $this->assertNull($cursorClass);
@@ -97,7 +97,7 @@ class CursorTest extends TestCase
     }
 
     #[DataProvider('edgeCaseProvider')]
-    public function testEdgeCases(string $input, string $expected): void
+    public function test_edge_cases(string $input, string $expected): void
     {
         $cursorClass = CursorClass::parse($input);
         $this->assertInstanceOf(CursorClass::class, $cursorClass);

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Sizing\MaxHeightClass;
 class MaxHeightTest extends TestCase
 {
     #[DataProvider('maxHeightClassProvider')]
-    public function testMaxHeightClass(string $input, string $expected): void
+    public function test_max_height_class(string $input, string $expected): void
     {
         $maxHeightClass = MaxHeightClass::parse($input);
         $this->assertInstanceOf(MaxHeightClass::class, $maxHeightClass);
@@ -83,12 +83,12 @@ class MaxHeightTest extends TestCase
         ];
     }
 
-    public function testInvalidMaxHeightClass(): void
+    public function test_invalid_max_height_class(): void
     {
         $this->assertNull(MaxHeightClass::parse('invalid-class'));
     }
 
-    public function testMaxHeightClassWithInvalidValue(): void
+    public function test_max_height_class_with_invalid_value(): void
     {
         $maxHeightClass = MaxHeightClass::parse('max-h-invalid');
         $this->assertInstanceOf(MaxHeightClass::class, $maxHeightClass);
@@ -96,7 +96,7 @@ class MaxHeightTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryMaxHeightProvider')]
-    public function testInvalidArbitraryMaxHeight(string $input): void
+    public function test_invalid_arbitrary_max_height(string $input): void
     {
         $maxHeightClass = MaxHeightClass::parse($input);
         $this->assertInstanceOf(MaxHeightClass::class, $maxHeightClass);
@@ -116,7 +116,7 @@ class MaxHeightTest extends TestCase
     }
 
     #[DataProvider('validArbitraryMaxHeightProvider')]
-    public function testValidArbitraryMaxHeight(string $input, string $expected): void
+    public function test_valid_arbitrary_max_height(string $input, string $expected): void
     {
         $maxHeightClass = MaxHeightClass::parse($input);
         $this->assertInstanceOf(MaxHeightClass::class, $maxHeightClass);

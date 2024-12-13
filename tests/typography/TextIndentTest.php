@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\TextIndentClass;
 class TextIndentTest extends TestCase
 {
     #[DataProvider('textIndentClassProvider')]
-    public function testTextIndentClass(string $input, string $expected): void
+    public function test_text_indent_class(string $input, string $expected): void
     {
         $textIndentClass = TextIndentClass::parse($input);
         $this->assertInstanceOf(TextIndentClass::class, $textIndentClass);
@@ -41,19 +41,19 @@ class TextIndentTest extends TestCase
         ];
     }
 
-    public function testInvalidTextIndentClass(): void
+    public function test_invalid_text_indent_class(): void
     {
         $this->assertNull(TextIndentClass::parse('indent-invalid'));
     }
 
-    public function testTextIndentClassWithInvalidValue(): void
+    public function test_text_indent_class_with_invalid_value(): void
     {
         $textIndentClass = TextIndentClass::parse('indent-100');
         $this->assertNull($textIndentClass);
     }
 
     #[DataProvider('invalidArbitraryTextIndentProvider')]
-    public function testInvalidArbitraryTextIndent(string $input): void
+    public function test_invalid_arbitrary_text_indent(string $input): void
     {
         $textIndentClass = TextIndentClass::parse($input);
         $this->assertInstanceOf(TextIndentClass::class, $textIndentClass);
@@ -70,7 +70,7 @@ class TextIndentTest extends TestCase
     }
 
     #[DataProvider('validArbitraryTextIndentProvider')]
-    public function testValidArbitraryTextIndent(string $input, string $expected): void
+    public function test_valid_arbitrary_text_indent(string $input, string $expected): void
     {
         $textIndentClass = TextIndentClass::parse($input);
         $this->assertInstanceOf(TextIndentClass::class, $textIndentClass);
@@ -88,14 +88,14 @@ class TextIndentTest extends TestCase
         ];
     }
 
-    public function testDefaultToZeroIndent(): void
+    public function test_default_to_zero_indent(): void
     {
         $textIndentClass = TextIndentClass::parse('indent-unknown');
         $this->assertNull($textIndentClass);
     }
 
     #[DataProvider('edgeCaseArbitraryTextIndentProvider')]
-    public function testEdgeCaseArbitraryTextIndent(string $input, string $expected): void
+    public function test_edge_case_arbitrary_text_indent(string $input, string $expected): void
     {
         $textIndentClass = TextIndentClass::parse($input);
         $this->assertInstanceOf(TextIndentClass::class, $textIndentClass);

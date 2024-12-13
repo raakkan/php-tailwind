@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\FlexGrid\GridColumnClass;
 class GridColumnTest extends TestCase
 {
     #[DataProvider('gridColumnClassProvider')]
-    public function testGridColumnClass(string $input, string $expected): void
+    public function test_grid_column_class(string $input, string $expected): void
     {
         $gridColumnClass = GridColumnClass::parse($input);
         $this->assertInstanceOf(GridColumnClass::class, $gridColumnClass);
@@ -46,12 +46,12 @@ class GridColumnTest extends TestCase
         ];
     }
 
-    public function testInvalidGridColumnClass(): void
+    public function test_invalid_grid_column_class(): void
     {
         $this->assertNull(GridColumnClass::parse('invalid-class'));
     }
 
-    public function testGridColumnClassWithInvalidValue(): void
+    public function test_grid_column_class_with_invalid_value(): void
     {
         $gridColumnClass = GridColumnClass::parse('grid-cols-invalid');
         $this->assertInstanceOf(GridColumnClass::class, $gridColumnClass);
@@ -59,7 +59,7 @@ class GridColumnTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryValuesProvider')]
-    public function testInvalidArbitraryValues(string $input): void
+    public function test_invalid_arbitrary_values(string $input): void
     {
         $gridColumnClass = GridColumnClass::parse($input);
         $this->assertInstanceOf(GridColumnClass::class, $gridColumnClass);

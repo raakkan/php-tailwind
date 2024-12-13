@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Transforms\ScaleClass;
 class ScaleTest extends TestCase
 {
     #[DataProvider('scaleClassProvider')]
-    public function testScaleClass(string $input, string $expected): void
+    public function test_scale_class(string $input, string $expected): void
     {
         $scaleClass = ScaleClass::parse($input);
         $this->assertInstanceOf(ScaleClass::class, $scaleClass);
@@ -39,7 +39,7 @@ class ScaleTest extends TestCase
     }
 
     #[DataProvider('arbitraryScaleClassProvider')]
-    public function testArbitraryScaleClass(string $input, string $expected): void
+    public function test_arbitrary_scale_class(string $input, string $expected): void
     {
         $scaleClass = ScaleClass::parse($input);
         $this->assertInstanceOf(ScaleClass::class, $scaleClass);
@@ -56,13 +56,13 @@ class ScaleTest extends TestCase
         ];
     }
 
-    public function testInvalidScaleClass(): void
+    public function test_invalid_scale_class(): void
     {
         $this->assertNull(ScaleClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidScaleValueProvider')]
-    public function testScaleClassWithInvalidValue(string $input): void
+    public function test_scale_class_with_invalid_value(string $input): void
     {
         $scaleClass = ScaleClass::parse($input);
         $this->assertInstanceOf(ScaleClass::class, $scaleClass);
@@ -80,7 +80,7 @@ class ScaleTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryScaleClassProvider')]
-    public function testInvalidArbitraryScaleClass(string $input): void
+    public function test_invalid_arbitrary_scale_class(string $input): void
     {
         $scaleClass = ScaleClass::parse($input);
         $this->assertInstanceOf(ScaleClass::class, $scaleClass);

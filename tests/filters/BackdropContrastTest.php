@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BackdropContrastClass;
 class BackdropContrastTest extends TestCase
 {
     #[DataProvider('standardBackdropContrastProvider')]
-    public function testStandardBackdropContrast(string $input, string $expected): void
+    public function test_standard_backdrop_contrast(string $input, string $expected): void
     {
         $backdropContrastClass = BackdropContrastClass::parse($input);
         $this->assertInstanceOf(BackdropContrastClass::class, $backdropContrastClass);
@@ -30,7 +30,7 @@ class BackdropContrastTest extends TestCase
     }
 
     #[DataProvider('arbitraryBackdropContrastProvider')]
-    public function testArbitraryBackdropContrast(string $input, string $expected): void
+    public function test_arbitrary_backdrop_contrast(string $input, string $expected): void
     {
         $backdropContrastClass = BackdropContrastClass::parse($input);
         $this->assertInstanceOf(BackdropContrastClass::class, $backdropContrastClass);
@@ -48,7 +48,7 @@ class BackdropContrastTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $backdropContrastClass = BackdropContrastClass::parse($input);
         $this->assertNull($backdropContrastClass);
@@ -67,7 +67,7 @@ class BackdropContrastTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the smallest predefined backdrop contrast
         $smallestContrast = BackdropContrastClass::parse('backdrop-contrast-0');

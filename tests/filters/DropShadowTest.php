@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\DropShadowClass;
 class DropShadowTest extends TestCase
 {
     #[DataProvider('standardDropShadowProvider')]
-    public function testStandardDropShadows(string $input, string $expected): void
+    public function test_standard_drop_shadows(string $input, string $expected): void
     {
         $dropShadowClass = DropShadowClass::parse($input);
         $this->assertInstanceOf(DropShadowClass::class, $dropShadowClass);
@@ -47,7 +47,7 @@ class DropShadowTest extends TestCase
     // }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $dropShadowClass = DropShadowClass::parse($input);
         $this->assertNull($dropShadowClass);
@@ -67,7 +67,7 @@ class DropShadowTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default drop-shadow
         $defaultDropShadow = DropShadowClass::parse('drop-shadow');

@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Borders\OutlineWidthClass;
 class OutlineWidthTest extends TestCase
 {
     #[DataProvider('outlineWidthClassProvider')]
-    public function testOutlineWidthClass(string $input, string $expected): void
+    public function test_outline_width_class(string $input, string $expected): void
     {
         $outlineWidthClass = OutlineWidthClass::parse($input);
         $this->assertInstanceOf(OutlineWidthClass::class, $outlineWidthClass);
@@ -28,7 +28,7 @@ class OutlineWidthTest extends TestCase
     }
 
     #[DataProvider('arbitraryOutlineWidthClassProvider')]
-    public function testArbitraryOutlineWidthClass(string $input, string $expected): void
+    public function test_arbitrary_outline_width_class(string $input, string $expected): void
     {
         $outlineWidthClass = OutlineWidthClass::parse($input);
         $this->assertInstanceOf(OutlineWidthClass::class, $outlineWidthClass);
@@ -47,13 +47,13 @@ class OutlineWidthTest extends TestCase
         ];
     }
 
-    public function testInvalidOutlineWidthClass(): void
+    public function test_invalid_outline_width_class(): void
     {
         $this->assertNull(OutlineWidthClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidOutlineWidthValueProvider')]
-    public function testOutlineWidthClassWithInvalidValue(string $input): void
+    public function test_outline_width_class_with_invalid_value(string $input): void
     {
         $outlineWidthClass = OutlineWidthClass::parse($input);
         $this->assertInstanceOf(OutlineWidthClass::class, $outlineWidthClass);
@@ -74,7 +74,7 @@ class OutlineWidthTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryOutlineWidthClassProvider')]
-    public function testInvalidArbitraryOutlineWidthClass(string $input): void
+    public function test_invalid_arbitrary_outline_width_class(string $input): void
     {
         $outlineWidthClass = OutlineWidthClass::parse($input);
         $this->assertInstanceOf(OutlineWidthClass::class, $outlineWidthClass);

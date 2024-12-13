@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Borders\RingWidthClass;
 class RingWidthTest extends TestCase
 {
     #[DataProvider('validRingWidthClassProvider')]
-    public function testValidRingWidthClass(string $input, string $expected): void
+    public function test_valid_ring_width_class(string $input, string $expected): void
     {
         $ringWidthClass = RingWidthClass::parse($input);
         $this->assertInstanceOf(RingWidthClass::class, $ringWidthClass);
@@ -34,7 +34,7 @@ class RingWidthTest extends TestCase
     }
 
     #[DataProvider('invalidRingWidthClassProvider')]
-    public function testInvalidRingWidthClass(string $input): void
+    public function test_invalid_ring_width_class(string $input): void
     {
         $ringWidthClass = RingWidthClass::parse($input);
         $this->assertInstanceOf(RingWidthClass::class, $ringWidthClass);
@@ -59,7 +59,7 @@ class RingWidthTest extends TestCase
         ];
     }
 
-    public function testNonRingWidthClass(): void
+    public function test_non_ring_width_class(): void
     {
         $this->assertNull(RingWidthClass::parse('text-lg'));
         $this->assertNull(RingWidthClass::parse('bg-red-500'));

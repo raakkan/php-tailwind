@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Borders\BorderColorClass;
 class BorderColorTest extends TestCase
 {
     #[DataProvider('standardBorderColorProvider')]
-    public function testStandardBorderColors(string $input, string $expected): void
+    public function test_standard_border_colors(string $input, string $expected): void
     {
         $borderColorClass = BorderColorClass::parse($input);
         $this->assertInstanceOf(BorderColorClass::class, $borderColorClass);
@@ -31,7 +31,7 @@ class BorderColorTest extends TestCase
     }
 
     #[DataProvider('borderSidesProvider')]
-    public function testBorderSides(string $input, string $expected): void
+    public function test_border_sides(string $input, string $expected): void
     {
         $borderColorClass = BorderColorClass::parse($input);
         $this->assertInstanceOf(BorderColorClass::class, $borderColorClass);
@@ -51,7 +51,7 @@ class BorderColorTest extends TestCase
     }
 
     #[DataProvider('opacityProvider')]
-    public function testOpacity(string $input, string $expected): void
+    public function test_opacity(string $input, string $expected): void
     {
         $borderColorClass = BorderColorClass::parse($input);
         $this->assertInstanceOf(BorderColorClass::class, $borderColorClass);
@@ -69,7 +69,7 @@ class BorderColorTest extends TestCase
     }
 
     #[DataProvider('arbitraryValueProvider')]
-    public function testArbitraryValues(string $input, string $expected): void
+    public function test_arbitrary_values(string $input, string $expected): void
     {
         $borderColorClass = BorderColorClass::parse($input);
         $this->assertInstanceOf(BorderColorClass::class, $borderColorClass);
@@ -87,7 +87,7 @@ class BorderColorTest extends TestCase
     }
 
     #[DataProvider('specialColorProvider')]
-    public function testSpecialColors(string $input, string $expected): void
+    public function test_special_colors(string $input, string $expected): void
     {
         $borderColorClass = BorderColorClass::parse($input);
         $this->assertInstanceOf(BorderColorClass::class, $borderColorClass);
@@ -104,7 +104,7 @@ class BorderColorTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $borderColorClass = BorderColorClass::parse($input);
         $this->assertNull($borderColorClass);

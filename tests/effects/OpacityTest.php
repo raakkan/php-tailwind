@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Effects\OpacityClass;
 class OpacityTest extends TestCase
 {
     #[DataProvider('standardOpacityProvider')]
-    public function testStandardOpacities(string $input, string $expected): void
+    public function test_standard_opacities(string $input, string $expected): void
     {
         $opacityClass = OpacityClass::parse($input);
         $this->assertInstanceOf(OpacityClass::class, $opacityClass);
@@ -45,7 +45,7 @@ class OpacityTest extends TestCase
     }
 
     #[DataProvider('arbitraryOpacityProvider')]
-    public function testArbitraryOpacities(string $input, string $expected): void
+    public function test_arbitrary_opacities(string $input, string $expected): void
     {
         $opacityClass = OpacityClass::parse($input);
         $this->assertInstanceOf(OpacityClass::class, $opacityClass);
@@ -65,7 +65,7 @@ class OpacityTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $opacityClass = OpacityClass::parse($input);
         $this->assertNull($opacityClass);
@@ -87,7 +87,7 @@ class OpacityTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the lowest valid opacity
         $lowestOpacity = OpacityClass::parse('opacity-0');

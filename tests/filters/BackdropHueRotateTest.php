@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BackdropHueRotateClass;
 class BackdropHueRotateTest extends TestCase
 {
     #[DataProvider('standardBackdropHueRotateProvider')]
-    public function testStandardBackdropHueRotate(string $input, string $expected): void
+    public function test_standard_backdrop_hue_rotate(string $input, string $expected): void
     {
         $backdropHueRotateClass = BackdropHueRotateClass::parse($input);
         $this->assertInstanceOf(BackdropHueRotateClass::class, $backdropHueRotateClass);
@@ -29,7 +29,7 @@ class BackdropHueRotateTest extends TestCase
     }
 
     #[DataProvider('negativeBackdropHueRotateProvider')]
-    public function testNegativeBackdropHueRotate(string $input, string $expected): void
+    public function test_negative_backdrop_hue_rotate(string $input, string $expected): void
     {
         $backdropHueRotateClass = BackdropHueRotateClass::parse($input);
         $this->assertInstanceOf(BackdropHueRotateClass::class, $backdropHueRotateClass);
@@ -48,7 +48,7 @@ class BackdropHueRotateTest extends TestCase
     }
 
     #[DataProvider('arbitraryBackdropHueRotateProvider')]
-    public function testArbitraryBackdropHueRotate(string $input, string $expected): void
+    public function test_arbitrary_backdrop_hue_rotate(string $input, string $expected): void
     {
         $backdropHueRotateClass = BackdropHueRotateClass::parse($input);
         $this->assertInstanceOf(BackdropHueRotateClass::class, $backdropHueRotateClass);
@@ -66,7 +66,7 @@ class BackdropHueRotateTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $backdropHueRotateClass = BackdropHueRotateClass::parse($input);
         $this->assertNull($backdropHueRotateClass);
@@ -86,7 +86,7 @@ class BackdropHueRotateTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default backdrop-hue-rotate (0deg)
         $defaultBackdropHueRotate = BackdropHueRotateClass::parse('backdrop-hue-rotate-0');

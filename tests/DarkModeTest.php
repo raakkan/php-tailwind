@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\DarkModeClass;
 class DarkModeTest extends TestCase
 {
     #[DataProvider('darkModeClassProvider')]
-    public function testDarkModeClass(string $input, string $expected): void
+    public function test_dark_mode_class(string $input, string $expected): void
     {
         $darkModeClass = DarkModeClass::parse($input);
         $this->assertInstanceOf(DarkModeClass::class, $darkModeClass);
@@ -31,12 +31,12 @@ class DarkModeTest extends TestCase
         ];
     }
 
-    public function testInvalidDarkModeClass(): void
+    public function test_invalid_dark_mode_class(): void
     {
         $this->assertNull(DarkModeClass::parse('light:text-white'));
     }
 
-    public function testDarkModeClassWithInvalidValue(): void
+    public function test_dark_mode_class_with_invalid_value(): void
     {
         $darkModeClass = DarkModeClass::parse('dark:invalid-class');
         $this->assertInstanceOf(DarkModeClass::class, $darkModeClass);

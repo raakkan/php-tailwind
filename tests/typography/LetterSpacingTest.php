@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\LetterSpacingClass;
 class LetterSpacingTest extends TestCase
 {
     #[DataProvider('letterSpacingClassProvider')]
-    public function testLetterSpacingClass(string $input, string $expected): void
+    public function test_letter_spacing_class(string $input, string $expected): void
     {
         $letterSpacingClass = LetterSpacingClass::parse($input);
         $this->assertInstanceOf(LetterSpacingClass::class, $letterSpacingClass);
@@ -35,13 +35,13 @@ class LetterSpacingTest extends TestCase
         ];
     }
 
-    public function testInvalidLetterSpacingClass(): void
+    public function test_invalid_letter_spacing_class(): void
     {
         $this->assertNull(LetterSpacingClass::parse('tracking-invalid'));
     }
 
     #[DataProvider('invalidArbitraryLetterSpacingProvider')]
-    public function testInvalidArbitraryLetterSpacing(string $input): void
+    public function test_invalid_arbitrary_letter_spacing(string $input): void
     {
         $letterSpacingClass = LetterSpacingClass::parse($input);
         $this->assertInstanceOf(LetterSpacingClass::class, $letterSpacingClass);

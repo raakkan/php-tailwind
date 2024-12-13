@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\TransitionAnimation\TransitionPropertyClass;
 class TransitionPropertyTest extends TestCase
 {
     #[DataProvider('standardTransitionProvider')]
-    public function testStandardTransitions(string $input, string $expected): void
+    public function test_standard_transitions(string $input, string $expected): void
     {
         $transitionClass = TransitionPropertyClass::parse($input);
         $this->assertInstanceOf(TransitionPropertyClass::class, $transitionClass);
@@ -30,7 +30,7 @@ class TransitionPropertyTest extends TestCase
     }
 
     #[DataProvider('arbitraryTransitionProvider')]
-    public function testArbitraryTransitions(string $input, string $expected): void
+    public function test_arbitrary_transitions(string $input, string $expected): void
     {
         $transitionClass = TransitionPropertyClass::parse($input);
         $this->assertInstanceOf(TransitionPropertyClass::class, $transitionClass);
@@ -47,7 +47,7 @@ class TransitionPropertyTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $transitionClass = TransitionPropertyClass::parse($input);
         $this->assertNull($transitionClass);
@@ -65,7 +65,7 @@ class TransitionPropertyTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test case sensitivity
         $uppercaseTransition = TransitionPropertyClass::parse('TRANSITION-ALL');

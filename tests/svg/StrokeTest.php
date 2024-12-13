@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\SVG\StrokeClass;
 class StrokeTest extends TestCase
 {
     #[DataProvider('standardStrokeColorProvider')]
-    public function testStandardStrokeColors(string $input, string $expected): void
+    public function test_standard_stroke_colors(string $input, string $expected): void
     {
         $strokeClass = StrokeClass::parse($input);
         $this->assertInstanceOf(StrokeClass::class, $strokeClass);
@@ -32,7 +32,7 @@ class StrokeTest extends TestCase
     }
 
     #[DataProvider('arbitraryValueProvider')]
-    public function testArbitraryValues(string $input, string $expected): void
+    public function test_arbitrary_values(string $input, string $expected): void
     {
         $strokeClass = StrokeClass::parse($input);
         $this->assertInstanceOf(StrokeClass::class, $strokeClass);
@@ -51,7 +51,7 @@ class StrokeTest extends TestCase
     }
 
     #[DataProvider('specialValueProvider')]
-    public function testSpecialValues(string $input, string $expected): void
+    public function test_special_values(string $input, string $expected): void
     {
         $strokeClass = StrokeClass::parse($input);
         $this->assertInstanceOf(StrokeClass::class, $strokeClass);
@@ -69,7 +69,7 @@ class StrokeTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $strokeClass = StrokeClass::parse($input);
         $this->assertNull($strokeClass);
@@ -90,7 +90,7 @@ class StrokeTest extends TestCase
     }
 
     #[DataProvider('edgeCaseProvider')]
-    public function testEdgeCases(string $input, string $expected): void
+    public function test_edge_cases(string $input, string $expected): void
     {
         $strokeClass = StrokeClass::parse($input);
         $this->assertInstanceOf(StrokeClass::class, $strokeClass);

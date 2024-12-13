@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BackdropSepiaClass;
 class BackdropSepiaTest extends TestCase
 {
     #[DataProvider('standardBackdropSepiaProvider')]
-    public function testStandardBackdropSepia(string $input, string $expected): void
+    public function test_standard_backdrop_sepia(string $input, string $expected): void
     {
         $backdropSepiaClass = BackdropSepiaClass::parse($input);
         $this->assertInstanceOf(BackdropSepiaClass::class, $backdropSepiaClass);
@@ -25,7 +25,7 @@ class BackdropSepiaTest extends TestCase
     }
 
     #[DataProvider('arbitraryBackdropSepiaProvider')]
-    public function testArbitraryBackdropSepia(string $input, string $expected): void
+    public function test_arbitrary_backdrop_sepia(string $input, string $expected): void
     {
         $backdropSepiaClass = BackdropSepiaClass::parse($input);
         $this->assertInstanceOf(BackdropSepiaClass::class, $backdropSepiaClass);
@@ -43,7 +43,7 @@ class BackdropSepiaTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $backdropSepiaClass = BackdropSepiaClass::parse($input);
         $this->assertNull($backdropSepiaClass);
@@ -62,7 +62,7 @@ class BackdropSepiaTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the smallest predefined backdrop-sepia
         $smallestBackdropSepia = BackdropSepiaClass::parse('backdrop-sepia-0');

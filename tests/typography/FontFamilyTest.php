@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\FontFamilyClass;
 class FontFamilyTest extends TestCase
 {
     #[DataProvider('fontFamilyClassProvider')]
-    public function testFontFamilyClass(string $input, string $expected): void
+    public function test_font_family_class(string $input, string $expected): void
     {
         $fontFamilyClass = FontFamilyClass::parse($input);
         $this->assertInstanceOf(FontFamilyClass::class, $fontFamilyClass);
@@ -37,13 +37,13 @@ class FontFamilyTest extends TestCase
         ];
     }
 
-    public function testInvalidFontFamilyClass(): void
+    public function test_invalid_font_family_class(): void
     {
         $this->assertNull(FontFamilyClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidFontFamilyProvider')]
-    public function testInvalidFontFamily(string $input): void
+    public function test_invalid_font_family(string $input): void
     {
         $fontFamilyClass = FontFamilyClass::parse($input);
         $this->assertInstanceOf(FontFamilyClass::class, $fontFamilyClass);
@@ -60,7 +60,7 @@ class FontFamilyTest extends TestCase
     }
 
     #[DataProvider('escapedArbitraryValueProvider')]
-    public function testEscapedArbitraryValue(string $input, string $expected): void
+    public function test_escaped_arbitrary_value(string $input, string $expected): void
     {
         $fontFamilyClass = FontFamilyClass::parse($input);
         $this->assertInstanceOf(FontFamilyClass::class, $fontFamilyClass);

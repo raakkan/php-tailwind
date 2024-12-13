@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BlurClass;
 class BlurTest extends TestCase
 {
     #[DataProvider('standardBlurProvider')]
-    public function testStandardBlurs(string $input, string $expected): void
+    public function test_standard_blurs(string $input, string $expected): void
     {
         $blurClass = BlurClass::parse($input);
         $this->assertInstanceOf(BlurClass::class, $blurClass);
@@ -31,7 +31,7 @@ class BlurTest extends TestCase
     }
 
     #[DataProvider('arbitraryBlurProvider')]
-    public function testArbitraryBlurs(string $input, string $expected): void
+    public function test_arbitrary_blurs(string $input, string $expected): void
     {
         $blurClass = BlurClass::parse($input);
         $this->assertInstanceOf(BlurClass::class, $blurClass);
@@ -49,7 +49,7 @@ class BlurTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $blurClass = BlurClass::parse($input);
         $this->assertNull($blurClass);
@@ -69,7 +69,7 @@ class BlurTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default blur
         $defaultBlur = BlurClass::parse('blur');

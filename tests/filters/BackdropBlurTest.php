@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BackdropBlurClass;
 class BackdropBlurTest extends TestCase
 {
     #[DataProvider('standardBackdropBlurProvider')]
-    public function testStandardBackdropBlurs(string $input, string $expected): void
+    public function test_standard_backdrop_blurs(string $input, string $expected): void
     {
         $backdropBlurClass = BackdropBlurClass::parse($input);
         $this->assertInstanceOf(BackdropBlurClass::class, $backdropBlurClass);
@@ -31,7 +31,7 @@ class BackdropBlurTest extends TestCase
     }
 
     #[DataProvider('arbitraryBackdropBlurProvider')]
-    public function testArbitraryBackdropBlurs(string $input, string $expected): void
+    public function test_arbitrary_backdrop_blurs(string $input, string $expected): void
     {
         $backdropBlurClass = BackdropBlurClass::parse($input);
         $this->assertInstanceOf(BackdropBlurClass::class, $backdropBlurClass);
@@ -49,7 +49,7 @@ class BackdropBlurTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $backdropBlurClass = BackdropBlurClass::parse($input);
         $this->assertNull($backdropBlurClass);
@@ -69,7 +69,7 @@ class BackdropBlurTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default backdrop blur
         $defaultBlur = BackdropBlurClass::parse('backdrop-blur');

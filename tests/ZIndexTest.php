@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Layout\ZIndexClass;
 class ZIndexTest extends TestCase
 {
     #[DataProvider('zIndexClassProvider')]
-    public function testZIndexClass(string $input, string $expected): void
+    public function test_z_index_class(string $input, string $expected): void
     {
         $zIndexClass = ZIndexClass::parse($input);
         $this->assertInstanceOf(ZIndexClass::class, $zIndexClass);
@@ -58,12 +58,12 @@ class ZIndexTest extends TestCase
         ];
     }
 
-    public function testInvalidZIndexClass(): void
+    public function test_invalid_z_index_class(): void
     {
         $this->assertNull(ZIndexClass::parse('invalid-class'));
     }
 
-    public function testZIndexClassWithInvalidValue(): void
+    public function test_z_index_class_with_invalid_value(): void
     {
         $zIndexClass = ZIndexClass::parse('z-invalid');
         $this->assertInstanceOf(ZIndexClass::class, $zIndexClass);

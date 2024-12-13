@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\HueRotateClass;
 class HueRotateTest extends TestCase
 {
     #[DataProvider('standardHueRotateProvider')]
-    public function testStandardHueRotate(string $input, string $expected): void
+    public function test_standard_hue_rotate(string $input, string $expected): void
     {
         $hueRotateClass = HueRotateClass::parse($input);
         $this->assertInstanceOf(HueRotateClass::class, $hueRotateClass);
@@ -29,7 +29,7 @@ class HueRotateTest extends TestCase
     }
 
     #[DataProvider('negativeHueRotateProvider')]
-    public function testNegativeHueRotate(string $input, string $expected): void
+    public function test_negative_hue_rotate(string $input, string $expected): void
     {
         $hueRotateClass = HueRotateClass::parse($input);
         $this->assertInstanceOf(HueRotateClass::class, $hueRotateClass);
@@ -48,7 +48,7 @@ class HueRotateTest extends TestCase
     }
 
     #[DataProvider('arbitraryHueRotateProvider')]
-    public function testArbitraryHueRotate(string $input, string $expected): void
+    public function test_arbitrary_hue_rotate(string $input, string $expected): void
     {
         $hueRotateClass = HueRotateClass::parse($input);
         $this->assertInstanceOf(HueRotateClass::class, $hueRotateClass);
@@ -66,7 +66,7 @@ class HueRotateTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $hueRotateClass = HueRotateClass::parse($input);
         $this->assertNull($hueRotateClass);
@@ -86,7 +86,7 @@ class HueRotateTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default hue-rotate (0deg)
         $defaultHueRotate = HueRotateClass::parse('hue-rotate-0');

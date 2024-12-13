@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Layout\ColumnsClass;
 class ColumnsClassTest extends TestCase
 {
     #[DataProvider('columnsClassProvider')]
-    public function testColumnsClass(string $input, string $expected): void
+    public function test_columns_class(string $input, string $expected): void
     {
         $columnsClass = ColumnsClass::parse($input);
         $this->assertInstanceOf(ColumnsClass::class, $columnsClass);
@@ -50,18 +50,18 @@ class ColumnsClassTest extends TestCase
         ];
     }
 
-    public function testInvalidColumnsClass(): void
+    public function test_invalid_columns_class(): void
     {
         $this->assertNull(ColumnsClass::parse('columns-invalid'));
     }
 
-    public function testColumnsClassWithInvalidValue(): void
+    public function test_columns_class_with_invalid_value(): void
     {
         $columnsClass = new ColumnsClass('invalid');
         $this->assertSame('', $columnsClass->toCss());
     }
 
-    public function testArbitraryColumnsValidation(): void
+    public function test_arbitrary_columns_validation(): void
     {
         $this->assertInstanceOf(ColumnsClass::class, ColumnsClass::parse('columns-[15]'));
         $this->assertInstanceOf(ColumnsClass::class, ColumnsClass::parse('columns-[3.5rem]'));

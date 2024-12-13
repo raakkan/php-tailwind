@@ -135,11 +135,11 @@ class RingColorClass extends AbstractTailwindClass
     public static function parse(string $class): ?self
     {
         // Match ring color patterns with optional opacity
-        $pattern = '/^ring-(' . 
-            '(?:\[#[0-9A-Fa-f]{3,8}\])|' .  // Arbitrary hex colors
-            '(?:\[(?:rgb|hsl)a?\([^]]+\)\])|' .  // Arbitrary rgb/hsl colors
-            '(?:inherit|current|transparent)|' .  // Special values
-            '(?:(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?))' .  // Named colors
+        $pattern = '/^ring-('.
+            '(?:\[#[0-9A-Fa-f]{3,8}\])|'.  // Arbitrary hex colors
+            '(?:\[(?:rgb|hsl)a?\([^]]+\)\])|'.  // Arbitrary rgb/hsl colors
+            '(?:inherit|current|transparent)|'.  // Special values
+            '(?:(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?))'.  // Named colors
             '(?:\/([0-9.]+))?$/'; // Optional opacity
 
         if (preg_match($pattern, $class, $matches)) {

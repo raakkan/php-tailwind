@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\TextDecorationThicknessClass;
 class TextDecorationThicknessTest extends TestCase
 {
     #[DataProvider('standardThicknessProvider')]
-    public function testStandardThicknessClasses(string $input, string $expected): void
+    public function test_standard_thickness_classes(string $input, string $expected): void
     {
         $thicknessClass = TextDecorationThicknessClass::parse($input);
         $this->assertInstanceOf(TextDecorationThicknessClass::class, $thicknessClass);
@@ -30,7 +30,7 @@ class TextDecorationThicknessTest extends TestCase
     }
 
     #[DataProvider('arbitraryThicknessProvider')]
-    public function testArbitraryThicknessClasses(string $input, string $expected): void
+    public function test_arbitrary_thickness_classes(string $input, string $expected): void
     {
         $thicknessClass = TextDecorationThicknessClass::parse($input);
         $this->assertInstanceOf(TextDecorationThicknessClass::class, $thicknessClass);
@@ -48,7 +48,7 @@ class TextDecorationThicknessTest extends TestCase
     }
 
     #[DataProvider('invalidThicknessProvider')]
-    public function testInvalidThicknessClasses(string $input): void
+    public function test_invalid_thickness_classes(string $input): void
     {
         $thicknessClass = TextDecorationThicknessClass::parse($input);
         $this->assertNull($thicknessClass);
@@ -68,7 +68,7 @@ class TextDecorationThicknessTest extends TestCase
     }
 
     #[DataProvider('edgeCaseThicknessProvider')]
-    public function testEdgeCaseThicknessClasses(string $input, string $expected): void
+    public function test_edge_case_thickness_classes(string $input, string $expected): void
     {
         $thicknessClass = TextDecorationThicknessClass::parse($input);
         $this->assertInstanceOf(TextDecorationThicknessClass::class, $thicknessClass);
@@ -109,7 +109,7 @@ class TextDecorationThicknessTest extends TestCase
     //     ];
     // }
 
-    public function testNonDecorationClassReturnsNull(): void
+    public function test_non_decoration_class_returns_null(): void
     {
         $this->assertNull(TextDecorationThicknessClass::parse('font-bold'));
     }

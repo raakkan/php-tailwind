@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Effects\BoxShadowColorClass;
 class BoxShadowColorTest extends TestCase
 {
     #[DataProvider('standardColorProvider')]
-    public function testStandardColors(string $input, string $expected): void
+    public function test_standard_colors(string $input, string $expected): void
     {
         $boxShadowColorClass = BoxShadowColorClass::parse($input);
         $this->assertInstanceOf(BoxShadowColorClass::class, $boxShadowColorClass);
@@ -30,7 +30,7 @@ class BoxShadowColorTest extends TestCase
     }
 
     #[DataProvider('opacityProvider')]
-    public function testOpacity(string $input, string $expected): void
+    public function test_opacity(string $input, string $expected): void
     {
         $boxShadowColorClass = BoxShadowColorClass::parse($input);
         $this->assertInstanceOf(BoxShadowColorClass::class, $boxShadowColorClass);
@@ -49,7 +49,7 @@ class BoxShadowColorTest extends TestCase
     }
 
     #[DataProvider('arbitraryValueProvider')]
-    public function testArbitraryValues(string $input, string $expected): void
+    public function test_arbitrary_values(string $input, string $expected): void
     {
         $boxShadowColorClass = BoxShadowColorClass::parse($input);
         $this->assertInstanceOf(BoxShadowColorClass::class, $boxShadowColorClass);
@@ -68,7 +68,7 @@ class BoxShadowColorTest extends TestCase
     }
 
     #[DataProvider('specialColorProvider')]
-    public function testSpecialColors(string $input, string $expected): void
+    public function test_special_colors(string $input, string $expected): void
     {
         $boxShadowColorClass = BoxShadowColorClass::parse($input);
         $this->assertInstanceOf(BoxShadowColorClass::class, $boxShadowColorClass);
@@ -85,7 +85,7 @@ class BoxShadowColorTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $boxShadowColorClass = BoxShadowColorClass::parse($input);
         $this->assertNull($boxShadowColorClass);
@@ -103,7 +103,7 @@ class BoxShadowColorTest extends TestCase
     }
 
     #[DataProvider('edgeCaseProvider')]
-    public function testEdgeCases(string $input, string $expected): void
+    public function test_edge_cases(string $input, string $expected): void
     {
         $boxShadowColorClass = BoxShadowColorClass::parse($input);
         $this->assertInstanceOf(BoxShadowColorClass::class, $boxShadowColorClass);

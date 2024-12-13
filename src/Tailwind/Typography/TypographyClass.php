@@ -7,14 +7,17 @@ use Raakkan\PhpTailwind\AbstractTailwindClass;
 class TypographyClass extends AbstractTailwindClass
 {
     protected string $size;
+
     protected ?string $color;
+
     protected bool $invert;
+
     protected bool $notProse;
-    
+
     public function __construct(string $value)
     {
         parent::__construct($value);
-        
+
         // Parse the class components
         $this->parseComponents($value);
     }
@@ -30,11 +33,12 @@ class TypographyClass extends AbstractTailwindClass
         // Handle not-prose first
         if ($value === 'not-prose') {
             $this->notProse = true;
+
             return;
         }
 
         $parts = explode(' ', $value);
-        
+
         foreach ($parts as $part) {
             if (strpos($part, 'prose-') === 0) {
                 $modifier = substr($part, 6);
@@ -51,10 +55,10 @@ class TypographyClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if($this->value === 'prose') {  
+        if ($this->value === 'prose') {
             return $this->getProseClasses();
         }
-        if($this->value === 'prose-invert') {
+        if ($this->value === 'prose-invert') {
             return $this->getProseInvertClasses();
         }
         // Handle not-prose
@@ -70,23 +74,23 @@ class TypographyClass extends AbstractTailwindClass
         }
 
         $css = [];
-        
+
         // Base prose styles
         $css[] = $this->getBaseStyles();
-        
+
         // Size-specific styles
         $css[] = $this->getSizeStyles();
-        
+
         // Color theme styles
         if ($this->color) {
             $css[] = $this->getColorStyles();
         }
-        
+
         // Invert styles for dark mode
         if ($this->invert) {
             $css[] = $this->getInvertStyles();
         }
-        
+
         return implode("\n", array_filter($css));
     }
 
@@ -112,6 +116,7 @@ class TypographyClass extends AbstractTailwindClass
 
         if (isset($sizes[$this->size])) {
             [$fontSize, $lineHeight] = $sizes[$this->size];
+
             return ".{$this->escapeSelector($this->value)} {
                 font-size: {$fontSize};
                 line-height: {$lineHeight};
@@ -133,6 +138,7 @@ class TypographyClass extends AbstractTailwindClass
 
         if (isset($colors[$this->color])) {
             $color = $colors[$this->color];
+
             return ".{$this->escapeSelector($this->value)} {
                 --tw-prose-body: {$color['body']};
                 --tw-prose-headings: {$color['headings']};
@@ -169,6 +175,7 @@ class TypographyClass extends AbstractTailwindClass
         if ($class === 'not-prose' || preg_match('/^prose(?:(?:-(?:sm|base|lg|xl|2xl|gray|slate|zinc|neutral|stone))*\s*)*$/', $class)) {
             return new self($class);
         }
+
         return null;
     }
 
@@ -196,4 +203,4 @@ class TypographyClass extends AbstractTailwindClass
     {
         return '.prose-invert{--tw-prose-body:var(--tw-prose-invert-body);--tw-prose-headings:var(--tw-prose-invert-headings);--tw-prose-lead:var(--tw-prose-invert-lead);--tw-prose-links:var(--tw-prose-invert-links);--tw-prose-bold:var(--tw-prose-invert-bold);--tw-prose-counters:var(--tw-prose-invert-counters);--tw-prose-bullets:var(--tw-prose-invert-bullets);--tw-prose-hr:var(--tw-prose-invert-hr);--tw-prose-quotes:var(--tw-prose-invert-quotes);--tw-prose-quote-borders:var(--tw-prose-invert-quote-borders);--tw-prose-captions:var(--tw-prose-invert-captions);--tw-prose-kbd:var(--tw-prose-invert-kbd);--tw-prose-kbd-shadows:var(--tw-prose-invert-kbd-shadows);--tw-prose-code:var(--tw-prose-invert-code);--tw-prose-pre-code:var(--tw-prose-invert-pre-code);--tw-prose-pre-bg:var(--tw-prose-invert-pre-bg);--tw-prose-th-borders:var(--tw-prose-invert-th-borders);--tw-prose-td-borders:var(--tw-prose-invert-td-borders)}';
     }
-} 
+}

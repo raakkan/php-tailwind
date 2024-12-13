@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Interactivity\WillChangeClass;
 class WillChangeTest extends TestCase
 {
     #[DataProvider('standardWillChangeProvider')]
-    public function testStandardWillChange(string $input, string $expected): void
+    public function test_standard_will_change(string $input, string $expected): void
     {
         $willChangeClass = WillChangeClass::parse($input);
         $this->assertInstanceOf(WillChangeClass::class, $willChangeClass);
@@ -27,7 +27,7 @@ class WillChangeTest extends TestCase
     }
 
     #[DataProvider('arbitraryValueProvider')]
-    public function testArbitraryValues(string $input, string $expected): void
+    public function test_arbitrary_values(string $input, string $expected): void
     {
         $willChangeClass = WillChangeClass::parse($input);
         $this->assertInstanceOf(WillChangeClass::class, $willChangeClass);
@@ -45,7 +45,7 @@ class WillChangeTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $willChangeClass = WillChangeClass::parse($input);
         $this->assertNull($willChangeClass);
@@ -65,7 +65,7 @@ class WillChangeTest extends TestCase
     }
 
     #[DataProvider('edgeCaseProvider')]
-    public function testEdgeCases(string $input, string $expected): void
+    public function test_edge_cases(string $input, string $expected): void
     {
         $willChangeClass = WillChangeClass::parse($input);
         $this->assertInstanceOf(WillChangeClass::class, $willChangeClass);
@@ -82,7 +82,7 @@ class WillChangeTest extends TestCase
         ];
     }
 
-    public function testEmptyOutput(): void
+    public function test_empty_output(): void
     {
         $willChangeClass = WillChangeClass::parse('will-change-invalid');
         $this->assertInstanceOf(WillChangeClass::class, $willChangeClass);

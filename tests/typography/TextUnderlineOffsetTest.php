@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\TextUnderlineOffsetClass;
 class TextUnderlineOffsetTest extends TestCase
 {
     #[DataProvider('textUnderlineOffsetClassProvider')]
-    public function testTextUnderlineOffsetClass(string $input, string $expected): void
+    public function test_text_underline_offset_class(string $input, string $expected): void
     {
         $textUnderlineOffsetClass = TextUnderlineOffsetClass::parse($input);
         $this->assertInstanceOf(TextUnderlineOffsetClass::class, $textUnderlineOffsetClass);
@@ -34,19 +34,19 @@ class TextUnderlineOffsetTest extends TestCase
         ];
     }
 
-    public function testInvalidTextUnderlineOffsetClass(): void
+    public function test_invalid_text_underline_offset_class(): void
     {
         $this->assertNull(TextUnderlineOffsetClass::parse('underline-offset-invalid'));
     }
 
-    public function testTextUnderlineOffsetClassWithInvalidValue(): void
+    public function test_text_underline_offset_class_with_invalid_value(): void
     {
         $textUnderlineOffsetClass = TextUnderlineOffsetClass::parse('underline-offset-7');
         $this->assertNull($textUnderlineOffsetClass);
     }
 
     #[DataProvider('invalidArbitraryTextUnderlineOffsetProvider')]
-    public function testInvalidArbitraryTextUnderlineOffset(string $input): void
+    public function test_invalid_arbitrary_text_underline_offset(string $input): void
     {
         $textUnderlineOffsetClass = TextUnderlineOffsetClass::parse($input);
         $this->assertInstanceOf(TextUnderlineOffsetClass::class, $textUnderlineOffsetClass);
@@ -63,7 +63,7 @@ class TextUnderlineOffsetTest extends TestCase
     }
 
     #[DataProvider('validArbitraryTextUnderlineOffsetProvider')]
-    public function testValidArbitraryTextUnderlineOffset(string $input, string $expected): void
+    public function test_valid_arbitrary_text_underline_offset(string $input, string $expected): void
     {
         $textUnderlineOffsetClass = TextUnderlineOffsetClass::parse($input);
         $this->assertInstanceOf(TextUnderlineOffsetClass::class, $textUnderlineOffsetClass);
@@ -81,7 +81,7 @@ class TextUnderlineOffsetTest extends TestCase
     }
 
     #[DataProvider('edgeCaseArbitraryTextUnderlineOffsetProvider')]
-    public function testEdgeCaseArbitraryTextUnderlineOffset(string $input, string $expected): void
+    public function test_edge_case_arbitrary_text_underline_offset(string $input, string $expected): void
     {
         $textUnderlineOffsetClass = TextUnderlineOffsetClass::parse($input);
         $this->assertInstanceOf(TextUnderlineOffsetClass::class, $textUnderlineOffsetClass);
@@ -97,7 +97,7 @@ class TextUnderlineOffsetTest extends TestCase
     }
 
     #[DataProvider('calcFunctionTextUnderlineOffsetProvider')]
-    public function testCalcFunctionTextUnderlineOffset(string $input, string $expected): void
+    public function test_calc_function_text_underline_offset(string $input, string $expected): void
     {
         $textUnderlineOffsetClass = TextUnderlineOffsetClass::parse($input);
         $this->assertInstanceOf(TextUnderlineOffsetClass::class, $textUnderlineOffsetClass);

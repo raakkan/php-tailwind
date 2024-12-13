@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\FlexGrid\OrderClass;
 class OrderTest extends TestCase
 {
     #[DataProvider('orderClassProvider')]
-    public function testOrderClass(string $input, string $expected): void
+    public function test_order_class(string $input, string $expected): void
     {
         $orderClass = OrderClass::parse($input);
         $this->assertInstanceOf(OrderClass::class, $orderClass);
@@ -45,12 +45,12 @@ class OrderTest extends TestCase
         ];
     }
 
-    public function testInvalidOrderClass(): void
+    public function test_invalid_order_class(): void
     {
         $this->assertNull(OrderClass::parse('invalid-class'));
     }
 
-    public function testOrderClassWithInvalidValue(): void
+    public function test_order_class_with_invalid_value(): void
     {
         $orderClass = OrderClass::parse('order-invalid');
         $this->assertInstanceOf(OrderClass::class, $orderClass);
@@ -58,7 +58,7 @@ class OrderTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryValuesProvider')]
-    public function testInvalidArbitraryValues(string $input): void
+    public function test_invalid_arbitrary_values(string $input): void
     {
         $orderClass = OrderClass::parse($input);
         $this->assertInstanceOf(OrderClass::class, $orderClass);

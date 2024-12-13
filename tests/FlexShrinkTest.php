@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\FlexGrid\FlexShrinkClass;
 class FlexShrinkTest extends TestCase
 {
     #[DataProvider('flexShrinkClassProvider')]
-    public function testFlexShrinkClass(string $input, string $expected): void
+    public function test_flex_shrink_class(string $input, string $expected): void
     {
         $flexShrinkClass = FlexShrinkClass::parse($input);
         $this->assertInstanceOf(FlexShrinkClass::class, $flexShrinkClass);
@@ -31,13 +31,13 @@ class FlexShrinkTest extends TestCase
         ];
     }
 
-    public function testInvalidFlexShrinkClass(): void
+    public function test_invalid_flex_shrink_class(): void
     {
         $this->assertNull(FlexShrinkClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidFlexShrinkValuesProvider')]
-    public function testFlexShrinkClassWithInvalidValue(string $input): void
+    public function test_flex_shrink_class_with_invalid_value(string $input): void
     {
         $flexShrinkClass = FlexShrinkClass::parse($input);
         $this->assertInstanceOf(FlexShrinkClass::class, $flexShrinkClass);
@@ -56,7 +56,7 @@ class FlexShrinkTest extends TestCase
     }
 
     #[DataProvider('escapingTestProvider')]
-    public function testProperEscaping(string $input, string $expected): void
+    public function test_proper_escaping(string $input, string $expected): void
     {
         $flexShrinkClass = FlexShrinkClass::parse($input);
         $this->assertInstanceOf(FlexShrinkClass::class, $flexShrinkClass);

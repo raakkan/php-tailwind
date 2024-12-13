@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Interactivity\ScrollPaddingClass;
 class ScrollPaddingTest extends TestCase
 {
     #[DataProvider('scrollPaddingClassProvider')]
-    public function testScrollPaddingClass(string $input, string $expected): void
+    public function test_scroll_padding_class(string $input, string $expected): void
     {
         $scrollPaddingClass = ScrollPaddingClass::parse($input);
         $this->assertInstanceOf(ScrollPaddingClass::class, $scrollPaddingClass);
@@ -42,7 +42,7 @@ class ScrollPaddingTest extends TestCase
     }
 
     #[DataProvider('scrollPaddingFractionClassProvider')]
-    public function testScrollPaddingFractionClass(string $input, string $expected): void
+    public function test_scroll_padding_fraction_class(string $input, string $expected): void
     {
         $scrollPaddingClass = ScrollPaddingClass::parse($input);
         $this->assertInstanceOf(ScrollPaddingClass::class, $scrollPaddingClass);
@@ -60,7 +60,7 @@ class ScrollPaddingTest extends TestCase
     }
 
     #[DataProvider('scrollPaddingArbitraryValueProvider')]
-    public function testScrollPaddingArbitraryValue(string $input, string $expected): void
+    public function test_scroll_padding_arbitrary_value(string $input, string $expected): void
     {
         $scrollPaddingClass = ScrollPaddingClass::parse($input);
         $this->assertInstanceOf(ScrollPaddingClass::class, $scrollPaddingClass);
@@ -82,12 +82,12 @@ class ScrollPaddingTest extends TestCase
         ];
     }
 
-    public function testInvalidScrollPaddingClass(): void
+    public function test_invalid_scroll_padding_class(): void
     {
         $this->assertNull(ScrollPaddingClass::parse('invalid-class'));
     }
 
-    public function testScrollPaddingClassWithInvalidValue(): void
+    public function test_scroll_padding_class_with_invalid_value(): void
     {
         $scrollPaddingClass = ScrollPaddingClass::parse('scroll-p-invalid');
         $this->assertInstanceOf(ScrollPaddingClass::class, $scrollPaddingClass);
@@ -95,7 +95,7 @@ class ScrollPaddingTest extends TestCase
     }
 
     #[DataProvider('negativeScrollPaddingClassProvider')]
-    public function testNegativeScrollPaddingClass(string $input): void
+    public function test_negative_scroll_padding_class(string $input): void
     {
         $this->assertNull(ScrollPaddingClass::parse($input));
     }
@@ -114,7 +114,7 @@ class ScrollPaddingTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryScrollPaddingClassProvider')]
-    public function testInvalidArbitraryScrollPaddingClass(string $input): void
+    public function test_invalid_arbitrary_scroll_padding_class(string $input): void
     {
         $scrollPaddingClass = ScrollPaddingClass::parse($input);
         $this->assertInstanceOf(ScrollPaddingClass::class, $scrollPaddingClass);

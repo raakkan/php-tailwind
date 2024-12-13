@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\BackdropSaturateClass;
 class BackdropSaturateTest extends TestCase
 {
     #[DataProvider('standardBackdropSaturateProvider')]
-    public function testStandardBackdropSaturate(string $input, string $expected): void
+    public function test_standard_backdrop_saturate(string $input, string $expected): void
     {
         $backdropSaturateClass = BackdropSaturateClass::parse($input);
         $this->assertInstanceOf(BackdropSaturateClass::class, $backdropSaturateClass);
@@ -28,7 +28,7 @@ class BackdropSaturateTest extends TestCase
     }
 
     #[DataProvider('arbitraryBackdropSaturateProvider')]
-    public function testArbitraryBackdropSaturate(string $input, string $expected): void
+    public function test_arbitrary_backdrop_saturate(string $input, string $expected): void
     {
         $backdropSaturateClass = BackdropSaturateClass::parse($input);
         $this->assertInstanceOf(BackdropSaturateClass::class, $backdropSaturateClass);
@@ -45,7 +45,7 @@ class BackdropSaturateTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $backdropSaturateClass = BackdropSaturateClass::parse($input);
         $this->assertNull($backdropSaturateClass);
@@ -66,7 +66,7 @@ class BackdropSaturateTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the default backdrop-saturate (100%)
         $defaultBackdropSaturate = BackdropSaturateClass::parse('backdrop-saturate-100');

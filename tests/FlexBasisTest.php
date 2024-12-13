@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\FlexGrid\FlexBasisClass;
 class FlexBasisTest extends TestCase
 {
     #[DataProvider('flexBasisClassProvider')]
-    public function testFlexBasisClass(string $input, string $expected): void
+    public function test_flex_basis_class(string $input, string $expected): void
     {
         $flexBasisClass = FlexBasisClass::parse($input);
         $this->assertInstanceOf(FlexBasisClass::class, $flexBasisClass);
@@ -67,12 +67,12 @@ class FlexBasisTest extends TestCase
         ];
     }
 
-    public function testInvalidFlexBasisClass(): void
+    public function test_invalid_flex_basis_class(): void
     {
         $this->assertNull(FlexBasisClass::parse('invalid-class'));
     }
 
-    public function testFlexBasisClassWithInvalidValue(): void
+    public function test_flex_basis_class_with_invalid_value(): void
     {
         $flexBasisClass = FlexBasisClass::parse('basis-invalid');
         $this->assertInstanceOf(FlexBasisClass::class, $flexBasisClass);
@@ -80,7 +80,7 @@ class FlexBasisTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryValuesProvider')]
-    public function testInvalidArbitraryValues(string $input): void
+    public function test_invalid_arbitrary_values(string $input): void
     {
         $flexBasisClass = FlexBasisClass::parse($input);
         $this->assertInstanceOf(FlexBasisClass::class, $flexBasisClass);

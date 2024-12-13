@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Sizing\SizeClass;
 class SizeTest extends TestCase
 {
     #[DataProvider('sizeClassProvider')]
-    public function testSizeClass(string $input, string $expected): void
+    public function test_size_class(string $input, string $expected): void
     {
         $sizeClass = SizeClass::parse($input);
         $this->assertInstanceOf(SizeClass::class, $sizeClass);
@@ -94,12 +94,12 @@ class SizeTest extends TestCase
         ];
     }
 
-    public function testInvalidSizeClass(): void
+    public function test_invalid_size_class(): void
     {
         $this->assertNull(SizeClass::parse('invalid-class'));
     }
 
-    public function testSizeClassWithInvalidValue(): void
+    public function test_size_class_with_invalid_value(): void
     {
         $sizeClass = SizeClass::parse('size-invalid');
         $this->assertInstanceOf(SizeClass::class, $sizeClass);
@@ -107,7 +107,7 @@ class SizeTest extends TestCase
     }
 
     #[DataProvider('invalidArbitrarySizeProvider')]
-    public function testInvalidArbitrarySize(string $input): void
+    public function test_invalid_arbitrary_size(string $input): void
     {
         $sizeClass = SizeClass::parse($input);
         $this->assertInstanceOf(SizeClass::class, $sizeClass);
@@ -127,7 +127,7 @@ class SizeTest extends TestCase
     }
 
     #[DataProvider('validArbitrarySizeProvider')]
-    public function testValidArbitrarySize(string $input, string $expected): void
+    public function test_valid_arbitrary_size(string $input, string $expected): void
     {
         $sizeClass = SizeClass::parse($input);
         $this->assertInstanceOf(SizeClass::class, $sizeClass);
@@ -148,7 +148,7 @@ class SizeTest extends TestCase
     }
 
     #[DataProvider('viewportUnitsProvider')]
-    public function testViewportUnits(string $input, string $expected): void
+    public function test_viewport_units(string $input, string $expected): void
     {
         $sizeClass = SizeClass::parse($input);
         $this->assertInstanceOf(SizeClass::class, $sizeClass);

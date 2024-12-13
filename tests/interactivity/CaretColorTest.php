@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Interactivity\CaretColorClass;
 class CaretColorTest extends TestCase
 {
     #[DataProvider('standardCaretColorProvider')]
-    public function testStandardCaretColors(string $input, string $expected): void
+    public function test_standard_caret_colors(string $input, string $expected): void
     {
         $caretColorClass = CaretColorClass::parse($input);
         $this->assertInstanceOf(CaretColorClass::class, $caretColorClass);
@@ -30,7 +30,7 @@ class CaretColorTest extends TestCase
     }
 
     #[DataProvider('opacityProvider')]
-    public function testOpacity(string $input, string $expected): void
+    public function test_opacity(string $input, string $expected): void
     {
         $caretColorClass = CaretColorClass::parse($input);
         $this->assertInstanceOf(CaretColorClass::class, $caretColorClass);
@@ -49,7 +49,7 @@ class CaretColorTest extends TestCase
     }
 
     #[DataProvider('arbitraryValueProvider')]
-    public function testArbitraryValues(string $input, string $expected): void
+    public function test_arbitrary_values(string $input, string $expected): void
     {
         $caretColorClass = CaretColorClass::parse($input);
         $this->assertInstanceOf(CaretColorClass::class, $caretColorClass);
@@ -68,7 +68,7 @@ class CaretColorTest extends TestCase
     }
 
     #[DataProvider('specialColorProvider')]
-    public function testSpecialColors(string $input, string $expected): void
+    public function test_special_colors(string $input, string $expected): void
     {
         $caretColorClass = CaretColorClass::parse($input);
         $this->assertInstanceOf(CaretColorClass::class, $caretColorClass);
@@ -85,7 +85,7 @@ class CaretColorTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $caretColorClass = CaretColorClass::parse($input);
         $this->assertNull($caretColorClass);
@@ -104,7 +104,7 @@ class CaretColorTest extends TestCase
     }
 
     #[DataProvider('edgeCaseProvider')]
-    public function testEdgeCases(string $input, string $expected): void
+    public function test_edge_cases(string $input, string $expected): void
     {
         $caretColorClass = CaretColorClass::parse($input);
         $this->assertInstanceOf(CaretColorClass::class, $caretColorClass);

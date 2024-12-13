@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\ListStyleTypeClass;
 class ListStyleTypeTest extends TestCase
 {
     #[DataProvider('listStyleTypeClassProvider')]
-    public function testListStyleTypeClass(string $input, string $expected): void
+    public function test_list_style_type_class(string $input, string $expected): void
     {
         $listStyleTypeClass = ListStyleTypeClass::parse($input);
         $this->assertInstanceOf(ListStyleTypeClass::class, $listStyleTypeClass);
@@ -31,19 +31,19 @@ class ListStyleTypeTest extends TestCase
         ];
     }
 
-    public function testInvalidListStyleTypeClass(): void
+    public function test_invalid_list_style_type_class(): void
     {
         $this->assertNull(ListStyleTypeClass::parse('list-invalid'));
     }
 
-    public function testListStyleTypeClassWithInvalidValue(): void
+    public function test_list_style_type_class_with_invalid_value(): void
     {
         $listStyleTypeClass = ListStyleTypeClass::parse('list-circle');
         $this->assertNull($listStyleTypeClass);
     }
 
     #[DataProvider('invalidArbitraryListStyleTypeProvider')]
-    public function testInvalidArbitraryListStyleType(string $input): void
+    public function test_invalid_arbitrary_list_style_type(string $input): void
     {
         $listStyleTypeClass = ListStyleTypeClass::parse($input);
         $this->assertInstanceOf(ListStyleTypeClass::class, $listStyleTypeClass);
@@ -59,7 +59,7 @@ class ListStyleTypeTest extends TestCase
     }
 
     #[DataProvider('validArbitraryListStyleTypeProvider')]
-    public function testValidArbitraryListStyleType(string $input, string $expected): void
+    public function test_valid_arbitrary_list_style_type(string $input, string $expected): void
     {
         $listStyleTypeClass = ListStyleTypeClass::parse($input);
         $this->assertInstanceOf(ListStyleTypeClass::class, $listStyleTypeClass);
@@ -77,14 +77,14 @@ class ListStyleTypeTest extends TestCase
         ];
     }
 
-    public function testDefaultToNoneType(): void
+    public function test_default_to_none_type(): void
     {
         $listStyleTypeClass = ListStyleTypeClass::parse('list-unknown');
         $this->assertNull($listStyleTypeClass);
     }
 
     #[DataProvider('specialCharactersListStyleTypeProvider')]
-    public function testSpecialCharactersListStyleType(string $input, string $expected): void
+    public function test_special_characters_list_style_type(string $input, string $expected): void
     {
         $listStyleTypeClass = ListStyleTypeClass::parse($input);
         $this->assertInstanceOf(ListStyleTypeClass::class, $listStyleTypeClass);
@@ -100,7 +100,7 @@ class ListStyleTypeTest extends TestCase
     }
 
     #[DataProvider('caseInsensitiveProvider')]
-    public function testCaseInsensitiveListStyleType(string $input, string $expected): void
+    public function test_case_insensitive_list_style_type(string $input, string $expected): void
     {
         $listStyleTypeClass = ListStyleTypeClass::parse($input);
         $this->assertInstanceOf(ListStyleTypeClass::class, $listStyleTypeClass);
@@ -117,7 +117,7 @@ class ListStyleTypeTest extends TestCase
         ];
     }
 
-    public function testNonListStyleTypeClass(): void
+    public function test_non_list_style_type_class(): void
     {
         $this->assertNull(ListStyleTypeClass::parse('font-bold'));
         $this->assertNull(ListStyleTypeClass::parse('text-lg'));

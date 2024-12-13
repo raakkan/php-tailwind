@@ -126,6 +126,7 @@ class BorderWidthClass extends AbstractTailwindClass
         if (preg_match('/^border(-[trblxyes])?(?:-(?:0|2|4|8))?$/', $class, $matches)) {
             $side = ltrim($matches[1] ?? '', '-');
             $value = $matches[2] ?? '';
+
             return new self($value, $side, false);
         }
 
@@ -133,6 +134,7 @@ class BorderWidthClass extends AbstractTailwindClass
         if (preg_match('/^border(?:-[trblxyes])?-(\[.+\])$/', $class, $matches)) {
             $side = ltrim($matches[1] ?? '', '-');
             $value = $matches[1];
+
             return new self($value, $side, true);
         }
 

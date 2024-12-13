@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Filters\SepiaClass;
 class SepiaTest extends TestCase
 {
     #[DataProvider('standardSepiaProvider')]
-    public function testStandardSepia(string $input, string $expected): void
+    public function test_standard_sepia(string $input, string $expected): void
     {
         $sepiaClass = SepiaClass::parse($input);
         $this->assertInstanceOf(SepiaClass::class, $sepiaClass);
@@ -25,7 +25,7 @@ class SepiaTest extends TestCase
     }
 
     #[DataProvider('arbitrarySepiaProvider')]
-    public function testArbitrarySepia(string $input, string $expected): void
+    public function test_arbitrary_sepia(string $input, string $expected): void
     {
         $sepiaClass = SepiaClass::parse($input);
         $this->assertInstanceOf(SepiaClass::class, $sepiaClass);
@@ -43,7 +43,7 @@ class SepiaTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $sepiaClass = SepiaClass::parse($input);
         $this->assertNull($sepiaClass);
@@ -62,7 +62,7 @@ class SepiaTest extends TestCase
         ];
     }
 
-    public function testEdgeCases(): void
+    public function test_edge_cases(): void
     {
         // Test the smallest predefined sepia
         $smallestSepia = SepiaClass::parse('sepia-0');

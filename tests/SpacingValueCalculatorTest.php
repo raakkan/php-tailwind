@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Spacing\SpacingValueCalculator;
 class SpacingValueCalculatorTest extends TestCase
 {
     #[DataProvider('spacingValueCalculatorProvider')]
-    public function testSpacingValueCalculator(string $input, bool $isNegative, string $expected): void
+    public function test_spacing_value_calculator(string $input, bool $isNegative, string $expected): void
     {
         $this->assertSame($expected, SpacingValueCalculator::calculate($input, $isNegative));
     }
@@ -73,7 +73,7 @@ class SpacingValueCalculatorTest extends TestCase
     }
 
     #[DataProvider('fractionSpacingValueProvider')]
-    public function testFractionSpacingValue(string $input, bool $isNegative, string $expected): void
+    public function test_fraction_spacing_value(string $input, bool $isNegative, string $expected): void
     {
         $this->assertSame($expected, SpacingValueCalculator::calculate($input, $isNegative));
     }

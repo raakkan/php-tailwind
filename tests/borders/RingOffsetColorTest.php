@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Borders\RingOffsetColorClass;
 class RingOffsetColorTest extends TestCase
 {
     #[DataProvider('standardRingOffsetColorProvider')]
-    public function testStandardRingOffsetColors(string $input, string $expected): void
+    public function test_standard_ring_offset_colors(string $input, string $expected): void
     {
         $ringOffsetColorClass = RingOffsetColorClass::parse($input);
         $this->assertInstanceOf(RingOffsetColorClass::class, $ringOffsetColorClass);
@@ -30,7 +30,7 @@ class RingOffsetColorTest extends TestCase
     }
 
     #[DataProvider('opacityProvider')]
-    public function testOpacity(string $input, string $expected): void
+    public function test_opacity(string $input, string $expected): void
     {
         $ringOffsetColorClass = RingOffsetColorClass::parse($input);
         $this->assertInstanceOf(RingOffsetColorClass::class, $ringOffsetColorClass);
@@ -49,7 +49,7 @@ class RingOffsetColorTest extends TestCase
     }
 
     #[DataProvider('arbitraryValueProvider')]
-    public function testArbitraryValues(string $input, string $expected): void
+    public function test_arbitrary_values(string $input, string $expected): void
     {
         $ringOffsetColorClass = RingOffsetColorClass::parse($input);
         $this->assertInstanceOf(RingOffsetColorClass::class, $ringOffsetColorClass);
@@ -68,7 +68,7 @@ class RingOffsetColorTest extends TestCase
     }
 
     #[DataProvider('specialColorProvider')]
-    public function testSpecialColors(string $input, string $expected): void
+    public function test_special_colors(string $input, string $expected): void
     {
         $ringOffsetColorClass = RingOffsetColorClass::parse($input);
         $this->assertInstanceOf(RingOffsetColorClass::class, $ringOffsetColorClass);
@@ -85,7 +85,7 @@ class RingOffsetColorTest extends TestCase
     }
 
     #[DataProvider('invalidInputProvider')]
-    public function testInvalidInputs(string $input): void
+    public function test_invalid_inputs(string $input): void
     {
         $ringOffsetColorClass = RingOffsetColorClass::parse($input);
         $this->assertNull($ringOffsetColorClass);
@@ -103,7 +103,7 @@ class RingOffsetColorTest extends TestCase
     }
 
     #[DataProvider('edgeCaseProvider')]
-    public function testEdgeCases(string $input, string $expected): void
+    public function test_edge_cases(string $input, string $expected): void
     {
         $ringOffsetColorClass = RingOffsetColorClass::parse($input);
         $this->assertInstanceOf(RingOffsetColorClass::class, $ringOffsetColorClass);

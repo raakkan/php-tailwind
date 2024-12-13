@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Typography\LineHeightClass;
 class LineHeightTest extends TestCase
 {
     #[DataProvider('lineHeightClassProvider')]
-    public function testLineHeightClass(string $input, string $expected): void
+    public function test_line_height_class(string $input, string $expected): void
     {
         $lineHeightClass = LineHeightClass::parse($input);
         $this->assertInstanceOf(LineHeightClass::class, $lineHeightClass);
@@ -45,13 +45,13 @@ class LineHeightTest extends TestCase
         ];
     }
 
-    public function testInvalidLineHeightClass(): void
+    public function test_invalid_line_height_class(): void
     {
         $this->assertNull(LineHeightClass::parse('leading-invalid'));
     }
 
     #[DataProvider('invalidArbitraryLineHeightProvider')]
-    public function testInvalidArbitraryLineHeight(string $input): void
+    public function test_invalid_arbitrary_line_height(string $input): void
     {
         $lineHeightClass = LineHeightClass::parse($input);
         $this->assertInstanceOf(LineHeightClass::class, $lineHeightClass);
@@ -68,7 +68,7 @@ class LineHeightTest extends TestCase
     }
 
     #[DataProvider('edgeCaseArbitraryLineHeightProvider')]
-    public function testEdgeCaseArbitraryLineHeight(string $input, string $expected): void
+    public function test_edge_case_arbitrary_line_height(string $input, string $expected): void
     {
         $lineHeightClass = LineHeightClass::parse($input);
         $this->assertInstanceOf(LineHeightClass::class, $lineHeightClass);
@@ -100,14 +100,14 @@ class LineHeightTest extends TestCase
     //     ];
     // }
 
-    public function testDefaultToNormalLineHeight(): void
+    public function test_default_to_normal_line_height(): void
     {
         $lineHeightClass = LineHeightClass::parse('leading-unknown');
         $this->assertNull($lineHeightClass);
     }
 
     #[DataProvider('nonMatchingClassesProvider')]
-    public function testNonMatchingClasses(string $input): void
+    public function test_non_matching_classes(string $input): void
     {
         $this->assertNull(LineHeightClass::parse($input));
     }

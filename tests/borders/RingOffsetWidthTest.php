@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Borders\RingOffsetWidthClass;
 class RingOffsetWidthTest extends TestCase
 {
     #[DataProvider('ringOffsetWidthClassProvider')]
-    public function testRingOffsetWidthClass(string $input, string $expected): void
+    public function test_ring_offset_width_class(string $input, string $expected): void
     {
         $ringOffsetWidthClass = RingOffsetWidthClass::parse($input);
         $this->assertInstanceOf(RingOffsetWidthClass::class, $ringOffsetWidthClass);
@@ -28,7 +28,7 @@ class RingOffsetWidthTest extends TestCase
     }
 
     #[DataProvider('arbitraryRingOffsetWidthClassProvider')]
-    public function testArbitraryRingOffsetWidthClass(string $input, string $expected): void
+    public function test_arbitrary_ring_offset_width_class(string $input, string $expected): void
     {
         $ringOffsetWidthClass = RingOffsetWidthClass::parse($input);
         $this->assertInstanceOf(RingOffsetWidthClass::class, $ringOffsetWidthClass);
@@ -49,13 +49,13 @@ class RingOffsetWidthTest extends TestCase
         ];
     }
 
-    public function testInvalidRingOffsetWidthClass(): void
+    public function test_invalid_ring_offset_width_class(): void
     {
         $this->assertNull(RingOffsetWidthClass::parse('invalid-class'));
     }
 
     #[DataProvider('invalidRingOffsetWidthValueProvider')]
-    public function testRingOffsetWidthClassWithInvalidValue(string $input): void
+    public function test_ring_offset_width_class_with_invalid_value(string $input): void
     {
         $ringOffsetWidthClass = RingOffsetWidthClass::parse($input);
         $this->assertInstanceOf(RingOffsetWidthClass::class, $ringOffsetWidthClass);
@@ -76,7 +76,7 @@ class RingOffsetWidthTest extends TestCase
     }
 
     #[DataProvider('invalidArbitraryRingOffsetWidthClassProvider')]
-    public function testInvalidArbitraryRingOffsetWidthClass(string $input): void
+    public function test_invalid_arbitrary_ring_offset_width_class(string $input): void
     {
         $ringOffsetWidthClass = RingOffsetWidthClass::parse($input);
         $this->assertInstanceOf(RingOffsetWidthClass::class, $ringOffsetWidthClass);

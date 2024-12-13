@@ -9,7 +9,7 @@ use Raakkan\PhpTailwind\Tailwind\Tables\BorderSpacingClass;
 class BorderSpacingTest extends TestCase
 {
     #[DataProvider('borderSpacingClassProvider')]
-    public function testBorderSpacingClass(string $input, string $expected): void
+    public function test_border_spacing_class(string $input, string $expected): void
     {
         $borderSpacingClass = BorderSpacingClass::parse($input);
         $this->assertInstanceOf(BorderSpacingClass::class, $borderSpacingClass);
@@ -49,7 +49,7 @@ class BorderSpacingTest extends TestCase
     }
 
     #[DataProvider('invalidBorderSpacingClassProvider')]
-    public function testInvalidBorderSpacingClass(string $input): void
+    public function test_invalid_border_spacing_class(string $input): void
     {
         $borderSpacingClass = BorderSpacingClass::parse($input);
         $this->assertInstanceOf(BorderSpacingClass::class, $borderSpacingClass);
@@ -70,7 +70,7 @@ class BorderSpacingTest extends TestCase
         ];
     }
 
-    public function testNonBorderSpacingClass(): void
+    public function test_non_border_spacing_class(): void
     {
         $this->assertNull(BorderSpacingClass::parse('text-center'));
     }
