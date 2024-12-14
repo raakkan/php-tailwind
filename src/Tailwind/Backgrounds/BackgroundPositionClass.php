@@ -73,9 +73,18 @@ class BackgroundPositionClass extends AbstractTailwindClass
 
     public static function parse(string $class): ?self
     {
-        if (preg_match('/^bg-((?:\[.+\]|bottom|center|left|left-bottom|left-top|right|right-bottom|right-top|top))$/', $class, $matches)) {
+        // Match background position patterns
+        $pattern = '/^bg-('.
+            '(?:\[(?:\d+(?:%|px|rem)?|top|bottom|left|right|center|calc\([^]]+\)|var\([^]]+\))(?:_(?:\d+(?:%|px|rem)?|top|bottom|left|right|center|calc\([^]]+\)|var\([^]]+\)))?\])|'.  // Arbitrary positions
+            '(?:bottom|center|left|left-bottom|left-top|right|right-bottom|right-top|top))$/';  // Standard positions
+
+        if (preg_match($pattern, $class, $matches)) {
             $value = $matches[1];
-            $isArbitrary = preg_match('/^\[.+\]$/', $value);
+            $isArbitrary = str_starts_with($value, '[');
+
+            if ($isArbitrary) {
+                $value = trim($value, '[]');
+            }
 
             return new self($value, $isArbitrary);
         }

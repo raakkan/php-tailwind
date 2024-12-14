@@ -3,7 +3,6 @@
 namespace Raakkan\PhpTailwind\Tailwind\Borders;
 
 use Raakkan\PhpTailwind\AbstractTailwindClass;
-use Raakkan\PhpTailwind\Tailwind\StaticClass;
 
 class OutlineWidthClass extends AbstractTailwindClass
 {
@@ -18,7 +17,7 @@ class OutlineWidthClass extends AbstractTailwindClass
     public function toCss(): string
     {
         if (! $this->isValidValue()) {
-            return StaticClass::parse('outline-'.$this->value)->toCss();
+            return '';
         }
 
         $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;

@@ -138,7 +138,7 @@ class RingColorClass extends AbstractTailwindClass
         $pattern = '/^ring-('.
             '(?:\[#[0-9A-Fa-f]{3,8}\])|'.  // Arbitrary hex colors
             '(?:\[(?:rgb|hsl)a?\([^]]+\)\])|'.  // Arbitrary rgb/hsl colors
-            '(?:inherit|current|transparent)|'.  // Special values
+            '(?:inherit|current|transparent|black|white)|'.  // Special values and basic colors
             '(?:(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?))'.  // Named colors
             '(?:\/([0-9.]+))?$/'; // Optional opacity
 

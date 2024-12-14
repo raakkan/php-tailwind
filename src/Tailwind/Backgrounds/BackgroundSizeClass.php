@@ -67,9 +67,23 @@ class BackgroundSizeClass extends AbstractTailwindClass
 
     public static function parse(string $class): ?self
     {
-        if (preg_match('/^bg-((?:\[.+\]|auto|cover|contain))$/', $class, $matches)) {
+        // Match background size patterns
+        $pattern = '/^bg-('.
+            '(?:\[(?:'.
+                'auto|cover|contain|'.  // Keywords
+                '\d+(?:%|px|rem|vw|vh)?(?:_\d+(?:%|px|rem|vw|vh)?)?|'.  // Single or double length values
+                'calc\([^]]+\)|'.  // calc() expressions
+                'var\([^]]+\)'.  // CSS variables
+            ')\])|'.  // End arbitrary values
+            '(?:auto|cover|contain))$/';  // Standard values
+
+        if (preg_match($pattern, $class, $matches)) {
             $value = $matches[1];
-            $isArbitrary = preg_match('/^\[.+\]$/', $value);
+            $isArbitrary = str_starts_with($value, '[');
+
+            if ($isArbitrary) {
+                $value = trim($value, '[]');
+            }
 
             return new self($value, $isArbitrary);
         }

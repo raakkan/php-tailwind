@@ -19,23 +19,23 @@ class BorderWidthClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (! $this->isValidValue()) {
+        if (!$this->isValidValue()) {
             return '';
         }
 
-        $classValue = $this->isArbitrary ? "\\[{$this->escapeArbitraryValue($this->value)}\\]" : $this->value;
+        $classValue = $this->isArbitrary ? $this->escapeArbitraryValue($this->value) : $this->value;
         $borderValue = $this->getBorderValue();
-
         $sidePrefix = $this->getSidePrefix();
         $properties = $this->getBorderProperties();
 
-        // Update this condition to handle 'border' and 'border-{side}' cases
-        if ($this->value === 'DEFAULT' || $this->value === '') {
+        // Build the class name
+        if ($this->value === 'DEFAULT') {
             $css = ".border{$sidePrefix}{";
         } else {
             $css = ".border{$sidePrefix}-{$classValue}{";
         }
 
+        // Add the CSS properties
         foreach ($properties as $property) {
             $css .= "{$property}:{$borderValue};";
         }
@@ -100,15 +100,24 @@ class BorderWidthClass extends AbstractTailwindClass
             return $this->isValidArbitraryValue();
         }
 
-        // Add empty string to valid values for 'border-{side}' cases
-        $validValues = ['0', '2', '4', '8', 'DEFAULT', ''];
-
+        $validValues = ['0', '2', '4', '8', 'DEFAULT'];
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
+        // Check if the value has both opening and closing brackets
+        if (!str_starts_with($this->value, '[') || !str_ends_with($this->value, ']')) {
+            return false;
+        }
+
         $value = trim($this->value, '[]');
+        
+        // Empty brackets are invalid
+        if (empty($value)) {
+            return false;
+        }
+
         $validUnits = ['px', 'em', 'rem', '%', 'vw', 'vh'];
         $pattern = '/^(-?\d*\.?\d+)('.implode('|', $validUnits).')$/';
 
@@ -119,25 +128,50 @@ class BorderWidthClass extends AbstractTailwindClass
     {
         // Match exact 'border' class first
         if ($class === 'border') {
-            return new self('DEFAULT', '', false);
+            return new self('DEFAULT');
         }
 
-        // Match border width patterns: border-{side?}-{0|2|4|8}
-        if (preg_match('/^border(-[trblxyes])?(?:-(?:0|2|4|8))?$/', $class, $matches)) {
-            $side = ltrim($matches[1] ?? '', '-');
-            $value = $matches[2] ?? '';
-
-            return new self($value, $side, false);
+        // Match border width patterns with sides and values
+        if (preg_match('/^border(-[trblxyes])?(?:-([0248]))?$/', $class, $matches)) {
+            $side = isset($matches[1]) ? ltrim($matches[1], '-') : '';
+            $value = $matches[2] ?? 'DEFAULT';
+            return new self($value, $side);
         }
 
-        // Match arbitrary border width: border-[10px]
-        if (preg_match('/^border(?:-[trblxyes])?-(\[.+\])$/', $class, $matches)) {
-            $side = ltrim($matches[1] ?? '', '-');
-            $value = $matches[1];
+        // Match arbitrary border width: border-[10px] or border-{side}-[10px]
+        if (preg_match('/^border(?:-([trblxyes]))?-(\[.*\])$/', $class, $matches)) {
+            $side = $matches[1] ?? '';
+            $value = $matches[2];
+            return new self($value, $side, true);
+        }
 
+        // Handle invalid border width values
+        if (preg_match('/^border(?:-[trblxyes])?-\d+$/', $class)) {
+            $parts = explode('-', $class);
+            $side = count($parts) === 3 ? $parts[1] : '';
+            $value = end($parts);
+            return new self($value, $side);
+        }
+
+        // Handle malformed arbitrary values (missing brackets, etc.)
+        if (preg_match('/^border(?:-([trblxyes]))?-\[.*$/', $class) || 
+            preg_match('/^border(?:-([trblxyes]))?-.*\]$/', $class)) {
+            $parts = explode('-', $class);
+            $side = count($parts) === 3 ? $parts[1] : '';
+            $value = end($parts);
             return new self($value, $side, true);
         }
 
         return null;
+    }
+
+    protected function escapeArbitraryValue(string $value): string
+    {
+        $escaped = str_replace(
+            ['[', ']', '.', '(', ')', '+', '%'],
+            ['\\[', '\\]', '\\.', '\\(', '\\)', '\\+', '\\%'],
+            $value
+        );
+        return $escaped;
     }
 }

@@ -173,15 +173,19 @@ class BorderColorClass extends AbstractTailwindClass
         $pattern = '/^border(?:-(x|y|t|r|b|l|s|e))?-('.
             '(?:\[#[0-9A-Fa-f]{3,8}\])|'.  // Arbitrary hex colors
             '(?:\[(?:rgb|hsl)a?\([^]]+\)\])|'.  // Arbitrary rgb/hsl colors
-            '(?:inherit|current|transparent)|'.  // Special values
-            '(?:(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3}))'.  // Named colors
-            ')(?:\/([0-9.]+))?$/'; // Optional opacity
+            '(?:inherit|current|transparent|black|white)|'.  // Special values and basic colors
+            '(?:(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:-\d{1,3})?))'.  // Named colors
+            '(?:\/([0-9.]+))?$/'; // Optional opacity
 
         if (preg_match($pattern, $class, $matches)) {
             $side = $matches[1] ?? null;
             $value = $matches[2];
             $opacity = $matches[3] ?? null;
             $isArbitrary = str_starts_with($value, '[');
+
+            if ($isArbitrary) {
+                $value = trim($value, '[]');
+            }
 
             return new self($value, $side, $isArbitrary, $opacity);
         }

@@ -72,9 +72,19 @@ class BackgroundImageClass extends AbstractTailwindClass
 
     public static function parse(string $class): ?self
     {
-        if (preg_match('/^bg-((?:\[.+\]|none|gradient-to-[trblTRBL]{1,2}))$/', $class, $matches)) {
+        // Match background image patterns
+        $pattern = '/^bg-('.
+            '(?:\[(?:url|linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient|conic-gradient)\([^]]+\)\])|'.  // Arbitrary gradients and urls
+            '(?:none)|'.  // None value
+            '(?:gradient-to-(?:t|tr|r|br|b|bl|l|tl)))$/';  // Standard gradients
+
+        if (preg_match($pattern, $class, $matches)) {
             $value = $matches[1];
-            $isArbitrary = preg_match('/^\[.+\]$/', $value);
+            $isArbitrary = str_starts_with($value, '[');
+
+            if ($isArbitrary) {
+                $value = trim($value, '[]');
+            }
 
             return new self($value, $isArbitrary);
         }
