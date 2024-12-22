@@ -104,12 +104,14 @@ class RingWidthClass extends AbstractTailwindClass
         // Match standard ring widths: ring-{0|1|2|4|8}
         if (preg_match('/^ring-(\d+)$/', $class, $matches)) {
             $value = $matches[1];
+
             return new self($value, false, false);
         }
 
         // Match arbitrary ring width: ring-[10px]
         if (preg_match('/^ring-(\[.+\])$/', $class, $matches)) {
             $value = trim($matches[1], '[]');
+
             return new self($value, true, false);
         }
 

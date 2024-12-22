@@ -19,7 +19,7 @@ class BorderWidthClass extends AbstractTailwindClass
 
     public function toCss(): string
     {
-        if (!$this->isValidValue()) {
+        if (! $this->isValidValue()) {
             return '';
         }
 
@@ -101,18 +101,19 @@ class BorderWidthClass extends AbstractTailwindClass
         }
 
         $validValues = ['0', '2', '4', '8', 'DEFAULT'];
+
         return in_array($this->value, $validValues);
     }
 
     private function isValidArbitraryValue(): bool
     {
         // Check if the value has both opening and closing brackets
-        if (!str_starts_with($this->value, '[') || !str_ends_with($this->value, ']')) {
+        if (! str_starts_with($this->value, '[') || ! str_ends_with($this->value, ']')) {
             return false;
         }
 
         $value = trim($this->value, '[]');
-        
+
         // Empty brackets are invalid
         if (empty($value)) {
             return false;
@@ -135,6 +136,7 @@ class BorderWidthClass extends AbstractTailwindClass
         if (preg_match('/^border(-[trblxyes])?(?:-([0248]))?$/', $class, $matches)) {
             $side = isset($matches[1]) ? ltrim($matches[1], '-') : '';
             $value = $matches[2] ?? 'DEFAULT';
+
             return new self($value, $side);
         }
 
@@ -142,6 +144,7 @@ class BorderWidthClass extends AbstractTailwindClass
         if (preg_match('/^border(?:-([trblxyes]))?-(\[.*\])$/', $class, $matches)) {
             $side = $matches[1] ?? '';
             $value = $matches[2];
+
             return new self($value, $side, true);
         }
 
@@ -150,15 +153,17 @@ class BorderWidthClass extends AbstractTailwindClass
             $parts = explode('-', $class);
             $side = count($parts) === 3 ? $parts[1] : '';
             $value = end($parts);
+
             return new self($value, $side);
         }
 
         // Handle malformed arbitrary values (missing brackets, etc.)
-        if (preg_match('/^border(?:-([trblxyes]))?-\[.*$/', $class) || 
+        if (preg_match('/^border(?:-([trblxyes]))?-\[.*$/', $class) ||
             preg_match('/^border(?:-([trblxyes]))?-.*\]$/', $class)) {
             $parts = explode('-', $class);
             $side = count($parts) === 3 ? $parts[1] : '';
             $value = end($parts);
+
             return new self($value, $side, true);
         }
 
@@ -172,6 +177,7 @@ class BorderWidthClass extends AbstractTailwindClass
             ['\\[', '\\]', '\\.', '\\(', '\\)', '\\+', '\\%'],
             $value
         );
+
         return $escaped;
     }
 }
